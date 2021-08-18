@@ -17,7 +17,9 @@ public class DispatcherServletInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[] {
+                HibernateConfig.class
+        };
     }
 
     @Override

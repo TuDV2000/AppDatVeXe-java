@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-    "com.dvt.controllers",
+    "com.dvt",
 })
 public class WebApplicationContextConfig implements WebMvcConfigurer{
     
