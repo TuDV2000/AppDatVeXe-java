@@ -14,5 +14,11 @@ import java.util.List;
 @Service
 @Transactional
 public class UserService extends GenericsService<User> implements IUserService {
+    @Autowired
+    IUserRepository userRepository;
 
+    @Override
+    public boolean createUser(User user) {
+        return userRepository.createUser(user);
+    }
 }

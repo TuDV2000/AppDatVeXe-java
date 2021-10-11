@@ -6,4 +6,5 @@ import com.dvt.pojos.User;
 import java.util.List;
 
 public interface IUserRepository extends IGenericsRepository<User> {
+    boolean createUser(User user);
 }

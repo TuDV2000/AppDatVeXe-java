@@ -16,4 +16,14 @@ import java.util.List;
 @Transactional
 public class UserRepository extends GenericsRepository<User> implements IUserRepository {
 
+    @Override
+    public boolean createUser(User user) {
+        if (user != null) {
+            user.setActive(true);
+            getCurrentSession().save(user);
+
+            return true;
+        }
+        return false;
+    }
 }
