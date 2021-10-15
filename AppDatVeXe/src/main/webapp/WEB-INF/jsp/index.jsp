@@ -8,12 +8,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hệ thống đặt vé xe</title>
-    </head>
-    <body>
-        <h1>Hệ thống đặt vé xe</h1>
-    </body>
-</html>
+
+<%--<img src="<c:url value="/images/Untitled01.png"/>" alt="anh">--%>
