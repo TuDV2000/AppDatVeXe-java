@@ -1,5 +1,10 @@
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
 .navbar {
-    background: linear-gradient(90deg, rgb(119, 199, 253) 0%, rgb(26, 23, 23) 100%);
+    background: linear-gradient(
+            90deg, rgb(119, 199, 253) 0%, rgb(26, 23, 23) 100%);
     height: 80px;
     display: flex;
     justify-content: center;
@@ -9,16 +14,7 @@
     top: 0;
     z-index: 999;
 }
-
-.navbar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-    max-width: 1500px;
-}
-
-.navbar-logo {
+.navbar-brand{
     color: #fff;
     justify-self: start;
     margin-left: 20px;
@@ -28,13 +24,11 @@
     display: flex;
     align-items: center;
 }
-
-.fa-bus-alt {
+.fa-bus-alt{
     margin-left: 0.5rem;
     font-size: 1.8rem;
 }
-
-.nav-menu {
+.navbar-nav{
     display: grid;
     grid-template-columns: repeat(5, auto);
     grid-gap: 10px;
@@ -44,12 +38,13 @@
     justify-content: end;
     margin-right: 2rem;
 }
-
-.nav-item {
+.nav-item{
     height: 80px;
 }
-
-.nav-links {
+.nav-link-signup{
+    display: none;
+}
+.navbar-expand-sm .navbar-nav .nav-link {
     color: #fff;
     display: flex;
     align-items: center;
@@ -57,30 +52,30 @@
     padding: 0.5rem 1rem;
     height: 100%;
 }
-
-.nav-links:hover {
+.nav-link:hover{
     border-bottom: 4px solid #fff;
     transition: all 0.2s ease-out;
 }
-
-.fa-bars {
-    color: #fff;
+.header-nav-button-signup > button{
+    padding: 6px 20px;
+    font-size: 20px;
+    border-radius: 2px;
 }
-
-.nav-links-mobile {
+.menu-icon{
     display: none;
 }
-
-.menu-icon {
-    display: none;
+.fa-bars{
+    color: white;
 }
-
+.fa-times{
+    color: white;
+    font-size: 2rem;
+}
 @media screen and (max-width: 960px) {
-    .NavbarItems {
+    .nav-item{
         position: relative;
     }
-
-    .nav-menu {
+    .navbar-nav{
         display: flex;
         flex-direction: column;
         width: 80%;
@@ -93,8 +88,7 @@
         margin-right: 0%;
         display: none;
     }
-
-    .nav-menu.active {
+    .navbar-nav.show {
         background: #242222;
         right: 0%;
         opacity: 1;
@@ -102,8 +96,10 @@
         z-index: 1;
         display: inline;
     }
-
-    .nav-links {
+    .header-nav-button-signup > button {
+        display: none;
+    }
+    .navbar-expand-sm .navbar-nav .nav-link {
         text-align: center;
         padding: 2rem;
         width: 100%;
@@ -111,35 +107,27 @@
         display: table;
     }
 
-    .nav-links:hover {
+    .nav-link:hover {
         background-color: #fff;
-        color: #242424;
+        color: #242424 !important;
         border-radius: 0;
     }
-
-    .navbar-logo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(25%, 50%);
-    }
-
-    .menu-icon {
+    .menu-icon{
         display: block;
         position: absolute;
         top: 0;
         right: 0;
-        transform: translate(-100%, 60%);
+        transform: translate(-100%, 50%);
         font-size: 1.8rem;
         cursor: pointer;
     }
-
-    .fa-times {
-        color: #fff;
-        font-size: 2rem;
+    .navbar-brand{
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(25%, 25%);
     }
-
-    .nav-links-mobile {
+    .nav-link-signup{
         display: block;
         text-align: center;
         margin: 2rem auto;
@@ -152,9 +140,10 @@
         padding: 14px 20px;
         border: 1px solid #fff;
         transition: all 0.3s ease-out;
+        text-decoration: none !important;
     }
 
-    .nav-links-mobile:hover {
+    .nav-link-signup:hover{
         background: #fff;
         color: #242424;
         transition: 250ms;
