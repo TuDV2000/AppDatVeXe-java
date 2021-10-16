@@ -8,10 +8,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><tiles:insertAttribute name="title" /></title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>
+
+        <link href="<c:url value="css/base.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="css/header.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="css/footer.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="css/index.css" />" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-<%--        <tiles:insertAttribute name="header" />--%>
+        <tiles:insertAttribute name="header" />
 
         <tiles:insertAttribute name="content" />
 

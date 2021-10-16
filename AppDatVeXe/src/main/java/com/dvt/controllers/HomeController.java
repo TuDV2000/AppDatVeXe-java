@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,13 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model) {
+        List<String> a = new ArrayList<>();
+        a.add("dumamay tức vl");
+        a.add("cmn");
+        a.add("Bố mày làm thủ công");
+        a.add("dmm");
+
+        model.addAttribute("place", a);
 
         return "index";
     }
