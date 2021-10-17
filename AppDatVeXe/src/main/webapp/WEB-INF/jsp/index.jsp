@@ -8,44 +8,45 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
 <!DOCTYPE html>
+
+<c:url var="searchTrips" value="/trips"/>
 
 <div class="hero-container">
     <img class="main-img" src="<c:url value="/images/img-10.jpg"/>" alt="anh" >
 </div>
 <div class="book-ticket">
-    <div class="book-ticket-container">
+    <form class="book-ticket-container" action="${searchTrips}" method="get">
         <div class="select-container">
             <div class="select-place-container">
                 <div class="auto-fill-place">
                     <label class="label-small">Điểm đi</label>
-                    <select class="selectpicker place">
-                        <option>       </option>
-                        <option>Sài Gòn</option>
-                        <option>Hà Nội</option>
-                        <option>Đà Nẵng</option>
+                    <select class="form-control selectpicker place" name="sPoint">
+                        <option value="null">       </option>
+                        <c:forEach var="p" items="${points}">
+                        <option value="${p.id}">${p.address}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="auto-fill-place">
                     <label class="label-small">Điểm đến</label>
-                    <select class="selectpicker place">
-                        <option>    </option>
-                        <option>Hà Nội</option>
-                        <option>Sài Gòn</option>
-                        <option>Đà Nẵng</option>
+                    <select class="form-control selectpicker place" name="ePoint">
+                        <option value="null">       </option>
+                        <c:forEach var="p" items="${points}">
+                            <option value="${p.id}">${p.address}</option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
             <div class="select-date-container">
                 <div class="select-date">
                     <label class="label-small">Ngày đi</label>
-                    <input class="input-date" type="date">
+                    <input class="form-control input-date" type="date" name="sDate">
                 </div>
             </div>
         </div>
-        <Button type="button" class="btn btn-primary search">TÌM CHUYẾN</Button>
-    </div>
+        <Button type="submit" class="btn btn-primary search">TÌM CHUYẾN</Button>
+    </form>
 </div>
 <div class='cards'>
     <h2>NHỮNG TUYẾN ĐI PHỔ BIẾNN </h2>
