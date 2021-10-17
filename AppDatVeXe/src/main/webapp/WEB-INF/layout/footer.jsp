@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 
 <div class="footer-wrap">
     <div class="footer-container">
@@ -9,7 +11,7 @@
             </div>
 
             <a href="http://www.online.gov.vn/">
-                <img alt="d" class="ddk-image" src="/images/DaDangKy.png" />
+                    <img src="<c:url value="/images/DaDangKy.png"/>" alt="anh">
             </a>
         </div>
         <div class="desc">
@@ -19,10 +21,10 @@
             <p>Điện thoại: <a href="/"> 0913260623 </a></p>
             <div class="social-media">
                 <a href="/">
-                    <img alt="d" class="sc-image" src="/images/facebook.png" />
+                    <img class="sc-image" src="<c:url value="/images/facebook.png"/>" alt="anh" />
                 </a>
                 <a href="/">
-                    <img alt="d" class="sc-image" src="/images/youtube.png" />
+                    <img class="sc-image" src="<c:url value="/images/youtube.png"/>" alt="anh" />
                 </a>
             </div>
         </div>
