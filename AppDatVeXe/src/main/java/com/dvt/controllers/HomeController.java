@@ -43,5 +43,9 @@ public class HomeController {
 
         return "index";
     }
+    @RequestMapping("/tuyenxe")
+    public String schedule(Model model) {
+        return "schedule";
+    }
 
 }

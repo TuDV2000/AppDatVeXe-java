@@ -19,4 +19,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
+    <definition name="schedule" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/schedule.jsp" />
+    </definition>
+
 </tiles-definitions>

@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<c:url var="pageRegist" value="/add" />
+<c:url var="schedule" value="/tuyenxe" />
 <c:url var="home" value="/" />
 
 <script>
@@ -39,7 +39,7 @@
                 <a class="nav-link" href=${home}>Trang chủ</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="#">Tuyến xe</a>
+                <a class="nav-link" href="${schedule}">Tuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="#">Hướng dẫn</a>
