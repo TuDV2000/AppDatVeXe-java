@@ -20,8 +20,16 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
     <definition name="schedule" extends="baseLayout">
-        <put-attribute name="title" value="Trang chủ"/>
+        <put-attribute name="title" value="Tuyến xe"/>
         <put-attribute name="content" value="/WEB-INF/jsp/schedule.jsp" />
+    </definition>
+    <definition name="ticket" extends="baseLayout">
+        <put-attribute name="title" value="Đặt vé"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/ticket.jsp" />
+    </definition>
+    <definition name="payment" extends="baseLayout">
+        <put-attribute name="title" value="Thanh toán"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/payment.jsp" />
     </definition>
 
 </tiles-definitions>

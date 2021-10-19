@@ -48,4 +48,12 @@ public class HomeController {
         return "schedule";
     }
 
+    @RequestMapping("/vexe")
+    public String ticket(Model model) {
+        return "ticket";
+    }
+    @RequestMapping("/thanhtoan")
+    public String payment(Model model) {
+        return "payment";
+    }
 }

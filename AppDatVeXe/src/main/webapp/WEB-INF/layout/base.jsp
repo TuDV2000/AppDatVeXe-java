@@ -20,6 +20,8 @@
         <link href="<c:url value="css/footer.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="css/index.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="css/schedule.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="css/ticket.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="css/payment.css" />" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <tiles:insertAttribute name="header" />

@@ -11,7 +11,7 @@
             </div>
 
             <a href="http://www.online.gov.vn/">
-                    <img src="<c:url value="/images/DaDangKy.png"/>" alt="anh">
+                    <img class="ddk-image" src="<c:url value="/images/DaDangKy.png"/>" alt="anh">
             </a>
         </div>
         <div class="desc">
