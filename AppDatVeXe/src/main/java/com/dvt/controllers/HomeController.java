@@ -59,12 +59,12 @@ public class HomeController {
         return "schedule";
     }
 
-    @RequestMapping("/vexe")
+    @RequestMapping("/tikcets")
     public String ticket(Model model) {
         return "ticket";
     }
 
-    @RequestMapping("/thanhtoan")
+    @RequestMapping("/paymemt")
     public String payment(Model model) {
         return "payment";
     }

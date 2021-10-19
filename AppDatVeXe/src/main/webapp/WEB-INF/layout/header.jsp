@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<c:url var="schedule" value="/tuyenxe" />
-<c:url var="ticket" value="/vexe" />
+<c:url var="schedule" value="/trips" />
+<c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
 
 <script>
@@ -46,7 +46,7 @@
                 <a class="nav-link" href="#">Hướng dẫn</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="${ticket}">Đặt vé</a>
+                <a class="nav-link" href="${tickets}">Đặt vé</a>
             </li>
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href=${pageRegist}>ĐĂNG KÝ</a>
