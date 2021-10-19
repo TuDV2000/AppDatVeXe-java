@@ -52,8 +52,14 @@ public class HomeController {
     public String ticket(Model model) {
         return "ticket";
     }
+
     @RequestMapping("/thanhtoan")
     public String payment(Model model) {
         return "payment";
+    }
+
+    @RequestMapping("/dangky")
+    public String signup(Model model) {
+        return "signup";
     }
 }
