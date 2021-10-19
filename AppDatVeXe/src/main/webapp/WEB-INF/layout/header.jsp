@@ -5,6 +5,7 @@
 <c:url var="schedule" value="/trips" />
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
+<c:url var="signup" value="/dangky" />
 
 <script>
     var flagicon = false;
@@ -49,10 +50,10 @@
                 <a class="nav-link" href="${tickets}">Đặt vé</a>
             </li>
             <li onclick="closeNav()" >
-                <a class="nav-link-signup" href=${pageRegist}>ĐĂNG KÝ</a>
+                <a class="nav-link-signup" href=${signup}>ĐĂNG KÝ</a>
             </li>
         </ul>
-        <a class="header-nav-button-signup" href="#">
+        <a class="header-nav-button-signup" href="${signup}">
             <button type="button" class="btn btn-outline-light">ĐĂNG KÝ</button>
         </a>
     </nav>

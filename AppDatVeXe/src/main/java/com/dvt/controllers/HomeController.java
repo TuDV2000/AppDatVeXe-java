@@ -68,4 +68,9 @@ public class HomeController {
     public String payment(Model model) {
         return "payment";
     }
+
+    @RequestMapping("/dangky")
+    public String signup(Model model) {
+        return "signup";
+    }
 }
