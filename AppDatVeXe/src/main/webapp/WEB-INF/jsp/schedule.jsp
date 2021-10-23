@@ -26,6 +26,7 @@
                 <i class="fas fa-search-location"></i>
             </button>
         </div>
+        <button type="button" class="btn btn-primary">Tìm chuyến</button>
     </div>
     <div class="schedule-scroll">
         <div class="schedule-table">

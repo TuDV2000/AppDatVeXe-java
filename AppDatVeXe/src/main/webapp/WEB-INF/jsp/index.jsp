@@ -44,7 +44,7 @@
     </form>
 </div>
 <div class='cards'>
-    <h2>NHỮNG TUYẾN ĐI PHỔ BIẾNN </h2>
+    <h2>NHỮNG TUYẾN ĐI PHỔ BIẾN</h2>
     <div class='cards__container'>
         <div class='cards__wrapper'>
             <ul class='cards__items'>

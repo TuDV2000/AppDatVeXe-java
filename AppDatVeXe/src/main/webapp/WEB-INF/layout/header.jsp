@@ -5,7 +5,7 @@
 <c:url var="schedule" value="/trips" />
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
-<c:url var="signup" value="/dangky" />
+<c:url var="signup" value="/signup" />
 
 <script>
     var flagicon = false;
@@ -26,7 +26,6 @@
         flagicon = false;
     }
 </script>
-
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="#">

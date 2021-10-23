@@ -63,8 +63,13 @@ public class HomeController {
         return "payment";
     }
 
-    @RequestMapping("/dangky")
+    @RequestMapping("/signup")
     public String signup(Model model) {
         return "signup";
+    }
+
+    @RequestMapping("/signin")
+    public String signin(Model model) {
+        return "signin";
     }
 }
