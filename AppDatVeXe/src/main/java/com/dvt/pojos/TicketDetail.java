@@ -11,7 +11,7 @@ public class TicketDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "seat_position")
-    private String seatPosition;
+    private int seatPosition;
     private String note;
     @Column(name = "current_price")
     private BigDecimal currentPrice;
@@ -48,11 +48,11 @@ public class TicketDetail implements Serializable {
         this.id = id;
     }
 
-    public String getSeatPosition() {
+    public int getSeatPosition() {
         return seatPosition;
     }
 
-    public void setSeatPosition(String seatPosition) {
+    public void setSeatPosition(int seatPosition) {
         this.seatPosition = seatPosition;
     }
 

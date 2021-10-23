@@ -68,4 +68,12 @@ public class Ticket implements Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    public List<TicketDetail> getTicketDetails() {
+        return ticketDetails;
+    }
+
+    public void setTicketDetails(List<TicketDetail> ticketDetails) {
+        this.ticketDetails = ticketDetails;
+    }
 }

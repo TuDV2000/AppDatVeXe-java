@@ -5,6 +5,7 @@
  */
 package com.dvt.controllers;
 
+import com.dvt.service.ILineService;
 import com.dvt.service.IPointService;
 import com.dvt.service.ITripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,21 +37,6 @@ public class HomeController {
     public String index(Model model) {
 
         return "index";
-    }
-
-    @RequestMapping("/trips")
-    public String searchTrips(Model model){
-//            , @RequestParam(value = "sPoint", required = false) int sPointId
-//            , @RequestParam(value = "ePoint", required = false) int ePointId
-//            , @RequestParam(value = "sDate", required = false) String sDate){
-//
-//        System.out.println("controller: " + sDate);
-//        System.out.println(tripService.getTrips(sPointId, ePointId, sDate));
-//        if (sPointId != 0 && ePointId != 0 && sDate != null) {
-//            model.addAttribute("trips", tripService.getTrips(sPointId, ePointId, sDate));
-//        }
-
-        return "schedule";
     }
 
     @RequestMapping("/tikcets")
