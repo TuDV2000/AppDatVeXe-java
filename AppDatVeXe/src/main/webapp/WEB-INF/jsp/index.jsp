@@ -2,16 +2,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:url value="/trip" var="searchTrip" />
 
 <!DOCTYPE html>
-
-<c:url var="searchTrips" value="/trips"/>
-
 <div class="hero-container">
     <img class="main-img" src="<c:url value="/images/img-10.jpg"/>" alt="anh" >
 </div>
+<c:if test="${mgsSearchtrip == false}">
+<h1>KHÔNG TÌM THẤY CHUYẾN PHÙ HỢP</h1>
+</c:if>
 <div class="book-ticket">
-    <form class="book-ticket-container" action="${searchTrips}" method="get">
+    <form class="book-ticket-container" action="${searchTrip}" method="get">
         <div class="select-container">
             <div class="select-place-container">
                 <div class="auto-fill-place">

@@ -36,7 +36,7 @@ public class User {
     private List<Permission> permissions;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
-    private List<Trip> trips;
+    private List<Vehicle> vehicles;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
@@ -49,12 +49,12 @@ public class User {
         this.tickets = tickets;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     public List<Permission> getPermissions() {

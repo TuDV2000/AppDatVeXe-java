@@ -23,6 +23,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Tuyến xe"/>
         <put-attribute name="content" value="/WEB-INF/jsp/schedule.jsp" />
     </definition>
+    <definition name="trips" extends="baseLayout">
+        <put-attribute name="title" value="Chuyến xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/trips.jsp" />
+    </definition>
     <definition name="ticket" extends="baseLayout">
         <put-attribute name="title" value="Đặt vé"/>
         <put-attribute name="content" value="/WEB-INF/jsp/ticket.jsp" />

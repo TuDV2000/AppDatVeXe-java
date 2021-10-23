@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.NoResultException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,25 +20,48 @@ import java.util.stream.Collectors;
 public class TripRepository extends GenericsRepository<Trip> implements ITripRepository {
 
     @Override
-    public List<Trip> getTrips(int sPointId, int ePointId, String sDate) {
-        System.out.println("repo: " + sDate);
+    public Trip getTripById(int id) {
+        if (id > 0) {
+            String hql = "from Trip where id = :id";
+            return (Trip) getCurrentSession().createQuery(hql)
+                    .setParameter("id", id).getSingleResult();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Trip> getTrips(int lineId) {
+        Line l = null;
+        if (lineId > 0) {
+            String hql = "from Line where id = :id";
+            l = (Line) getCurrentSession().createQuery(hql)
+                    .setParameter("id", lineId).getSingleResult();
+        }
+        return l.getTrips();
+    }
+
+    @Override
+    public Trip getTrip(int sPointId, int ePointId, String sDate) {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date sd = formatter.parse(sDate);
             Date ed = (Date) sd.clone();
             ed.setTime(ed.getTime() + 86400000);
-            System.out.println("sd: " + sd);
-            System.out.println("ed: " + ed);
-            if (sPointId != 0 && ePointId != 0) {
 
-                String hql1 = "from Line where startPoint.id = :idSPoint and endPoint.id = :idEPoint";
-                Line l = (Line) getCurrentSession().createQuery(hql1)
-                        .setParameter("idSPoint", sPointId)
-                        .setParameter("idEPoint", ePointId)
-                        .getSingleResult();
-                return l.getTrips().stream().filter(t ->
-                        t.getStartTime().getTime() >= sd.getTime() && t.getStartTime().getTime() < ed.getTime()
-                        ).collect(Collectors.toList());
+            if (sPointId != 0 && ePointId != 0) {
+                String hql1 = "from Trip where line.startPoint.id = :idSPoint and line.endPoint.id = :idEPoint and startTime between :sTime and :eTime";
+                try {
+                    Trip trip = (Trip) getCurrentSession().createQuery(hql1)
+                            .setParameter("idSPoint", sPointId)
+                            .setParameter("idEPoint", ePointId)
+                            .setParameter("sTime", sd)
+                            .setParameter("eTime", ed)
+                            .getSingleResult();
+                    System.out.println("getTrip(int sPointId, int ePointId, String sDate): " + trip);
+                    return trip;
+                } catch (NoResultException ex) {
+                    ex.printStackTrace();
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();

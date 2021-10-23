@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<c:url var="schedule" value="/trips" />
+<c:url var="schedule" value="/lines" />
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
 <c:url var="signup" value="/dangky" />

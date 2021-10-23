@@ -16,8 +16,17 @@ public class TripService extends GenericsService<Trip> implements ITripService {
     ITripRepository tripRepository;
 
     @Override
-    public List<Trip> getTrips(int sPointId, int ePointId, String sDate) {
-        System.out.println("servvice: " + sDate);
-        return tripRepository.getTrips(sPointId, ePointId, sDate);
+    public Trip getTripById(int id) {
+        return tripRepository.getTripById(id);
+    }
+
+    @Override
+    public List<Trip> getTrips(int lineId) {
+        return tripRepository.getTrips(lineId);
+    }
+
+    @Override
+    public Trip getTrip(int sPointId, int ePointId, String sDate) {
+        return tripRepository.getTrip(sPointId, ePointId, sDate);
     }
 }
