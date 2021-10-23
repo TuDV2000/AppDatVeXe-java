@@ -30,6 +30,10 @@
 
         checkInput();
     });
+    function test(){
+        checkInput();
+        console.log(checkInput());
+    }
     function checkInput(){
         const fullname = document.getElementById("fullname");
         const username = document.getElementById('username');
@@ -38,41 +42,47 @@
         const password2 = document.getElementById('password2');
         const checker = document.getElementById('checker');
 
-        console.log(fullname, username, email, password, password2);
-        console.log(checker.checked);
         //full name
         if(fullname.value.trim() == ""){
             setErrorFor(fullname, 'Không được để trống tên của bạn');
+            return false;
         }else {
             setSuccessFor(fullname);
         }
         //user name
         if(username.value.trim() == ""){
             setErrorFor(username, 'Không được để trống tên đăng nhập');
+            return false;
         }else {
             setSuccessFor(username);
         }
         //email
         if(email.value.trim() ==""){
             setErrorFor(email,'Không được để trống email');
+            return false;
         }else if(!isEmail(email.value.trim())){
             setErrorFor(email, 'Email không hợp lệ');
+            return false;
         }else {
             setSuccessFor(email);
         }
         //password
         if(password.value.trim() == ""){
             setErrorFor(password, 'Không được để trống mật khẩu');
+            return false;
+        }else if (password.value.trim().length <= 6){
+            setErrorFor(password,'Mật khẩu phải dài hơn 6 ký tự')
+            return false;
         }else {
             setSuccessFor(password);
         }
         //password check
         if(password2.value.trim() == ""){
             setErrorFor(password2,'Không được để trống xác thực mật khẩu');
-        }else if (password2.value.trim().length < 6){
-            setErrorFor(password,'Mật khẩu phải dài hơn 6 ký tự')
+            return false;
         }else if(password.value.trim() != password2.value.trim()){
             setErrorFor(password2, 'Mật khẩu xác thực không đúng');
+            return false;
         }else {
             setSuccessFor(password2);
         }
@@ -81,7 +91,9 @@
             checker.parentElement.style.color = 'black';
         }else {
             checker.parentElement.style.color = 'red';
+            return false;
         }
+        return true;
     }
     function  setErrorFor(input, message){
         const formOutline = input.parentElement;
@@ -165,7 +177,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button onclick="checkInput()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng ký</button>
+                                    <button onclick="test()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng ký</button>
                                 </div>
 
                                 <p class="text-center text-muted mt-5 mb-0">Đã có tài khoản? <a href="${signin}" class="fw-bold text-body"><u>Đăng nhập ở đây</u></a></p>

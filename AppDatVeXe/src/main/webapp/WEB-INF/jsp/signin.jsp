@@ -21,6 +21,55 @@
 
 <c:url var="signup" value="/signup" />
 
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        checkInput();
+    });
+    function test(){
+        checkInput();
+        console.log(checkInput());
+    }
+    function checkInput(){
+        let flag;
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+
+        console.log(username, password);
+        //user name
+        if(username.value.trim() == ""){
+            setErrorFor(username, 'Không được để trống tên đăng nhập');
+            return false;
+        }else {
+            setSuccessFor(username);
+        }
+        //password
+        if(password.value.trim() == ""){
+            setErrorFor(password, 'Không được để trống mật khẩu');
+            return false;
+        }else if (password.value.trim().length <= 6){
+            setErrorFor(password,'Mật khẩu phải dài hơn 6 ký tự')
+            return false;
+        }else {
+            setSuccessFor(password);
+        }
+        return true;
+    }
+    function  setErrorFor(input, message){
+        const formOutline = input.parentElement;
+        const small = formOutline.querySelector('small');
+
+        small.innerText = message;
+        formOutline.className = "form-outline mb-4 error";
+    }
+    function setSuccessFor(input){
+        const formOutline = input.parentElement;
+        formOutline.className = "form-outline mb-4 success";
+    }
+</script>
+
 <section class="vh-100 bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">
@@ -33,19 +82,25 @@
                         </a>
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
-                            <form>
+                            <form id="form">
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">Tên đăng nhập</label>
+                                    <small>Erro message</small>
+                                    <input type="text" id="username" class="form-control form-control-lg" />
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <label class="form-label" >Tên đăng nhập</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Mật khẩu</label>
+                                    <small>Erro message</small>
+                                    <input type="password" id="password" class="form-control form-control-lg" />
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <label class="form-label" >Mật khẩu</label>
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng nhập</button>
+                                    <button onclick="test()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng nhập</button>
                                 </div>
                             </form>
 
