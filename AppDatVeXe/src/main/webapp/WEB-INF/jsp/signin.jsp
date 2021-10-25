@@ -20,6 +20,7 @@
 <body>
 
 <c:url var="signup" value="/signup" />
+<c:url var="home" value="/" />
 
 <script>
     const form = document.getElementById('form');
@@ -76,7 +77,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                     <div class="card" style="border-radius: 15px;">
-                        <a class="back-to-mainpage" href="${signup}">
+                        <a class="back-to-mainpage" href="${home}">
                             <i class="fas fa-chevron-left"></i>
                             Quay lại
                         </a>
@@ -102,6 +103,7 @@
                                 <div class="d-flex justify-content-center">
                                     <button onclick="test()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng nhập</button>
                                 </div>
+                                <p class="text-center text-muted mt-5 mb-0">Chưa có tài khoản? <a href="${signup}" class="fw-bold text-body"><u>Đăng ký ở đây</u></a></p>
                             </form>
 
                         </div>

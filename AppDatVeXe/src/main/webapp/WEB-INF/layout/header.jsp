@@ -5,7 +5,7 @@
 <c:url var="schedule" value="/lines" />
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
-<c:url var="signup" value="/signup" />
+<c:url var="signin" value="/signin" />
 
 <script>
     var flagicon = false;
@@ -43,17 +43,17 @@
                 <a class="nav-link" href="${schedule}">Tuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="#">Hướng dẫn</a>
+                <a class="nav-link" href="#">Đặt vé</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="${tickets}">Đặt vé</a>
+                <a class="nav-link" href="${tickets}">Hướng dẫn</a>
             </li>
             <li onclick="closeNav()" >
-                <a class="nav-link-signup" href=${signup}>ĐĂNG KÝ</a>
+                <a class="nav-link-signup" href=${signin}>ĐĂNG NHẬP</a>
             </li>
         </ul>
-        <a class="header-nav-button-signup" href="${signup}">
-            <button type="button" class="btn btn-outline-light">ĐĂNG KÝ</button>
+        <a class="header-nav-button-signup" href="${signin}">
+            <button type="button" class="btn btn-outline-light">ĐĂNG NHẬP</button>
         </a>
     </nav>
 </div>
