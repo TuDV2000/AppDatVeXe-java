@@ -22,7 +22,7 @@
             <h3 class="trip-destination"> Điểm đến : ${trip.line.endPoint.address} </h3>
             <h3>Số ghế : ${trip.driver.vehicles[0].seat}</h3>
             <h3>Tổng tiền</h3>
-            <h3 class="start-place-title">${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}</h3>
+            <h3 class="start-place-title">${trip.line.extra_changes + trip.price + trip.driver.vehicles[0].extraChanges}</h3>
             <img class="bus-img" src="<c:url value="/images/xe-nha-1.png" />" />
         </div>
         <div class="sit-position">

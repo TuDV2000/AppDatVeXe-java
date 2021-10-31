@@ -19,8 +19,7 @@ public class Trip implements Serializable {
     private Date endTime;
     @Column(name = "blank_seat")
     private int blankSeat;
-    @Column(name = "extra_changes")
-    private BigDecimal extra_changes;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "driver_id")
@@ -108,11 +107,11 @@ public class Trip implements Serializable {
         this.blankSeat = blankSeat;
     }
 
-    public BigDecimal getExtra_changes() {
-        return extra_changes;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setExtra_changes(BigDecimal extra_changes) {
-        this.extra_changes = extra_changes;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

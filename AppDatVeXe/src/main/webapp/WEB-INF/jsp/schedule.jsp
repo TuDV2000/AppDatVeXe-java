@@ -68,7 +68,7 @@
                             <th class="schedule-route-name">${lEP.endPoint.address}</th>
 <%--                            <th class="date"> 19/10/2021</th>--%>
 <%--                            <th class="time"> 5h30 </th>--%>
-                            <th class="price"> ${lEP.price} </th>
+                            <th class="price"> ${lEP.extra_changes} </th>
                             <th class="end"> <a href="<c:url value="/line/${lEP.id}/trips" />">Xem Chuyến</a> </th>
                         </tr>
                     </c:forEach>
@@ -83,7 +83,7 @@
                             <th class="schedule-route-name">
                                     ${line.startPoint.address} - ${line.endPoint.address}
                             </th>
-                            <th class="price"> ${line.price} </th>
+                            <th class="price"> ${line.extra_changes} </th>
                             <th class="end"> <a href="#">Xem các chuyến</a> </th>
                         </tr>
                     </tbody>
