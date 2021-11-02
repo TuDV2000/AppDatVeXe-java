@@ -48,14 +48,4 @@ public class HomeController {
     public String payment(Model model) {
         return "payment";
     }
-
-    @RequestMapping("/signup")
-    public String signup(Model model) {
-        return "signup";
-    }
-
-    @RequestMapping("/signin")
-    public String signin(Model model) {
-        return "signin";
-    }
 }

@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<c:url var="signup" value="/signup" />
+<c:url var="signin" value="/signin" />
 <c:url var="home" value="/" />
 
 <script>
@@ -70,7 +70,9 @@
         formOutline.className = "form-outline mb-4 success";
     }
 </script>
-
+<c:if test="${param.error != null}">
+    <h1 class="alert alert-danger">!!!!!!!Loi!!!!!!!!!</h1>
+</c:if>
 <section class="vh-100 bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">
@@ -83,10 +85,10 @@
                         </a>
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
-                            <form id="form">
+                            <form id="form" method="post" action="${signin}">
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="username" class="form-control form-control-lg" />
+                                    <input name="username" type="text" id="username" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Tên đăng nhập</label>
@@ -94,14 +96,14 @@
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="password" id="password" class="form-control form-control-lg" />
+                                    <input name="password" type="password" id="password" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Mật khẩu</label>
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button onclick="test()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng nhập</button>
+                                    <input type="submit"  value="ĐĂNG NHẬP" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">
                                 </div>
                                 <p class="text-center text-muted mt-5 mb-0">Chưa có tài khoản? <a href="${signup}" class="fw-bold text-body"><u>Đăng ký ở đây</u></a></p>
                             </form>

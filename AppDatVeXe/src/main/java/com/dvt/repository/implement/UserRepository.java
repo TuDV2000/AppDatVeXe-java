@@ -26,4 +26,16 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         }
         return false;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return (User) getCurrentSession().createQuery("from User where username = :un")
+                .setParameter("un", username).getSingleResult();
+    }
+
+//    public List<User> getUsers(String username) {
+//        String hql = "from User where username = :un";
+//        List<User> users = getCurrentSession().createQuery(hql)
+//                .setParameter("un", username).getResultList();
+//    }
 }
