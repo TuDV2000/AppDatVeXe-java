@@ -39,7 +39,7 @@
     function checkInput(){
         const fullname = document.getElementById("fullname");
         const username = document.getElementById('username');
-        const phone = document.getElementById('phone');
+        const phone = document.getElementById('phoneNumber');
         const password = document.getElementById('password');
         const password2 = document.getElementById('password2');
         const checker = document.getElementById('checker');
@@ -59,22 +59,15 @@
             setSuccessFor(username);
         }
         //phone
-        if(phone.value.trim() ==""){
-            setErrorFor(phone,'Không được để trống email');
+        if(phone.value.trim() == ""){
+            setErrorFor(phone,'Không được để trống số điện thoại');
+            return false;
+        }else if(!isPhone(phone.value.trim())){
+            setErrorFor(phone, 'Số điện thoại không hợp lệ');
             return false;
         }else {
             setSuccessFor(phone);
         }
-        //email
-        /*if(email.value.trim() ==""){
-            setErrorFor(email,'Không được để trống email');
-            return false;
-        }else if(!isEmail(email.value.trim())){
-            setErrorFor(email, 'Email không hợp lệ');
-            return false;
-        }else {
-            setSuccessFor(email);
-        }*/
         //password
         if(password.value.trim() == ""){
             setErrorFor(password, 'Không được để trống mật khẩu');
@@ -115,9 +108,9 @@
         const formOutline = input.parentElement;
         formOutline.className = "form-outline mb-4 success";
     }
-    /*function isEmail(email) {
-        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-    }*/
+    function isPhone(phone) {
+        return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phone);
+    }
 </script>
 <section class="bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -153,7 +146,7 @@
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="phone" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
+                                    <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >SĐT</label>
