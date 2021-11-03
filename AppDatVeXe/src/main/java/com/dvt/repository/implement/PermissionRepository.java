@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -15,4 +16,15 @@ import java.util.List;
 @Transactional
 public class PermissionRepository extends GenericsRepository<Permission> implements IPermissionRepository {
 
+    @Override
+    public Permission getPerByName(String perName) {
+        Permission permission = null;
+        try {
+            permission = (Permission) getCurrentSession().createQuery("from Permission where name = :name")
+                    .setParameter("name", perName).getSingleResult();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+        return permission;
+    }
 }

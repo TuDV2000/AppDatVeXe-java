@@ -6,5 +6,5 @@ import com.dvt.pojos.Permission;
 import java.util.List;
 
 public interface IPermissionRepository extends IGenericsRepository<Permission>{
-
+    public Permission getPerByName(String perName);
 }

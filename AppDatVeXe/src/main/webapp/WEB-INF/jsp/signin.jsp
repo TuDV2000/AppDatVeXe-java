@@ -20,6 +20,7 @@
 <body>
 
 <c:url var="signin" value="/signin" />
+<c:url var="signup" value="/signup-form" />
 <c:url var="home" value="/" />
 
 <script>
@@ -73,6 +74,22 @@
 <c:if test="${param.error != null}">
     <h1 class="alert alert-danger">!!!!!!!Loi!!!!!!!!!</h1>
 </c:if>
+
+<ul>
+    <c:choose>
+        <c:when test="${pageContext.request.userPrincipal.name == null}">
+            <li>
+                <p>pageContext.request.userPrincipal.name == null</p>
+            </li>
+        </c:when>
+        <c:when test="${pageContext.request.userPrincipal.name != null}">
+            <li>
+                <p>${pageContext.request.userPrincipal.name}</p>
+            </li>
+        </c:when>
+    </c:choose>
+</ul>
+
 <section class="vh-100 bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">

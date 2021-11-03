@@ -13,6 +13,8 @@ public class User implements Serializable {
     @Column(unique = true)
     private String username;
     private String password;
+    @Transient
+    private String confirmPassword;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -28,19 +30,27 @@ public class User implements Serializable {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_permissions",
-            joinColumns = {@JoinColumn(name = "user_id")}
-            ,inverseJoinColumns = {@JoinColumn(name = "permission_id")}
-    )
-    private List<Permission> permissions;
+    @ManyToOne
+    @JoinColumn(name = "user_permission")
+    private Permission permission;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Vehicle> vehicles;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
+
+    public User() {}
+
+    public User(String username, String password, String firstName, String lastName
+            , String numberPhone, Permission permission) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.numberPhone = numberPhone;
+        this.permission = permission;
+    }
 
     public List<Ticket> getTickets() {
         return tickets;
@@ -58,12 +68,12 @@ public class User implements Serializable {
         this.vehicles = vehicles;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
+    public Permission getPermission() {
+        return permission;
     }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
+    public void setPermission(Permission permission) {
+        this.permission = permission;
     }
 
     public int getId() {
@@ -88,6 +98,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFirstName() {

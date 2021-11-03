@@ -12,5 +12,11 @@ import java.util.List;
 @Service
 @Transactional
 public class PermissionService extends GenericsService<Permission> implements IPermissionService {
+    @Autowired
+    IPermissionRepository permissionRepository;
 
+    @Override
+    public Permission getPerByName(String perName) {
+        return permissionRepository.getPerByName(perName);
+    }
 }

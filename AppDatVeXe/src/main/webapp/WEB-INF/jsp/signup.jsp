@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
@@ -22,6 +23,7 @@
 
 <c:url var="home" value="/" />
 <c:url var="signin" value="/signin" />
+<c:url var="signup" value="/signup" />
 
 <script>
     const form = document.getElementById('form');
@@ -37,7 +39,7 @@
     function checkInput(){
         const fullname = document.getElementById("fullname");
         const username = document.getElementById('username');
-        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
         const password = document.getElementById('password');
         const password2 = document.getElementById('password2');
         const checker = document.getElementById('checker');
@@ -56,8 +58,15 @@
         }else {
             setSuccessFor(username);
         }
+        //phone
+        if(phone.value.trim() ==""){
+            setErrorFor(phone,'Không được để trống email');
+            return false;
+        }else {
+            setSuccessFor(phone);
+        }
         //email
-        if(email.value.trim() ==""){
+        /*if(email.value.trim() ==""){
             setErrorFor(email,'Không được để trống email');
             return false;
         }else if(!isEmail(email.value.trim())){
@@ -65,7 +74,7 @@
             return false;
         }else {
             setSuccessFor(email);
-        }
+        }*/
         //password
         if(password.value.trim() == ""){
             setErrorFor(password, 'Không được để trống mật khẩu');
@@ -106,9 +115,9 @@
         const formOutline = input.parentElement;
         formOutline.className = "form-outline mb-4 success";
     }
-    function isEmail(email) {
+    /*function isEmail(email) {
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-    }
+    }*/
 </script>
 <section class="bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -122,11 +131,13 @@
                         </a>
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Đăng ký tài khoản</h2>
-
-                            <form class="form-signup" id="form">
+                            <c:if test="${msg != ''}">
+                                <h3 class="text-danger">${msg}</h3>
+                            </c:if>
+                            <form class="form-signup" id="form" method="post" action="${signup}">
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="fullname" class="form-control form-control-lg" />
+                                    <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Tên của bạn</label>
@@ -134,7 +145,7 @@
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="username" class="form-control form-control-lg" />
+                                    <input type="text" id="username" name="username"  class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Tên đăng nhập</label>
@@ -142,15 +153,15 @@
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="email" id="email" class="form-control form-control-lg" />
+                                    <input type="text" id="phone" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Địa chỉ Email</label>
+                                    <label class="form-label" >SĐT</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="password" id="password" class="form-control form-control-lg" />
+                                    <input type="password" id="password" name="password"  class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Mật khẩu</label>
@@ -158,7 +169,7 @@
 
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="password" id="password2" class="form-control form-control-lg" />
+                                    <input type="password" id="password2" name="password2"  class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <label class="form-label" >Xác thực mật khẩu</label>
@@ -166,7 +177,7 @@
 
                                 <div class="form-check d-flex justify-content-center mb-5">
                                     <input
-                                            id="checker"
+                                            id="checker" name="checker"
                                             class="form-check-input me-2"
                                             type="checkbox"
                                             value=""
@@ -177,7 +188,8 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button onclick="test()" type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đăng ký</button>
+                                    <input onclick="return checkInput()" type="submit" value="Đăng ký"
+                                           class="btn btn-success btn-block btn-lg gradient-custom-4 text-white" />
                                 </div>
 
                             </form>

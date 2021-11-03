@@ -3,6 +3,7 @@ package com.dvt.repository.implement;
 import com.dvt.pojos.Permission;
 import com.dvt.pojos.User;
 import com.dvt.repository.IUserRepository;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -18,11 +19,14 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
 
     @Override
     public boolean createUser(User user) {
-        if (user != null) {
-            user.setActive(true);
-            getCurrentSession().save(user);
-
-            return true;
+        try {
+            if (user != null) {
+                user.setActive(true);
+                getCurrentSession().save(user);
+                return true;
+            }
+        } catch (HibernateError e) {
+            e.printStackTrace();
         }
         return false;
     }
