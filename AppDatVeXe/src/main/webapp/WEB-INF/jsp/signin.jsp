@@ -120,7 +120,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <input type="submit"  value="ĐĂNG NHẬP" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">
+                                    <input onclick="return checkInput()" type="submit"  value="ĐĂNG NHẬP" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">
                                 </div>
                                 <p class="text-center text-muted mt-5 mb-0">Chưa có tài khoản? <a href="${signup}" class="fw-bold text-body"><u>Đăng ký ở đây</u></a></p>
                             </form>

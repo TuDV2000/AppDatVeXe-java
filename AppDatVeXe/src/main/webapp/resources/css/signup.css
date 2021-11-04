@@ -42,6 +42,12 @@
 .back-to-mainpage:hover{
     cursor: pointer;
 }
+.fullname-textbox-container{
+    display: flex;
+}
+.fullname-textbox-container > div:first-child {
+    padding-right: 5px;
+}
 .form-outline{
     position: relative;
     margin-bottom: 1rem !important;

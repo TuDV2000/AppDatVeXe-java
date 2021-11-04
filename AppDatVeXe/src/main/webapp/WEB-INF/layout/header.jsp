@@ -28,7 +28,7 @@
 </script>
 <div class="container-fluid">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="${home}">
             TuGi
             <i class="fas fa-bus-alt"></i>
         </a>
@@ -48,12 +48,27 @@
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="${tickets}">Hướng dẫn</a>
             </li>
+            <c:if test="${pageContext.request.userPrincipal.name == null}">
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href=${signin}>ĐĂNG NHẬP</a>
             </li>
+            </c:if>
+            <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <li onclick="closeNav()" >
+                <a class="nav-link-signup" href=${signin}>${pageContext.request.userPrincipal.name}</a>
+            </li>
+            </c:if>
+
         </ul>
+        <c:if test="${pageContext.request.userPrincipal.name == null}">
         <a class="header-nav-button-signup" href="${signin}">
             <button type="button" class="btn btn-outline-light">ĐĂNG NHẬP</button>
         </a>
+        </c:if>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <a class="header-nav-button-signup" href="${signin}">
+            <button type="button" class="btn btn-outline-light">${pageContext.request.userPrincipal.name}</button>
+        </a>
+        </c:if>
     </nav>
 </div>

@@ -14,9 +14,9 @@
 <!DOCTYPE html>
 <div class="schedule-container">
     <h1 class="title-page">Các tuyến xe</h1>
-    <form class="book-ticket-container" action="${searchLine}" method="get">
-        <div class="select-container">
-            <div class="select-place-container">
+    <form class="book-ticket-container schedule" action="${searchLine}" method="get">
+        <div class="select-container schedule">
+            <div class="select-place-container schedule">
                 <div class="auto-fill-place">
                     <label class="label-small">Điểm đi</label>
                     <select class="form-control selectpicker place" name="sPoint">
@@ -44,13 +44,13 @@
         <div class="schedule-table">
             <table>
                 <thead>
-                <tr class="table-head">
-                    <th class="schedule-route-name"> Tuyến xe </th>
-<%--                    <th class="date"> Ngày khởi hành </th>--%>
-<%--                    <th class="time"> Giờ khởi hành </th>--%>
-                    <th class="prize"> Giá vé </th>
-                    <th class="end">  </th>
-                </tr>
+                    <tr class="table-head">
+                        <th class="schedule-route-name"> Tuyến xe </th>
+    <%--                    <th class="date"> Ngày khởi hành </th>--%>
+    <%--                    <th class="time"> Giờ khởi hành </th>--%>
+                        <th class="prize"> Giá vé </th>
+                        <th class="end"> </th>
+                    </tr>
                 </thead>
             </table>
             <div>

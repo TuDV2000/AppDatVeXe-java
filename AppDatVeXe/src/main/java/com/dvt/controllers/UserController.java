@@ -26,7 +26,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup(Model model
-            , @RequestParam(value = "fullname") String fullName
+            , @RequestParam(value = "lastName") String lastName
+            , @RequestParam(value = "firstName") String firstName
             , @RequestParam(value = "username") String username
             , @RequestParam(value = "phone") String phone
             , @RequestParam(value = "password") String password
@@ -35,8 +36,8 @@ public class UserController {
 
         if (password.equals(password2)) {
             Permission permission = permissionService.getPerByName("Customer");
-            if (userDetailsService.createUser(new User(username, password, "firstName"
-                    , fullName, phone, permission))) {
+            if (userDetailsService.createUser(new User(username, password, firstName
+                    , lastName, phone, permission))) {
                     return "redirect:/signin";
                 } else {
                     msg = "Da co loi xay ra khi tao moi user!!";

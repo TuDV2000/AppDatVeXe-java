@@ -4,28 +4,24 @@
 
 
 <!DOCTYPE html>
-<div class="schedule-scroll">
-    <c:choose>
-        <c:when test="${trips.size() == 0}">
-        <h1 style="text-align: center" >Tuyến xe hiện không có chuyến nào</h1>
-        </c:when>
-        <c:when test="${trips.size() > 0}">
-        <div class="schedule-table">
-            <table>
-                <thead>
-                <tr class="table-head">
-                    <th class="schedule-route-name"> Chuyến xe </th>
-                    <th class="date"> Thời gian khởi hành </th>
-                    <th class="time"> Thời gian đến (dự kiến) </th>
-                    <th class="prize"> Giá vé </th>
-                    <th class="end">  </th>
-                </tr>
-                </thead>
-            </table>
-            <div>
-            <table class="group-table">
-                <tbody>
-                <c:forEach var="t" items="${trips}">
+<div class="schedule-container">
+    <h1 class="title-page">Các chuyến xe</h1>
+    <div class="schedule-scroll">
+        <c:choose>
+            <c:when test="${trips.size() == 0}">
+            <h2 class="text-danger" style="text-align: center" >Tuyến xe hiện không có chuyến nào</h2>
+            </c:when>
+            <c:when test="${trips.size() > 0}">
+            <div class="schedule-table trip">
+                <table>
+                    <tr class="table-head">
+                        <th class="schedule-route-name"> Chuyến xe </th>
+                        <th class="date"> Thời gian khởi hành </th>
+                        <th class="time"> Thời gian đến (dự kiến) </th>
+                        <th class="prize"> Giá vé </th>
+                        <th class="end">  </th>
+                    </tr>
+                    <c:forEach var="t" items="${trips}">
                     <tr class="table-data">
                         <th class="schedule-route-name"> ${t.name} </th>
                         <th class="date"> ${t.startTime} </th>
@@ -33,12 +29,10 @@
                         <th class="price"> ${t.line.extra_changes + t.price} </th>
                         <th class="end"> <a href="<c:url value="/trip/${t.id}/book-ticket" />">Mua vé</a> </th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </c:forEach>
+                </table>
             </div>
-        </div>
-        </c:when>
-    </c:choose>
-</div>
+            </c:when>
+        </c:choose>
+    </div>
 </div>

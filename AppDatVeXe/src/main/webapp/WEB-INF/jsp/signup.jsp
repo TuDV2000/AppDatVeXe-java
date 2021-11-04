@@ -37,19 +37,28 @@
         console.log(checkInput());
     }
     function checkInput(){
-        const fullname = document.getElementById("fullname");
+        const firstname = document.getElementById("firstname");
+        const lastname = document.getElementById("lastname");
         const username = document.getElementById('username');
         const phone = document.getElementById('phoneNumber');
         const password = document.getElementById('password');
         const password2 = document.getElementById('password2');
         const checker = document.getElementById('checker');
 
-        //full name
-        if(fullname.value.trim() == ""){
-            setErrorFor(fullname, 'Không được để trống tên của bạn');
+
+        //last name
+        if(lastname.value.trim() == ""){
+            setErrorFor(lastname, 'Không được để trống họ của bạn');
             return false;
         }else {
-            setSuccessFor(fullname);
+            setSuccessFor(lastname);
+        }
+        //first name
+        if(firstname.value.trim() == ""){
+            setErrorFor(firstname, 'Không được để trống tên của bạn');
+            return false;
+        }else {
+            setSuccessFor(firstname);
         }
         //user name
         if(username.value.trim() == ""){
@@ -128,12 +137,21 @@
                                 <h3 class="text-danger">${msg}</h3>
                             </c:if>
                             <form class="form-signup" id="form" method="post" action="${signup}">
-                                <div class="form-outline mb-4">
-                                    <small>Erro message</small>
-                                    <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" />
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Tên của bạn</label>
+                                <div class="fullname-textbox-container">
+                                    <div class="form-outline mb-4">
+                                        <small>Erro message</small>
+                                        <input type="text" id="lastname" name="lastName" class="form-control form-control-lg" />
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <label class="form-label" >Họ & Tên đệm</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <small>Erro message</small>
+                                        <input type="text" id="firstname" name="firstName" class="form-control form-control-lg" />
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <label class="form-label" >Tên</label>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -149,7 +167,7 @@
                                     <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >SĐT</label>
+                                    <label class="form-label" >Số điện thoại</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
