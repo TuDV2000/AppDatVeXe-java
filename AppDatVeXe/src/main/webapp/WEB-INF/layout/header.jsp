@@ -55,7 +55,7 @@
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
             <li onclick="closeNav()" >
-                <a class="nav-link-signup" href=${signin}>${pageContext.request.userPrincipal.name}</a>
+                <a class="nav-link-signup" href="#">${pageContext.request.userPrincipal.name}</a>
             </li>
             </c:if>
 
@@ -66,7 +66,7 @@
         </a>
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <a class="header-nav-button-signup" href="${signin}">
+        <a class="header-nav-button-signup" href="#">
             <button type="button" class="btn btn-outline-light">${pageContext.request.userPrincipal.name}</button>
         </a>
         </c:if>

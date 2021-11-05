@@ -21,6 +21,9 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
     public boolean createUser(User user) {
         try {
             if (user != null) {
+                if (getUserByUsername(user.getUsername()) != null)
+                    return false;
+
                 user.setActive(true);
                 getCurrentSession().save(user);
                 return true;

@@ -133,8 +133,8 @@
                         </a>
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Đăng ký tài khoản</h2>
-                            <c:if test="${msg != ''}">
-                                <h3 class="text-danger">${msg}</h3>
+                            <c:if test="${mgs != ''}">
+                                <h3 class="text-danger">${mgs}</h3>
                             </c:if>
                             <form class="form-signup" id="form" method="post" action="${signup}">
                                 <div class="fullname-textbox-container">

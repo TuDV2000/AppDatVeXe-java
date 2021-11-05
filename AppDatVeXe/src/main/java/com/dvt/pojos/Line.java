@@ -19,8 +19,7 @@ public class Line implements Serializable {
     @ManyToOne
     @JoinColumn(name = "end_point_id")
     private Point endPoint;
-    @Column(name = "extra_changes")
-    private BigDecimal extra_changes;
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "line", fetch = FetchType.LAZY)
     private List<Trip> trips;
@@ -65,11 +64,12 @@ public class Line implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getExtra_changes() {
-        return extra_changes;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setExtra_changes(BigDecimal extra_changes) {
-        this.extra_changes = extra_changes;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
+

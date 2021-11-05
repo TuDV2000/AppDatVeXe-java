@@ -19,8 +19,8 @@ public class UserController {
     @Autowired
     IPermissionService permissionService;
 
-    @RequestMapping("/signup-form")
-    public String signupForm(Model model) {
+    @GetMapping("/signup")
+    public String signupForm() {
         return "signup";
     }
 
@@ -32,7 +32,7 @@ public class UserController {
             , @RequestParam(value = "phone") String phone
             , @RequestParam(value = "password") String password
             , @RequestParam(value = "password2") String password2) {
-        String msg = "";
+        String mgs = "";
 
         if (password.equals(password2)) {
             Permission permission = permissionService.getPerByName("Customer");
@@ -40,14 +40,14 @@ public class UserController {
                     , lastName, phone, permission))) {
                     return "redirect:/signin";
                 } else {
-                    msg = "Da co loi xay ra khi tao moi user!!";
+                mgs = "Username đã tồn tại!!";
                 }
         } else {
-            msg = "Mat khau khong khop";
+            mgs = "Mật khẩu không khớp";
         }
 
-        model.addAttribute("mgsErr", msg);
-        return "index";
+        model.addAttribute("mgs", mgs);
+        return "signup";
     }
 
     @RequestMapping("/signin")

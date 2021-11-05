@@ -26,7 +26,7 @@
                         <th class="schedule-route-name"> ${t.name} </th>
                         <th class="date"> ${t.startTime} </th>
                         <th class="date"> ${t.endTime} </th>
-                        <th class="price"> ${t.line.extra_changes + t.price} </th>
+                        <th class="price"> ${t.line.price + t.extra_changes} </th>
                         <th class="end"> <a href="<c:url value="/trip/${t.id}/book-ticket" />">Mua vé</a> </th>
                     </tr>
                     </c:forEach>
