@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -28,5 +29,10 @@ public class TripService extends GenericsService<Trip> implements ITripService {
     @Override
     public Trip getTrip(int sPointId, int ePointId, String sDate) {
         return tripRepository.getTrip(sPointId, ePointId, sDate);
+    }
+
+    @Override
+    public Map<Integer, Boolean> getSeatsByTrip(Trip trip) {
+        return tripRepository.getSeatsByTrip(trip);
     }
 }

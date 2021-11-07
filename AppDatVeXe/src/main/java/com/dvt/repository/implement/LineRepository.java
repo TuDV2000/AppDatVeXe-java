@@ -25,14 +25,14 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
     public Map<Point, List<Line>> getAllLines() {
         Map<Point, List<Line>> allLines = new HashMap<>();
         List<Point> lPoints = pointRepository.getAll();
-        System.out.println("List<Point>: " + lPoints);
+
         for (Point p: lPoints) {
             List<Line> lLines = getLinesBySPoint(p.getId());
             if (lLines.size() > 0) {
-                System.out.println("List<Line>: " + lLines);
                 allLines.put(p, lLines);
             }
         }
+
         return allLines;
     }
 
@@ -44,6 +44,7 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
             return getCurrentSession().createQuery(hql)
                     .setParameter("idSPoint", idSPoint).getResultList();
         }
+
         return null;
     }
 
@@ -56,12 +57,14 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
                         .setParameter("idSPoint", sPointId)
                         .setParameter("idEPoint", ePointId)
                         .getSingleResult();
+
                 if (l != null)
                     return l;
             } catch (NoResultException ex) {
                 ex.printStackTrace();
             }
         }
+
         return null;
     }
 }

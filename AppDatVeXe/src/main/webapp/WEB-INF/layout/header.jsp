@@ -6,6 +6,7 @@
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
 <c:url var="signin" value="/signin" />
+<c:url var="booking" value="/book-ticket" />
 
 <script>
     var flagicon = false;
@@ -43,7 +44,7 @@
                 <a class="nav-link" href="${schedule}">Tuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="#">Đặt vé</a>
+                <a class="nav-link" href="${booking}">Đặt vé</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="${tickets}">Hướng dẫn</a>
@@ -57,6 +58,9 @@
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href="#">${pageContext.request.userPrincipal.name}</a>
             </li>
+            <li onclick="closeNav()" >
+                <a class="nav-link-signup" href="<c:url value="/logout" />">ĐĂNG XUẤT</a>
+            </li>
             </c:if>
 
         </ul>
@@ -68,6 +72,9 @@
         <c:if test="${pageContext.request.userPrincipal.name != null}">
         <a class="header-nav-button-signup" href="#">
             <button type="button" class="btn btn-outline-light">${pageContext.request.userPrincipal.name}</button>
+        </a>
+        <a class="header-nav-button-signup" href="<c:url value="/logout" />">
+            <button type="button" class="btn btn-outline-light">ĐĂNG XUẤT</button>
         </a>
         </c:if>
     </nav>

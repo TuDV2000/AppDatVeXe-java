@@ -140,17 +140,17 @@
                                 <div class="fullname-textbox-container">
                                     <div class="form-outline mb-4">
                                         <small>Erro message</small>
-                                        <input type="text" id="lastname" name="lastName" class="form-control form-control-lg" />
-                                        <i class="fas fa-check-circle"></i>
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <label class="form-label" >Họ & Tên đệm</label>
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <small>Erro message</small>
                                         <input type="text" id="firstname" name="firstName" class="form-control form-control-lg" />
                                         <i class="fas fa-check-circle"></i>
                                         <i class="fas fa-exclamation-circle"></i>
                                         <label class="form-label" >Tên</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <small>Erro message</small>
+                                        <input type="text" id="lastname" name="lastName" class="form-control form-control-lg" />
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <label class="form-label" >Họ & Tên đệm</label>
                                     </div>
                                 </div>
 

@@ -1,6 +1,7 @@
 package com.dvt.repository.implement;
 
 import com.dvt.pojos.Line;
+import com.dvt.pojos.Ticket;
 import com.dvt.pojos.Trip;
 import com.dvt.repository.ITripRepository;
 import org.springframework.stereotype.Repository;
@@ -10,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.NoResultException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,12 +20,13 @@ public class TripRepository extends GenericsRepository<Trip> implements ITripRep
 
     @Override
     public Trip getTripById(int id) {
-        if (id > 0) {
-            String hql = "from Trip where id = :id";
-            return (Trip) getCurrentSession().createQuery(hql)
-                    .setParameter("id", id).getSingleResult();
-        }
-        return null;
+//        if (id > 0) {
+//            String hql = "from Trip where id = :id";
+//            return (Trip) getCurrentSession().createQuery(hql)
+//                    .setParameter("id", id).getSingleResult();
+//        }
+//        return null;
+        return getCurrentSession().get(Trip.class, id);
     }
 
     @Override
@@ -67,5 +67,23 @@ public class TripRepository extends GenericsRepository<Trip> implements ITripRep
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Map<Integer, Boolean> getSeatsByTrip(Trip trip) {
+        Map<Integer, Boolean> seats = new HashMap<>();
+        List<Ticket> tickets = trip.getTickets();
+        int seatsAmount = trip.getDriver().getVehicles().get(0).getSeat();
+
+        for (int i = 1; i <= seatsAmount; i++) {
+            seats.put(i, false);
+        }
+        if (tickets != null) {
+            for (Ticket t : tickets) {
+                seats.put(t.getTicketDetails().get(0).getSeatPosition(), true);
+            }
+        }
+
+        return seats;
     }
 }

@@ -16,7 +16,7 @@ public class TripController {
     ITripService tripService;
 
     @GetMapping("/line/{lineId}/trips")
-    public String searchTrips(Model model, @PathVariable(value = "lineId") int lineId){
+    public String searchTrips(Model model, @PathVariable(value = "lineId") Integer lineId){
         model.addAttribute("trips", tripService.getTrips(lineId));
 
         return "trips";
@@ -40,6 +40,6 @@ public class TripController {
                 model.addAttribute("mgsSearchtrip", false);
         }
 
-        return "forward:/";
+        return "redirect:/";
     }
 }

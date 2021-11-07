@@ -9,9 +9,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
 <!DOCTYPE html>
-<c:if test="${trip == null}"><h1>Không có chuyến</h1></c:if>
+<c:if test="${trip == null}"><h1 class="text-danger" style="text-align: center">Không có chuyến</h1></c:if>
 <c:if test="${trip != null}">
 <div class="ticket-container">
     <h1 class="title-page"> thông tin chuyến </h1>
@@ -22,7 +21,7 @@
             <h3 class="trip-destination"> Điểm đến : ${trip.line.endPoint.address} </h3>
             <h3>Số ghế : ${trip.driver.vehicles[0].seat}</h3>
             <h3>Tổng tiền</h3>
-            <h3 class="start-place-title">${trip.line.extra_changes + trip.price + trip.driver.vehicles[0].extraChanges}</h3>
+            <h3 class="start-place-title">${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}</h3>
             <img class="bus-img" src="<c:url value="/images/xe-nha-1.png" />" />
         </div>
         <div class="sit-position">
@@ -65,18 +64,38 @@
             </div>
         </div>
     </div>
-
     <div id="booking" style="display: none">
+        <h1 class="text-container">Thông tin vé</h1>
         <form class="form" action="" method="post">
-            <label>Họ và tên</label>
-            <input class="form-control" type="text" name="fullName">
-            <label>Số điện thoại</label>
-            <input class="form-control" type="text" pattern="^[0-9\-\+]{10,11}$" name="phone">
-            <input class="form-control" type="hidden" name="seatPosition" id="seatPosition">
+            <label for="trip">Chuyến</label>
+            <input class="form-control" type="text" name="trip"  disabled
+                   value="${trip.line.startPoint.address}-${trip.line.endPoint.address}">
+            <label for="price">Tiền vé</label>
+            <input class="form-control" type="text" name="price" disabled
+                    value="${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}">
+            <label for="seatPosition">Vị trí ghế</label>
+            <input class="form-control" type="text" name="seatPosition" id="seatPosition" disabled>
+            <c:choose>
+                <c:when test="${user == null}">
+                <label for="fullName">Họ và tên</label>
+                <input class="form-control" type="text" name="fullName" id="fullName">
+                <label for="phone">Số điện thoại</label>
+                <input class="form-control" type="text" pattern="^[0-9\-\+]{10,11}$" name="phone" id="phone">
+                </c:when>
+                <c:when test="${user != null}">
+                <input type="text" name="userId" id="userId" value="${user.getId()}" hidden>
+                <label for="fullName">Họ và tên</label>
+                <input class="form-control" type="text" name="fullName" id="fullName" disabled
+                       value="${user.getFirstName()} ${user.getLastName()}" >
+                <label for="phone">Số điện thoại</label>
+                <input class="form-control" type="text" pattern="^[0-9\-\+]{10,11}$" name="phone" id="phone"
+                       value="${user.getNumberPhone()}" disabled>
+                </c:when>
+            </c:choose>
+            <p class="text-danger">Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15'</p>
             <button type="submit" class="btn btn-primary btn-lg ticket">Đặt vé</button>
         </form>
     </div>
-
     <div class="ticket-btn-container">
         <div class="ticket-btn-return">
             <button type="button" class="btn btn-primary btn-lg ticket">Quay Lại</button>
