@@ -33,6 +33,11 @@ public class UserService extends GenericsService<User> implements IUserService {
     }
 
     @Override
+    public boolean updateUser(User user) {
+        return userRepository.updateUser(user);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
@@ -49,5 +54,9 @@ public class UserService extends GenericsService<User> implements IUserService {
 
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authoritySet);
+    }
+    @Override
+    public String enCode(String s){
+        return bCryptPasswordEncoder.encode(s);
     }
 }

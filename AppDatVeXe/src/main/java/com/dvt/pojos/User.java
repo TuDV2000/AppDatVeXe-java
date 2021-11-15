@@ -52,6 +52,7 @@ public class User implements Serializable {
         this.permission = permission;
     }
 
+
     public List<Ticket> getTickets() {
         return tickets;
     }

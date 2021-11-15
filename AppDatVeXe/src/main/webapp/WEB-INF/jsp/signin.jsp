@@ -9,6 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -71,50 +72,46 @@
         formOutline.className = "form-outline mb-4 success";
     }
 </script>
-<c:if test="${param.error != null}">
-    <h1 class="alert alert-danger">!!!!!!!Loi!!!!!!!!!</h1>
-</c:if>
-<section class="vh-100 bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
-                        <a class="back-to-mainpage" href="${home}">
-                            <i class="fas fa-chevron-left"></i>
-                            Quay lại
-                        </a>
-                        <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
-                            <form id="form" method="post" action="${signin}">
-                                <div class="form-outline mb-4">
-                                    <small>Erro message</small>
-                                    <input name="username" type="text" id="username" class="form-control form-control-lg" />
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Tên đăng nhập</label>
-                                </div>
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                    <a class="back-to-mainpage" href="${home}">
+                        <i class="fas fa-chevron-left"></i>
+                        Quay lại
+                    </a>
+                    <div class="card-body p-5">
+                        <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
+                        <c:if test="${param.error != null}">
+                            <label class="text-danger">*Đăng nhập không thành công</label>
+                        </c:if>
+                        <form id="form" method="post" action="${signin}">
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input name="username" type="text" id="username" class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Tên đăng nhập</label>
+                            </div>
 
-                                <div class="form-outline mb-4">
-                                    <small>Erro message</small>
-                                    <input name="password" type="password" id="password" class="form-control form-control-lg" />
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Mật khẩu</label>
-                                </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input name="password" type="password" id="password" class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Mật khẩu</label>
+                            </div>
 
-                                <div class="d-flex justify-content-center">
-                                    <input onclick="return checkInput()" type="submit"  value="ĐĂNG NHẬP" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">
-                                </div>
-                                <p class="text-center text-muted mt-5 mb-0">Chưa có tài khoản? <a href="${signup}" class="fw-bold text-body"><u>Đăng ký ở đây</u></a></p>
-                            </form>
+                            <div class="d-flex justify-content-center">
+                                <input onclick="return checkInput()" type="submit"  value="ĐĂNG NHẬP" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">
+                            </div>
+                            <p class="text-center text-muted mt-5 mb-0">Chưa có tài khoản? <a href="${signup}" class="fw-bold text-body"><u>Đăng ký ở đây</u></a></p>
+                        </form>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
 </body>
 </html>

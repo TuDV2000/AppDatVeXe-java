@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface IUserService extends IGenericsServevice<User>, UserDetailsService {
     boolean createUser(User user);
+    boolean updateUser(User user);
+    public String enCode(String s);
     public User getUserByUsername(String username);
 }

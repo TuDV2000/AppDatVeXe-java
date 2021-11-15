@@ -1,7 +1,9 @@
-.bg-image{
-    background-size: cover;
+body{
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 120%;
+    background-size: cover;
+    background-color: #cccccc;
 }
 .gradient-custom-3 {
     /* fallback for old browsers */

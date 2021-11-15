@@ -6,6 +6,7 @@
 <c:url var="tickets" value="/tikcets" />
 <c:url var="home" value="/" />
 <c:url var="signin" value="/signin" />
+<c:url var="profile" value="/profile" />
 
 <script>
     var flagicon = false;
@@ -45,9 +46,9 @@
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="#">Đặt vé</a>
             </li>
-            <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="${tickets}">Hướng dẫn</a>
-            </li>
+<%--            <li class="nav-item active" onclick="closeNav()">--%>
+<%--                <a class="nav-link" href="${tickets}">Hướng dẫn</a>--%>
+<%--            </li>--%>
             <c:if test="${pageContext.request.userPrincipal.name == null}">
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href=${signin}>ĐĂNG NHẬP</a>
@@ -55,7 +56,7 @@
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
             <li onclick="closeNav()" >
-                <a class="nav-link-signup" href="#">${pageContext.request.userPrincipal.name}</a>
+                <a class="nav-link-signup" href="<c:url value="/profile" />">${pageContext.request.userPrincipal.name}</a>
             </li>
             </c:if>
 
@@ -66,7 +67,7 @@
         </a>
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <a class="header-nav-button-signup" href="#">
+        <a class="header-nav-button-signup" href="<c:url value="/profile" />">
             <button type="button" class="btn btn-outline-light">${pageContext.request.userPrincipal.name}</button>
         </a>
         </c:if>

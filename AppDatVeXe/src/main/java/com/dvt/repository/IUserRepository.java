@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IUserRepository extends IGenericsRepository<User> {
     boolean createUser(User user);
+    boolean updateUser(User user);
     public User getUserByUsername(String username);
 }
