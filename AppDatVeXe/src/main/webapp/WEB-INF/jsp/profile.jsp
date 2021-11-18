@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Hồ sơ</title>
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
@@ -110,6 +110,14 @@
     <c:when test="${result == 'err'}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             Cập nhật không thành công, thử lại sau!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:when>
+    <c:when test="${result == 'err2'}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Mật khẩu hiện tại không chính sác. Cập nhật mật khẩu thất bại.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -227,31 +235,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="t" items="${ticket}">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>#ikasjdu</td>
-                                    <td>Hà Nội - Thành phố Hồ Chí Minh</td>
+                                    <th scope="row"></th>
+                                    <td>${t.id}</td>
+                                    <td>${t.trip.line.startPoint.address} - ${t.trip.line.endPoint.address}</td>
                                     <td><a href="#">Chi tiết</a></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>#ikasjdu</td>
-                                    <td>Hà Nội - Thành phố Hồ Chí Minh</td>
-                                    <td><a href="#">Chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>#ikasjdu</td>
-                                    <td>Hà Nội - Thành phố Hồ Chí Minh</td>
-                                    <td><a href="#">Chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>#ikasjdu</td>
-                                    <td>Hà Nội - Thành phố Hồ Chí Minh</td>
-                                    <td><a href="#">Chi tiết</a></td>
-                                </tr>
-
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

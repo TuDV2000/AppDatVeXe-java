@@ -1,6 +1,7 @@
 package com.dvt.service.implement;
 
 import com.dvt.pojos.Permission;
+import com.dvt.pojos.Ticket;
 import com.dvt.pojos.User;
 import com.dvt.repository.IUserRepository;
 import com.dvt.service.IUserService;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service("userDetailsService")
@@ -43,6 +45,7 @@ public class UserService extends GenericsService<User> implements IUserService {
         return userRepository.getUserByUsername(username);
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);
@@ -58,5 +61,10 @@ public class UserService extends GenericsService<User> implements IUserService {
     @Override
     public String enCode(String s){
         return bCryptPasswordEncoder.encode(s);
+    }
+
+    @Override
+    public List<Ticket> getTicketByUsername(String username) {
+        return userRepository.getTicketByUsername(username);
     }
 }

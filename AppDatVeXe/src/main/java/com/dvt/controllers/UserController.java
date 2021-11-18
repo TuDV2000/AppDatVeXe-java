@@ -27,7 +27,7 @@ public class UserController {
         return "signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup")
     public String signup(Model model
             , @RequestParam(value = "lastName") String lastName
             , @RequestParam(value = "firstName") String firstName
@@ -36,6 +36,9 @@ public class UserController {
             , @RequestParam(value = "password") String password
             , @RequestParam(value = "password2") String password2) {
         String mgs = "";
+
+        System.out.println("lastName ===============" + lastName);
+        System.out.println("fistName ===============" + firstName);
 
         if (password.equals(password2)) {
             Permission permission = permissionService.getPerByName("Customer");
@@ -82,28 +85,37 @@ public class UserController {
             mgs ="err";
         }
         System.out.println(mgs);
-        model.addAttribute("result", mgs);
-        return "/profile";
+
+        return "redirect:/profile/" + mgs;
     }
 
     @PostMapping("/password")
         public String updatePass(Model model,Principal principal
-            ,@RequestParam(value = "newpass") String newPass){
+            ,@RequestParam(value = "newpass") String newPass
+            ,@RequestParam(value = "oldpass") String oldPass){
         String mgs = "";
         User user = userService.getUserByUsername(principal.getName());
-        String enPass = userService.enCode(newPass);
-        user.setPassword(enPass);
-        if(userService.updateUser(user)){
-            mgs = "sus";
-        }else{
-            mgs = "err";
+        System.out.println("user.getPassword()       " + user.getPassword());
+        System.out.println("oldPass                   " + oldPass);
+        System.out.println("userService.enCode(oldPass)      " + userService.enCode(oldPass));
+        System.out.println("userService.enCode(oldPass)      " + userService.enCode(oldPass));
+        if (user.getPassword().equals(userService.enCode(oldPass))){
+            String enPass = userService.enCode(newPass);
+            user.setPassword(enPass);
+            if(userService.updateUser(user)){
+                mgs = "sus";
+            }else{
+                mgs = "err";
+            }
         }
+        else {
+            mgs = "err2";
+        }
+
         System.out.println(mgs);
-        model.addAttribute("rel", mgs);
+        model.addAttribute("result", mgs);
         return "/profile";
     }
-
-
 
     @RequestMapping("/signin")
     public String signin(Model model) {
@@ -111,9 +123,10 @@ public class UserController {
     }
 
 
-    @GetMapping("/profile")
-    public String searchUser(Model model, Principal principal){
+    @GetMapping(value = {"/profile", "/profile/{result}"})
+    public String searchUser(Model model, @PathVariable(value = "result", required = false) String result, Principal principal){
         model.addAttribute("user", userService.getUserByUsername(principal.getName()));
+        model.addAttribute("ticket", userService.getTicketByUsername(principal.getName()));
         return "profile";
     }
 }
