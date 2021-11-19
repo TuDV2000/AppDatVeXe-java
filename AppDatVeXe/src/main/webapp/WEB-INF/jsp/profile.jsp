@@ -97,6 +97,7 @@
 <c:url var="home" value="/" />
 <c:url var="update" value="/profile" />
 <c:url var="change" value="/password" />
+<c:url var="avatar" value="/update-avatar"/>
 
 <c:choose>
     <c:when test="${result == 'sus'}">
@@ -135,10 +136,13 @@
                 </div>
                 <div class="profile-img">
                     <img src="<c:url value="/images/svg/account.svg" />" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Đổi ảnh đại diện
-                        <input type="file" name="file"/>
-                    </div>
+                    <form:form method="post" action="${avatar}" enctype="multipart/form-data " modelAttribute="user">
+                        <div class="file btn btn-lg btn-primary">
+                            Đổi ảnh đại diện
+                            <form:input id="imageId" path="img" type="file" />
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Upload">
+                    </form:form>
                 </div>
             </div>
             <div class="col-md-6">

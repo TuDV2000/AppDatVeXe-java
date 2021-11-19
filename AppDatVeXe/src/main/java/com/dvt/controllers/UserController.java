@@ -1,5 +1,7 @@
 package com.dvt.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.dvt.pojos.Permission;
 import com.dvt.pojos.User;
 import com.dvt.service.IPermissionService;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class UserController {
     IUserService userService;
     @Autowired
     IPermissionService permissionService;
+    @Autowired
+    Cloudinary cloudinary;
 
     @GetMapping("/signup")
     public String signupForm() {
@@ -64,11 +69,11 @@ public class UserController {
 //    }
 
     @PostMapping("/profile")
-        public String updateProfile(Model model
-            ,@RequestParam(value = "userName") String userName
-            ,@RequestParam(value = "email") String email
-            ,@RequestParam(value = "phone") String phone
-            ,@RequestParam(value = "address") String address) {
+    public String updateProfile(Model model
+        ,@RequestParam(value = "userName") String userName
+        ,@RequestParam(value = "email") String email
+        ,@RequestParam(value = "phone") String phone
+        ,@RequestParam(value = "address") String address) {
         String mgs = "";
         System.out.println(userName + "-------------" + email + "-------------" + phone + "-------------" + address);
 
@@ -78,9 +83,9 @@ public class UserController {
         user.setAddress(address);
         if(userService.updateUser(user)){
             mgs = "sus";
-//            model.addAttribute("rel", mgs);
-//            System.out.println(mgs);
-//            return "redirect:/profile";
+    //            model.addAttribute("rel", mgs);
+    //            System.out.println(mgs);
+    //            return "redirect:/profile";
         }else {
             mgs ="err";
         }
@@ -90,9 +95,9 @@ public class UserController {
     }
 
     @PostMapping("/password")
-        public String updatePass(Model model,Principal principal
-            ,@RequestParam(value = "newpass") String newPass
-            ,@RequestParam(value = "oldpass") String oldPass){
+    public String updatePass(Model model,Principal principal
+        ,@RequestParam(value = "newpass") String newPass
+        ,@RequestParam(value = "oldpass") String oldPass){
         String mgs = "";
         User user = userService.getUserByUsername(principal.getName());
         System.out.println("user.getPassword()       " + user.getPassword());
@@ -114,6 +119,18 @@ public class UserController {
 
         System.out.println(mgs);
         model.addAttribute("result", mgs);
+        return "/profile";
+    }
+    @RequestMapping(path="/update-avatar", method = RequestMethod.POST)
+    public String updateAvatar(@ModelAttribute("user") User user){
+        System.out.println("aaaaaaaaa");
+        String mgs = "";
+        try {
+            this.cloudinary.uploader().upload(user.getImg().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            mgs = "sus";
+        } catch (IOException ex) {
+            System.out.println("==Change profile avata ==" +ex.getMessage());
+        }
         return "/profile";
     }
 

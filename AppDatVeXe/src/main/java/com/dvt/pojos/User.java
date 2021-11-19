@@ -1,5 +1,7 @@
 package com.dvt.pojos;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -29,6 +31,8 @@ public class User implements Serializable {
     private String avatar;
     @Column(name = "is_active")
     private boolean isActive;
+    @Transient
+    private MultipartFile img;
 
     @ManyToOne
     @JoinColumn(name = "user_permission")
@@ -39,6 +43,7 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
+
 
     public User() {}
 
@@ -179,5 +184,13 @@ public class User implements Serializable {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 }
