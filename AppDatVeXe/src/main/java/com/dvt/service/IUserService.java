@@ -1,12 +1,17 @@
 package com.dvt.service;
 
 import com.dvt.pojos.Permission;
+import com.dvt.pojos.Ticket;
 import com.dvt.pojos.User;
+import com.dvt.pojos.Trip;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface IUserService extends IGenericsServevice<User>, UserDetailsService {
     boolean createUser(User user);
+    boolean updateUser(User user);
+    public String enCode(String s);
     public User getUserByUsername(String username);
+    public List<Ticket> getTicketByUsername (String username);
 }

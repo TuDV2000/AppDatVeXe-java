@@ -5,11 +5,12 @@
   Time: 10:19 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
-<head>
+<head >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
 
     <script src="jquery-3.5.1.min.js"></script>
@@ -121,91 +122,88 @@
         return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phone);
     }
 </script>
-<section class="bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
-                        <a class="back-to-mainpage" href="${signin}" >
-                            <i class="fas fa-chevron-left"></i>
-                            Quay lại
-                        </a>
-                        <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Đăng ký tài khoản</h2>
-                            <c:if test="${mgs != ''}">
-                                <h3 class="text-danger">${mgs}</h3>
-                            </c:if>
-                            <form class="form-signup" id="form" method="post" action="${signup}">
-                                <div class="fullname-textbox-container">
-                                    <div class="form-outline mb-4">
-                                        <small>Erro message</small>
-                                        <input type="text" id="firstname" name="firstName" class="form-control form-control-lg" />
-                                        <i class="fas fa-check-circle"></i>
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <label class="form-label" >Tên</label>
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <small>Erro message</small>
-                                        <input type="text" id="lastname" name="lastName" class="form-control form-control-lg" />
-                                        <i class="fas fa-check-circle"></i>
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <label class="form-label" >Họ & Tên đệm</label>
-                                    </div>
-                                </div>
-
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                    <a class="back-to-mainpage" href="${signin}" >
+                        <i class="fas fa-chevron-left"></i>
+                        Quay lại
+                    </a>
+                    <div class="card-body p-5">
+                        <h2 class="text-uppercase text-center mb-5">Đăng ký tài khoản</h2>
+                        <c:if test="${mgs != ''}">
+                            <h3 class="text-danger">${mgs}</h3>
+                        </c:if>
+                        <form class="form-signup" id="form" method="post" action="${signup}">
+                            <div class="fullname-textbox-container">
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="username" name="username"  class="form-control form-control-lg" />
+                                    <input type="text" id="lastname" name="lastName" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Tên đăng nhập</label>
+                                    <label class="form-label" >Họ & Tên đệm</label>
                                 </div>
-
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
-                                    <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
+                                    <input type="text" id="firstname" name="firstName" class="form-control form-control-lg" />
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Số điện thoại</label>
+                                    <label class="form-label" >Tên</label>
                                 </div>
+                            </div>
 
-                                <div class="form-outline mb-4">
-                                    <small>Erro message</small>
-                                    <input type="password" id="password" name="password"  class="form-control form-control-lg" />
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Mật khẩu</label>
-                                </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input type="text" id="username" name="username"  class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Tên đăng nhập</label>
+                            </div>
 
-                                <div class="form-outline mb-4">
-                                    <small>Erro message</small>
-                                    <input type="password" id="password2" name="password2"  class="form-control form-control-lg" />
-                                    <i class="fas fa-check-circle"></i>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <label class="form-label" >Xác thực mật khẩu</label>
-                                </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Số điện thoại</label>
+                            </div>
 
-                                <div class="form-check d-flex justify-content-center mb-5">
-                                    <input
-                                            id="checker" name="checker"
-                                            class="form-check-input me-2"
-                                            type="checkbox"
-                                            value=""
-                                    />
-                                    <label class="form-check-label" >
-                                        Đồng ý với <u>các điều khoản dịch vụ</u>
-                                    </label>
-                                </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input type="password" id="password" name="password"  class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Mật khẩu</label>
+                            </div>
 
-                                <div class="d-flex justify-content-center">
-                                    <input onclick="return checkInput()" type="submit" value="Đăng ký"
-                                           class="btn btn-success btn-block btn-lg gradient-custom-4 text-white" />
-                                </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input type="password" id="password2" name="password2"  class="form-control form-control-lg" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Xác thực mật khẩu</label>
+                            </div>
 
-                            </form>
+                            <div class="form-check d-flex justify-content-center mb-5">
+                                <input
+                                        id="checker" name="checker"
+                                        class="form-check-input me-2"
+                                        type="checkbox"
+                                        value=""
+                                />
+                                <label class="form-check-label" >
+                                    Đồng ý với <u>các điều khoản dịch vụ</u>
+                                </label>
+                            </div>
 
-                        </div>
+                            <div class="d-flex justify-content-center">
+                                <input onclick="return checkInput()" type="submit" value="Đăng ký"
+                                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-white" />
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
             </div>

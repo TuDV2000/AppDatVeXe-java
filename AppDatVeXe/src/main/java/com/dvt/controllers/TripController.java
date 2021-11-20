@@ -22,6 +22,7 @@ public class TripController {
         return "trips";
     }
 
+
     @RequestMapping("/trip")
     public String searchTrips(Model model
             , @RequestParam(value = "sPoint", required = false) int sPointId

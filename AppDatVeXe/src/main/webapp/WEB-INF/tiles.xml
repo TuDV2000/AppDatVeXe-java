@@ -42,5 +42,8 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="signin" template="/WEB-INF/jsp/signin.jsp">
         <put-attribute name="title" value="Đăng nhập"/>
     </definition>
+    <definition name="profile" template="/WEB-INF/jsp/profile.jsp">
+        <put-attribute name="title" value="Hồ sơ"/>
+    </definition>
 
 </tiles-definitions>
