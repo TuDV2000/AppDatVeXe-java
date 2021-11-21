@@ -67,4 +67,9 @@ public class UserService extends GenericsService<User> implements IUserService {
     public List<Ticket> getTicketByUsername(String username) {
         return userRepository.getTicketByUsername(username);
     }
+
+    @Override
+    public void updateAvatar(String username, String avatar) {
+        userRepository.updateAvatar(username, avatar);
+    }
 }

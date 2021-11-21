@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -121,17 +123,22 @@ public class UserController {
         model.addAttribute("result", mgs);
         return "/profile";
     }
-    @RequestMapping(path="/update-avatar", method = RequestMethod.POST)
-    public String updateAvatar(@ModelAttribute("user") User user){
-        System.out.println("aaaaaaaaa");
+
+    @PostMapping("/update-avatar")
+    public String updateAvatar(@RequestParam(value = "img") MultipartFile image, Principal principal) {
         String mgs = "";
         try {
-            this.cloudinary.uploader().upload(user.getImg().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            Map imgCloud = this.cloudinary.uploader()
+                    .upload(image.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            String avatar = (String) imgCloud.get("secure_url");
+            userService.updateAvatar(principal.getName(), avatar);
             mgs = "sus";
-        } catch (IOException ex) {
-            System.out.println("==Change profile avata ==" +ex.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            mgs = "err";
         }
-        return "/profile";
+
+        return "redirect:/profile/" + mgs;
     }
 
     @RequestMapping("/signin")

@@ -12,4 +12,5 @@ public interface IUserRepository extends IGenericsRepository<User> {
     boolean updateUser(User user);
     public User getUserByUsername(String username);
     public List<Ticket> getTicketByUsername (String username);
+    public void updateAvatar(String username, String avatar);
 }

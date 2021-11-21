@@ -11,13 +11,6 @@
     <title>Hồ sơ</title>
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-
-
-<%--        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>--%>
-<%--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>--%>
-<%--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>--%>
-<%--        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>--%>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -135,14 +128,19 @@
                     </a>
                 </div>
                 <div class="profile-img">
-                    <img src="<c:url value="/images/svg/account.svg" />" alt=""/>
-                    <form:form method="post" action="${avatar}" enctype="multipart/form-data " modelAttribute="user">
+                    <c:if test="${user.getAvatar() == null}">
+                    <img src="<c:url value="/images/svg/account.svg" />" alt="Ảnh"/>
+                    </c:if>
+                    <c:if test="${user.getAvatar() != null}">
+                        <img src="${user.getAvatar()}" alt="Ảnh"/>
+                    </c:if>
+                    <form method="post" enctype="multipart/form-data" action="${avatar}">
                         <div class="file btn btn-lg btn-primary">
                             Đổi ảnh đại diện
-                            <form:input id="imageId" path="img" type="file" />
+                            <input id="imageId" name="img" type="file" />
                         </div>
                         <input type="submit" class="btn btn-primary" value="Upload">
-                    </form:form>
+                    </form>
                 </div>
             </div>
             <div class="col-md-6">
@@ -275,7 +273,7 @@
                     <div class="modal-body">
                             <div class="tab-content" id="editTabContent">
                                 <div class="tab-pane fade show active" id="editInfo" role="tabpanel" aria-labelledby="edit-infor-tab">
-                                    <form id="form" method="post" action="${update}">
+                                    <form id="form" method="post" action="${update}" accept-charset="utf-8">
                                         <div class="form-group">
                                             <label for="username" class="col-form-label">UserName </label>
                                             <input type="text" class="form-control" id="username" name="userName" readonly="readonly" value="${user.username}">

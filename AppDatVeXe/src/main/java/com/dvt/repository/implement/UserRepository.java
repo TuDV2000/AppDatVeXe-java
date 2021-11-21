@@ -93,7 +93,11 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         return null;
     }
 
-
+    public void updateAvatar(String username, String avatar) {
+        User user = getUserByUsername(username);
+        user.setAvatar(avatar);
+        getCurrentSession().update(user);
+    }
 //    public List<User> getUsers(String username) {
 //        String hql = "from User where username = :un";
 //        List<User> users = getCurrentSession().createQuery(hql)
