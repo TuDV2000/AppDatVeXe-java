@@ -11,6 +11,7 @@ import com.dvt.service.ITripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,15 +28,17 @@ public class HomeController {
     IPointService pointService;
     @Autowired
     ITripService tripService;
+    @Autowired
+    ILineService lineService;
 
     @ModelAttribute
     public void commonAttrs(Model model, HttpSession session) {
         model.addAttribute("points", pointService.getAll());
+        model.addAttribute("poline", lineService.getPopularLine());
     }
 
     @RequestMapping("/")
     public String index(Model model) {
-
         return "index";
     }
 
@@ -48,4 +51,5 @@ public class HomeController {
     public String payment(Model model) {
         return "payment";
     }
+
 }

@@ -20,6 +20,10 @@ public class Line implements Serializable {
     @JoinColumn(name = "end_point_id")
     private Point endPoint;
     private BigDecimal price;
+    private int popular_line;
+    private int kilometer;
+    private int time;
+
 
     @OneToMany(mappedBy = "line", fetch = FetchType.LAZY)
     private List<Trip> trips;
@@ -70,6 +74,30 @@ public class Line implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public int getPopular_line() {
+        return popular_line;
+    }
+
+    public void setPopular_line(int popular_line) {
+        this.popular_line = popular_line;
+    }
+
+    public int getKilometer() {
+        return kilometer;
+    }
+
+    public void setKilometer(int kilometer) {
+        this.kilometer = kilometer;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }
 

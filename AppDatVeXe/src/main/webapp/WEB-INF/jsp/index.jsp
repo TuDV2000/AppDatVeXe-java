@@ -49,133 +49,62 @@
     <div class='cards__container'>
         <div class='cards__wrapper'>
             <ul class='cards__items'>
-                <li class='cards__item'>
-                    <a class='cards__item__link' href="#">
-                    <figure class='cards__item__pic-wrap' data-category="Sài Gòn => Hà Nội">
-                        <img
-                                class='cards__item__img'
-                                alt='Travel Image'
-                                src="<c:url value="images/hanoi.jpg"/>"
-                        />
-                    </figure>
-                    <div class='cards__item__info'>
-                        <label class='cards__item__text'>
-                            <i class="fas fa-map-marker-alt"></i>
-                            1.723km
-                        </label>
-                        <label class='cards__item__text'>
-                            <i class="fas fa-clock"></i>
-                            8
-                        </label>
-                        <label class='cards__item__text'>
-                            <i class="fas fa-money-bill-wave"></i>
-                            1.500.000
-                        </label>
-                    </div>
-                    </a>
-                </li>
-                <li class='cards__item'>
-                    <a class='cards__item__link' href="#">
-                        <figure class='cards__item__pic-wrap' data-category="Sài Gòn => Hà Nội">
-                            <img
-                                    class='cards__item__img'
-                                    alt='Travel Image'
-                                    src="<c:url value="images/hanoi.jpg"/>"
-                            />
-                        </figure>
-                        <div class='cards__item__info'>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-map-marker-alt"></i>
-                                1.723km
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-clock"></i>
-                                8
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-money-bill-wave"></i>
-                                1.500.000
-                            </label>
-                        </div>
-                    </a>
-                </li>
+                <c:forEach var="l" begin="0" end="1" items="${poline}">
+                    <li class='cards__item'>
+                        <a class='cards__item__link' href="#">
+                            <figure class='cards__item__pic-wrap' data-category="${l.startPoint.address} => ${l.endPoint.address}">
+                                <img
+                                        class='cards__item__img'
+                                        alt='Travel Image'
+                                        src="${l.endPoint.picture}"/>"
+                                />
+                            </figure>
+                            <div class='cards__item__info'>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                        ${l.kilometer}km
+                                </label>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-clock"></i>
+                                        ${l.time}h
+                                </label>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    ${l.price}
+                                </label>
+                            </div>
+                        </a>
+                    </li>
+                </c:forEach>
             </ul>
             <ul class='cards__items'>
-                <li class='cards__item'>
-                    <a class='cards__item__link' href="#">
-                        <figure class='cards__item__pic-wrap' data-category="Sài Gòn => Hà Nội">
-                            <img
-                                    class='cards__item__img'
-                                    alt='Travel Image'
-                                    src="<c:url value="images/hanoi.jpg"/>"
-                            />
-                        </figure>
-                        <div class='cards__item__info'>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-map-marker-alt"></i>
-                                1.723km
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-clock"></i>
-                                8
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-money-bill-wave"></i>
-                                1.500.000
-                            </label>
-                        </div>
-                    </a>
-                </li>
-                <li class='cards__item'>
-                    <a class='cards__item__link' href="#">
-                        <figure class='cards__item__pic-wrap' data-category="Sài Gòn => Hà Nội">
-                            <img
-                                    class='cards__item__img'
-                                    alt='Travel Image'
-                                    src="<c:url value="images/hanoi.jpg"/>"
-                            />
-                        </figure>
-                        <div class='cards__item__info'>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-map-marker-alt"></i>
-                                1.723km
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-clock"></i>
-                                8
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-money-bill-wave"></i>
-                                1.500.000
-                            </label>
-                        </div>
-                    </a>
-                </li>
-                <li class='cards__item'>
-                    <a class='cards__item__link' href="#">
-                        <figure class='cards__item__pic-wrap' data-category="Sài Gòn => Hà Nội">
-                            <img
-                                    class='cards__item__img'
-                                    alt='Travel Image'
-                                    src="<c:url value="images/hanoi.jpg"/>"
-                            />
-                        </figure>
-                        <div class='cards__item__info'>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-map-marker-alt"></i>
-                                1.723km
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-clock"></i>
-                                8
-                            </label>
-                            <label class='cards__item__text'>
-                                <i class="fas fa-money-bill-wave"></i>
-                                1.500.000
-                            </label>
-                        </div>
-                    </a>
-                </li>
+                <c:forEach var="l" begin="2" end="4" items="${poline}">
+                    <li class='cards__item'>
+                        <a class='cards__item__link' href="#">
+                            <figure class='cards__item__pic-wrap' data-category="${l.startPoint.address} => ${l.endPoint.address}">
+                                <img
+                                        class='cards__item__img'
+                                        alt='Travel Image'
+                                        src="${l.endPoint.picture}"/>"
+                                />
+                            </figure>
+                            <div class='cards__item__info'>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                        ${l.kilometer}km
+                                </label>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-clock"></i>
+                                        ${l.time}h
+                                </label>
+                                <label class='cards__item__text'>
+                                    <i class="fas fa-money-bill-wave"></i>
+                                        ${l.price}
+                                </label>
+                            </div>
+                        </a>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>

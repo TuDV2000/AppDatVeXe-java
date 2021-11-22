@@ -136,10 +136,15 @@
                     </c:if>
                     <form method="post" enctype="multipart/form-data" action="${avatar}">
                         <div class="file btn btn-lg btn-primary">
-                            Đổi ảnh đại diện
+                            Chọn ảnh đại diện
                             <input id="imageId" name="img" type="file" />
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Upload">
+<%--                        <div class="form-group">--%>
+<%--                            <input type="submit" class="btn btn-primary" value="Upload">--%>
+<%--                        </div>--%>
+                        <div >
+                            <input class="btn btn-lg file_button_submit" type="submit" value="Cập nhật"/>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -59,9 +59,9 @@
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href="<c:url value="/profile" />">${pageContext.request.userPrincipal.name}</a>
             </li>
-            <li onclick="closeNav()" >
-                <a class="nav-link-signup" href="<c:url value="/logout" />">ĐĂNG XUẤT</a>
-            </li>
+<%--            <li onclick="closeNav()" >--%>
+<%--                <a class="nav-link-signup" href="<c:url value="/logout" />">ĐĂNG XUẤT</a>--%>
+<%--            </li>--%>
             </c:if>
 
         </ul>
@@ -74,9 +74,9 @@
         <a class="header-nav-button-signup" href="<c:url value="/profile" />">
             <button type="button" class="btn btn-outline-light">${pageContext.request.userPrincipal.name}</button>
         </a>
-        <a class="header-nav-button-signup" href="<c:url value="/logout" />">
-            <button type="button" class="btn btn-outline-light">ĐĂNG XUẤT</button>
-        </a>
+<%--        <a class="header-nav-button-signup" href="<c:url value="/logout" />">--%>
+<%--            <button type="button" class="btn btn-outline-light">ĐĂNG XUẤT</button>--%>
+<%--        </a>--%>
         </c:if>
     </nav>
 </div>

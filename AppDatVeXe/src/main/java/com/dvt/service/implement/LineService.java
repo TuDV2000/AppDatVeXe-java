@@ -31,4 +31,9 @@ public class LineService extends GenericsService<Line> implements ILineService {
     public Line getLine(int sPointId, int ePointId) {
         return lineRepository.getLine(sPointId, ePointId);
     }
+
+    @Override
+    public List<Line> getPopularLine(){
+        return lineRepository.getPopularLine();
+    }
 }

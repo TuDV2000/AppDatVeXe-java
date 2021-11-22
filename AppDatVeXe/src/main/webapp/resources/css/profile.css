@@ -168,3 +168,17 @@ body{
     display: block;
     padding-bottom: 5px;
 }
+.file_button_submit{
+    position: relative;
+    overflow: hidden;
+    margin-top: -11%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #44b4ff;
+    color: white;
+}
+.file_button_submit:hover{
+    color: white;
+}

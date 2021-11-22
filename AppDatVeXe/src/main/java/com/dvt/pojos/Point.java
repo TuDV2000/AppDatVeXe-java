@@ -11,6 +11,7 @@ public class Point implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String address;
+    private String picture;
 
     @OneToMany(mappedBy = "startPoint", fetch = FetchType.LAZY)
     private List<Line> lines;
@@ -37,5 +38,13 @@ public class Point implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

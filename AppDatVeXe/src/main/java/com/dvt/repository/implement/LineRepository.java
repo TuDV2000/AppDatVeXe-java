@@ -67,4 +67,19 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
 
         return null;
     }
+    @Override
+    public List<Line> getPopularLine(){
+        List<Line> poLines = new ArrayList<>();
+
+        List<Point> lPoints = pointRepository.getAll();
+        for (Point p: lPoints) {
+            List<Line> lLines = getLinesBySPoint(p.getId());
+            for (Line l: lLines){
+                if(l.getPopular_line() == 1){
+                    poLines.add(l);
+                }
+            }
+        }
+        return poLines;
+    }
 }
