@@ -11,10 +11,11 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 
         <link href="<c:url value="/css/base.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/header.css"/>" rel="stylesheet" type="text/css"/>
@@ -23,6 +24,7 @@
         <link href="<c:url value="/css/schedule.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/ticket.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/payment.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/css/admin.css" />" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>

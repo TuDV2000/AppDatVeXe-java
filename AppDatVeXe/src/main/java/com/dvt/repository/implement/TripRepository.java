@@ -73,6 +73,7 @@ public class TripRepository extends GenericsRepository<Trip> implements ITripRep
     public Map<Integer, Boolean> getSeatsByTrip(Trip trip) {
         Map<Integer, Boolean> seats = new HashMap<>();
         List<Ticket> tickets = trip.getTickets();
+        System.out.println(tickets);
         int seatsAmount = trip.getDriver().getVehicles().get(0).getSeat();
 
         for (int i = 1; i <= seatsAmount; i++) {
@@ -80,6 +81,7 @@ public class TripRepository extends GenericsRepository<Trip> implements ITripRep
         }
         if (tickets != null) {
             for (Ticket t : tickets) {
+                System.out.println("ticketdetail           :" + t.getTicketDetails().get(0).getSeatPosition());
                 seats.put(t.getTicketDetails().get(0).getSeatPosition(), true);
             }
         }

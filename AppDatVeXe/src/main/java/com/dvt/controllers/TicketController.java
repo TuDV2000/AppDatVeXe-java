@@ -43,6 +43,7 @@ public class TicketController {
     public String showTicketByTrip(Model model, @PathVariable(value = "tripId") int tripId
             , HttpSession session, Principal principal) {
         Trip trip = tripService.getTripById(tripId);
+
         if (trip != null) {
             session.setAttribute("trip", trip);
             model.addAttribute("trip", trip);
