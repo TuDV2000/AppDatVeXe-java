@@ -11,6 +11,9 @@ public interface IUserRepository extends IGenericsRepository<User> {
     boolean createUser(User user);
     boolean updateUser(User user);
     public User getUserByUsername(String username);
+    // Viết nhầm chỗ :(
     public List<Ticket> getTicketByUsername (String username);
     public void updateAvatar(String username, String avatar);
+    public List<User> getAllCustomer();
+    public List<User> getAllDriverAndEmployee();
 }

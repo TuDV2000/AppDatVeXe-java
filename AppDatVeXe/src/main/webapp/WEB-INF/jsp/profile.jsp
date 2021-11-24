@@ -291,10 +291,6 @@
                                             <label for="firstname" class="col-form-label">Tên </label>
                                             <input type="text" class="form-control" id="firstname" readonly="readonly" value="${user.firstName}">
                                         </div>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label for="email" class="col-form-label">Email </label>--%>
-<%--                                            <input type="text" class="form-control" id="email" name="email" value="${user.email}">--%>
-<%--                                        </div>--%>
                                         <div class="form-group">
                                             <label for="email" class="col-form-label">Email </label>
                                             <small>Erro message</small>

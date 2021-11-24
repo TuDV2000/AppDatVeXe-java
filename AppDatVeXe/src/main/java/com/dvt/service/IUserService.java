@@ -15,4 +15,6 @@ public interface IUserService extends IGenericsServevice<User>, UserDetailsServi
     public User getUserByUsername(String username);
     public List<Ticket> getTicketByUsername (String username);
     public void updateAvatar(String username, String avatar);
+    public List<User> getAllCustomer();
+    public List<User> getAllDriverAndEmployee();
 }

@@ -103,4 +103,24 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
 //        List<User> users = getCurrentSession().createQuery(hql)
 //                .setParameter("un", username).getResultList();
 //    }
+    @Override
+    public List<User> getAllCustomer(){
+        List<User> lUser = getAll();
+        List<User> lCus = new ArrayList<>();
+        for (User u: lUser){
+            if(u.getPermission().getName().equals("Customer"))
+                lCus.add(u);
+        }
+        return lCus;
+    }
+    @Override
+    public List<User> getAllDriverAndEmployee(){
+        List<User> lUser = getAll();
+        List<User> lCus = new ArrayList<>();
+        for (User u: lUser){
+            if(u.getPermission().getName().equals("Employee") || u.getPermission().getName().equals("driver"))
+                lCus.add(u);
+        }
+        return lCus;
+    }
 }

@@ -72,4 +72,10 @@ public class UserService extends GenericsService<User> implements IUserService {
     public void updateAvatar(String username, String avatar) {
         userRepository.updateAvatar(username, avatar);
     }
+
+    @Override
+    public List<User> getAllCustomer(){return userRepository.getAllCustomer();}
+
+    @Override
+    public List<User> getAllDriverAndEmployee(){return userRepository.getAllDriverAndEmployee();}
 }

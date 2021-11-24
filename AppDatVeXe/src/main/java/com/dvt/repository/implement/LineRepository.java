@@ -32,7 +32,6 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
                 allLines.put(p, lLines);
             }
         }
-
         return allLines;
     }
 
@@ -82,4 +81,9 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
         }
         return poLines;
     }
+//    @Override
+//    public List<Line> getOnlyLines(){
+//        List<Line> lines = getAll();
+//        return lines;
+//    }
 }

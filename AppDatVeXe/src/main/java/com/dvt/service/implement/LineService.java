@@ -36,4 +36,7 @@ public class LineService extends GenericsService<Line> implements ILineService {
     public List<Line> getPopularLine(){
         return lineRepository.getPopularLine();
     }
+
+    @Override
+    public List<Line> getOnlyLines(){return  lineRepository.getAll();};
 }
