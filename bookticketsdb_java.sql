@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: bookticketsdb_java
+-- Host: 127.0.0.1    Database: bookticketsdb_java
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -58,12 +58,15 @@ CREATE TABLE `line` (
   `end_point_id` bigint DEFAULT NULL,
   `start_point_id` bigint DEFAULT NULL,
   `price` int NOT NULL,
+  `popular_line` int DEFAULT '0',
+  `kilometer` int DEFAULT NULL,
+  `time` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `app_line_end_point_id_1fa1352d_fk_app_point_id` (`end_point_id`),
   KEY `app_line_start_point_id_0801ba8f_fk_app_point_id` (`start_point_id`),
   CONSTRAINT `app_line_end_point_id_1fa1352d_fk_app_point_id` FOREIGN KEY (`end_point_id`) REFERENCES `point` (`id`),
   CONSTRAINT `app_line_start_point_id_0801ba8f_fk_app_point_id` FOREIGN KEY (`start_point_id`) REFERENCES `point` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +75,7 @@ CREATE TABLE `line` (
 
 LOCK TABLES `line` WRITE;
 /*!40000 ALTER TABLE `line` DISABLE KEYS */;
-INSERT INTO `line` VALUES (4,'tuyến 1',6,7,100000),(5,'tuyến 2',6,8,90000),(6,'tuyến 3',6,9,120000);
+INSERT INTO `line` VALUES (4,'tuyến 1',6,7,100000,1,132,2),(5,'tuyến 2',6,8,90000,0,0,1),(6,'tuyến 3',9,6,120000,1,308,6),(7,'tuyến 4',11,6,120000,1,180,4),(8,'tuyến 5',12,6,500000,1,434,8),(9,'tuyến 6',13,15,1500000,1,838,18);
 /*!40000 ALTER TABLE `line` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +99,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (77,'Customer'),(78,'Employee'),(79,'Driver');
+INSERT INTO `permission` VALUES (77,'Customer'),(78,'Employee'),(79,'driver');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,8 +113,9 @@ DROP TABLE IF EXISTS `point`;
 CREATE TABLE `point` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `picture` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +124,7 @@ CREATE TABLE `point` (
 
 LOCK TABLES `point` WRITE;
 /*!40000 ALTER TABLE `point` DISABLE KEYS */;
-INSERT INTO `point` VALUES (6,'TP Hồ Chí Minh'),(7,'TP Vĩnh Long'),(8,'TP Tây Ninh'),(9,'Đà Lạt'),(10,'Vũng Tàu');
+INSERT INTO `point` VALUES (6,'TP Hồ Chí Minh','https://res.cloudinary.com/docswnn1e/image/upload/v1637589331/tp-hcm_h06j32.jpg'),(7,'TP Vĩnh Long',NULL),(8,'TP Tây Ninh',NULL),(9,'Đà Lạt','https://res.cloudinary.com/docswnn1e/image/upload/v1637589715/lamdong_z1kpxg.jpg'),(10,'Vũng Tàu',NULL),(11,'Đạ Tẻh','https://res.cloudinary.com/docswnn1e/image/upload/v1637589735/IMG_0922_ygo9mo.jpg'),(12,'Nha Trang','https://res.cloudinary.com/docswnn1e/image/upload/v1637589715/nhatrang_wlmwpy.jpg'),(13,'Hà Nội','https://res.cloudinary.com/docswnn1e/image/upload/v1637588813/hanoi_ldnons.jpg'),(14,'Hải Phòng',NULL),(15,'Đà Nẵng',NULL);
 /*!40000 ALTER TABLE `point` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +148,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `app_ticket_customer_id_9f11fd4b_fk_app_user_id` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`),
   CONSTRAINT `app_ticket_employee_id_bb25f7f5_fk_app_user_id` FOREIGN KEY (`employee_id`) REFERENCES `user` (`id`),
   CONSTRAINT `app_ticket_trip_id_e58b726b_fk_app_trip_id` FOREIGN KEY (`trip_id`) REFERENCES `trip` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +157,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (21,23,25,11,'2021-10-31 01:01:01.000000');
+INSERT INTO `ticket` VALUES (21,23,25,11,'2021-10-31 01:01:01.000000'),(22,30,25,11,'2021-10-31 01:01:01.000000'),(23,30,25,10,'2021-10-31 01:01:01.000000'),(24,30,25,12,'2021-10-31 01:01:01.000000');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +170,7 @@ DROP TABLE IF EXISTS `ticketdetail`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticketdetail` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `seat_position` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `seat_position` int NOT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `ticket_id` bigint NOT NULL,
   `vehicle_id` bigint NOT NULL,
@@ -176,7 +180,7 @@ CREATE TABLE `ticketdetail` (
   KEY `app_ticketdetail_ticket_id_86f379dc_fk_app_ticket_id` (`ticket_id`),
   CONSTRAINT `app_ticketdetail_ticket_id_86f379dc_fk_app_ticket_id` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`),
   CONSTRAINT `app_ticketdetail_vehicle_id_dd2f3eaf_fk_app_vehicle_id` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +189,7 @@ CREATE TABLE `ticketdetail` (
 
 LOCK TABLES `ticketdetail` WRITE;
 /*!40000 ALTER TABLE `ticketdetail` DISABLE KEYS */;
-INSERT INTO `ticketdetail` VALUES (16,'1','Vui lòng đến có mặt trước giờ khỏi hành 15\'',21,5,0);
+INSERT INTO `ticketdetail` VALUES (17,2,'Đi sớm trước 15p',21,5,200000),(18,1,'èd',22,5,200000),(19,5,'213123',23,5,200000),(20,2,'qưeeqwe',24,5,200000);
 /*!40000 ALTER TABLE `ticketdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +241,7 @@ CREATE TABLE `user` (
   `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `email` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT TRUE,
+  `is_active` tinyint(1) NOT NULL,
   `dob` datetime(6) DEFAULT NULL,
   `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -249,7 +253,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username` (`username`),
   KEY `user_permission_idx` (`user_permission`),
   CONSTRAINT `users_permission` FOREIGN KEY (`user_permission`) REFERENCES `permission` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +262,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (23,'1234567','gianghuynh','giang','huynh','huyniuahsiduh@gmail.com',1,'2000-07-09 00:00:00.000000','male','477',NULL,NULL,NULL,77),(24,'1234567','giang1','huynh','giang','dsfdasd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,79),(25,'1234567','giang2','ghhhg','áddss','dsfdawsd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,78),(26,'$2a$10$LfTTVXeNFNSDqt10tn5AzOHR66V2c9YcM171oNbZOU59gJ2UExs/2','tduong','tu','duong van',NULL,1,NULL,NULL,NULL,NULL,'0713124131',NULL,77);
+INSERT INTO `user` VALUES (23,'1234567','gianghuynh','giang','huynh','huyniuahsiduh@gmail.com',1,'2000-07-09 00:00:00.000000','male','477',NULL,NULL,NULL,77),(24,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giang1','huynh','giang','dsfdasd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,79),(25,'1234567','giang2','ghhhg','áddss','dsfdawsd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,78),(26,'$2a$10$LfTTVXeNFNSDqt10tn5AzOHR66V2c9YcM171oNbZOU59gJ2UExs/2','tduong','tu','duong van',NULL,1,NULL,NULL,NULL,NULL,'0713124131',NULL,77),(27,'$2a$10$dSpvkxwIW9t5k43sBeNsMejQLDjUIlTcqmWf.gF3QrNRGLUvNrCw2','giangne','giang','giang',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77),(28,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giangne1','Guang','Gianggg','juygugyu@gmail.com',1,NULL,NULL,'447 Nguyen Van Cong p 33',NULL,'0913260623','https://res.cloudinary.com/docswnn1e/image/upload/v1637835323/ddudt4jtcuohylcqrgle.jpg',77),(29,'$2a$10$yToqZMneFgB.DrOocwaY5uqbcu4noi2Z3MUqr/SHVoJ1Pt4pI8p1e','tendangnhap','Hương','Đàm',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(30,'$2a$10$HxZLrYJDUPef48jMcTGRM.23mpM9W2ea6SvU0cYGlSF68LGIYPP0S','giangtest','test','Test','test@gmail.com',1,NULL,NULL,'ÃÂ¡ddq212312312',NULL,'0913260666',NULL,77),(34,'$2a$10$XKjQus/AN84mlde0An/30OughYhQWElT1TKPxLoT6BEjHmfek5H2y','zxc','TÆ°','TÆ°',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(35,'$2a$10$lbHoaxSYhhKtb4Y1CMy3hejbS9XkS3ioEZHPLn4F.vP.DaEvKHjGi','tyu','NÃ³','Máº¹',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,4 +360,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-07 11:45:04
+-- Dump completed on 2021-11-25 21:37:21

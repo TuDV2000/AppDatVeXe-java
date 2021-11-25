@@ -81,9 +81,17 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
         }
         return poLines;
     }
-//    @Override
-//    public List<Line> getOnlyLines(){
-//        List<Line> lines = getAll();
-//        return lines;
-//    }
+    @Override
+    public boolean createLine(Line line){
+        List<Line> lines = getAll();
+        for (Line l: lines)
+        {
+            if(line.getStartPoint().getId() == l.getStartPoint().getId()
+                    && line.getEndPoint().getId() == l.getEndPoint().getId()){
+                return false;
+            }
+        }
+        save(line);
+        return true;
+    }
 }

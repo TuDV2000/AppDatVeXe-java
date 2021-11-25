@@ -106,7 +106,33 @@ a[data-toggle="collapse"] {
     top: 20px;
     position: absolute;
 }
-
+/* ========================= form group ======================*/
+.form-group{
+    position: relative;
+}
+.form-group > small{
+    visibility: hidden;
+}
+.form-group > i{
+    visibility: hidden;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.form-group.success i.fa-check-circle{
+    visibility: visible;
+    color: #2ecc71;
+}
+.form-group.error i.fa-exclamation-circle{
+    visibility: visible;
+    color: #e74c3c;
+}
+.form-group.error small{
+    visibility: visible;
+    color: #e74c3c;
+    display: block;
+    padding-bottom: 5px;
+}
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

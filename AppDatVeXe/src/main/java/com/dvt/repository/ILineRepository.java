@@ -11,6 +11,5 @@ public interface ILineRepository extends IGenericsRepository<Line> {
     public List<Line> getLinesBySPoint(int idSPoint);
     public Line getLine(int sPointId, int ePointId);
     public List<Line> getPopularLine();
-//    Chi lay danh sach line k dua tren Poin
-//    public List<Line> getOnlyLines();
+    public boolean createLine(Line line);
 }

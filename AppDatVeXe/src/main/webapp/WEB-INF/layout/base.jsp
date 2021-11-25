@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title><tiles:insertAttribute name="title" /></title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
         <link href="<c:url value="/css/ticket.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/payment.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/admin.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/css/profile.css" />" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>

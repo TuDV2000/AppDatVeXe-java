@@ -4,6 +4,8 @@
 
 
 <!DOCTYPE html>
+
+<c:url var="create" value="/line" />
 <script>
     $(document).ready(function () {
 
@@ -217,22 +219,22 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form id="form" method="post" action="" accept-charset="utf-8">
+                                    <form id="form" method="post" action="${create}" accept-charset="character_set">
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="name" class="col-form-label">Tên tuyến </label>
                                                 <small>Erro message</small>
-                                                <input type="text" class="form-control" id="name" name="name">
+                                                <input type="text" class="form-control" id="name" name="lineName">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
                                                 <label for="startPlace" class="col-form-label">Điểm khởi hành</label>
                                                 <small>Erro message</small>
-                                                <select class="form-control" id="startPlace">
-                                                    <c:forEach var="l" items="${lines}">
-                                                        <option>Chọn điểm</option>
-                                                        <option>${l.startPoint.address}</option>
+                                                <select class="form-control" id="startPlace" name="startPlace">
+                                                    <option>Chọn điểm</option>
+                                                    <c:forEach var="p" items="${points}">
+                                                        <option>${p.address}</option>
                                                     </c:forEach>
                                                 </select>
                                                 <i class="fas fa-check-circle"></i>
@@ -241,10 +243,10 @@
                                             <div class="form-group">
                                                 <label for="endPlace" class="col-form-label">Điểm kết thúc</label>
                                                 <small>Erro message</small>
-                                                <select class="form-control" id="endPlace">
-                                                    <c:forEach var="l" items="${lines}">
-                                                        <option>Chọn điểm</option>
-                                                        <option>${l.startPoint.address}</option>
+                                                <select class="form-control" id="endPlace" name="endPlace">
+                                                    <option>Chọn điểm</option>
+                                                    <c:forEach var="p" items="${points}">
+                                                        <option>${p.address}</option>
                                                     </c:forEach>
                                                 </select>
                                                 <i class="fas fa-check-circle"></i>
