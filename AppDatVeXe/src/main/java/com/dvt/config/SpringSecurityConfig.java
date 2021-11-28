@@ -10,7 +10,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.filter.GenericFilterBean;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +42,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
+
+        http.authorizeRequests().and();
+
         http.formLogin().loginPage("/signin")
                 .usernameParameter("username")
                 .passwordParameter("password");
@@ -46,5 +58,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
 
         http.csrf().disable();
+    }
+    public class EncodingFilter extends GenericFilterBean {
+
+        @Override
+        public void doFilter(
+                ServletRequest request,
+                ServletResponse response,
+                FilterChain chain) throws IOException, ServletException {
+
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+
+            chain.doFilter(request, response);
+        }
     }
 }

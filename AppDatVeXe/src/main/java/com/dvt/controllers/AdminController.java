@@ -32,7 +32,5 @@ public class AdminController {
         model.addAttribute("customers", userService.getAllCustomer());
         model.addAttribute("employees", userService.getAllDriverAndEmployee());
         return "admin";
-
-
     }
 }

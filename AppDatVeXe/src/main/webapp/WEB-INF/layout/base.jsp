@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+<%--        <meta charset="utf-8" />--%>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title><tiles:insertAttribute name="title" /></title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>

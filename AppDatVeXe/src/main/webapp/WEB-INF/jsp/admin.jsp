@@ -219,7 +219,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form id="form" method="post" action="${create}" accept-charset="character_set">
+                                    <form id="form" method="post" action="${create}" accept-charset="utf-8">
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="name" class="col-form-label">Tên tuyến </label>
