@@ -28,6 +28,18 @@ public class Line implements Serializable {
     @OneToMany(mappedBy = "line", fetch = FetchType.LAZY)
     private List<Trip> trips;
 
+
+    public Line(){}
+
+    public Line (String lineName, Point startPoint, Point endPoint, BigDecimal price, int distance, int time){
+        this.name = lineName;
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
+        this.price = price;
+        this.kilometer = distance;
+        this.time = time;
+    }
+
     public List<Trip> getTrips() {
         return trips;
     }

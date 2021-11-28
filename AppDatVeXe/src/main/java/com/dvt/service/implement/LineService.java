@@ -41,5 +41,5 @@ public class LineService extends GenericsService<Line> implements ILineService {
     public List<Line> getOnlyLines(){return  lineRepository.getAll();};
 
     @Override
-    public boolean createLine(Line line){return lineRepository.createLine(line);};
+    public void createLine(Line line){lineRepository.save(line);};
 }

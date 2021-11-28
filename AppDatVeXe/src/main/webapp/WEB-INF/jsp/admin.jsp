@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 
-<c:url var="create" value="/line" />
+<c:url var="create" value="/add-line" />
 <script>
     $(document).ready(function () {
 
@@ -15,6 +15,24 @@
 
     });
 </script>
+<c:choose>
+    <c:when test="${result == 'sus'}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Cập nhật thành công!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:when>
+    <c:when test="${result == 'err'}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Cập nhật không thành công, thử lại sau!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:when>
+</c:choose>
 <div class="wrapper">
     <!-- Sidebar -->
     <nav id="sidebar">

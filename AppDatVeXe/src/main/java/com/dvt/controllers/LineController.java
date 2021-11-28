@@ -27,36 +27,6 @@ public class LineController {
         model.addAttribute("points", pointService.getAll());
     }
 
-    @PostMapping("/line")
-    public String createLine(Model model
-            , @RequestParam(value = "lineName") String lineName
-            , @RequestParam(value = "startPlace") String startPlace
-            , @RequestParam(value = "endPlace") String endPlace
-            , @RequestParam(value = "price") String price
-            , @RequestParam(value = "distance") String distance
-            , @RequestParam(value = "time") String time) {
-        String mgs = "";
-        System.out.println("# line name =" + lineName );
-        System.out.println("# startPlace =" + startPlace );
-        System.out.println("# endPlace =" + endPlace );
-        System.out.println("# price =" + price );
-        System.out.println("# distance =" + distance );
-        System.out.println("# time =" + time );
-
-        List<Line> lines = lineService.getAll();
-        for(Line l :lines){
-            System.out.println("@ line name =" + l.getStartPoint().getAddress());
-            System.out.println("@ startPlace =" + l.getEndPoint().getAddress() );
-            if(startPlace.equals(l.getStartPoint().getAddress()) && endPlace.equals(l.getEndPoint().getAddress())){
-                System.out.println("# line name =" + lineName );
-                System.out.println("# startPlace =" + startPlace );
-                System.out.println("@ line name =" + l.getStartPoint().getAddress());
-                System.out.println("@ startPlace =" + l.getEndPoint().getAddress() );
-            }
-        }
-        return "";
-    }
-
 
     @RequestMapping("/lines")
     public String searchLines(Model model
