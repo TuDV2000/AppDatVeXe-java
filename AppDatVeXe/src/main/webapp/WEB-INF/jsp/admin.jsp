@@ -8,17 +8,34 @@
 <c:url var="create" value="/add-line" />
 <c:url var="update" value="/line-update" />
 <script>
-    $(document).ready(function () {
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-
-    });
-    function test(){
-        checkInput();
-        console.log(checkInput());
-    }
+    // function checkUpdateInput(){
+    //     //Update Line
+    //     const priceUp = document.getElementById("priceUpdate");
+    //     const distanceUp = document.getElementById("distanceUpdate");
+    //     const timeUp = document.getElementById("timeUpdate");
+    //     console.log("CheckUpdate" + priceUp.value + distanceUp.value + timeUp.value)
+    //     //price update
+    //     if(priceUp.value.trim() == ""){
+    //         setErrorFor(price, 'Nhập giá vé');
+    //         return false;
+    //     }else {
+    //         setSuccessFor(price);
+    //     }
+    //     //distance update
+    //     if(distanceUp.value.trim() == ""){
+    //         setErrorFor(distance, 'Nhập quãng đường');
+    //         return false;
+    //     }else {
+    //         setSuccessFor(distance);
+    //     }
+    //     //time update
+    //     if(timeUp.value.trim() == ""){
+    //         setErrorFor(time, 'Nhập thời gian dự kiến');
+    //         return false;
+    //     }else {
+    //         setSuccessFor(time);
+    //     }
+    // }
     function checkInput(){
         //Create Line
         const lineName = document.getElementById('name');
@@ -27,10 +44,6 @@
         const price = document.getElementById('price');
         const distance = document.getElementById('distance');
         const time = document.getElementById('time');
-        //Update Line
-        const priceUp = document.getElementById('updatePrice');
-        const distanceUp = document.getElementById('updateDistance');
-        const timeUp = document.getElementById('updateTime');
         //line name
         if(lineName.value.trim() == ""){
             setErrorFor(lineName, 'Không được để trống tên tuyến');
@@ -59,13 +72,6 @@
         }else {
             setSuccessFor(price);
         }
-        //price update
-        if(priceUp.value.trim() == ""){
-            setErrorFor(priceUp, 'Nhập giá vé');
-            return false;
-        }else {
-            setSuccessFor(priceUp);
-        }
         //distance
         if(distance.value.trim() == ""){
             setErrorFor(distance, 'Nhập quãng đường');
@@ -73,26 +79,12 @@
         }else {
             setSuccessFor(distance);
         }
-        //distance update
-        if(distanceUp.value.trim() == ""){
-            setErrorFor(distanceUp, 'Nhập quãng đường');
-            return false;
-        }else {
-            setSuccessFor(distanceUp);
-        }
         //time
         if(time.value.trim() == ""){
             setErrorFor(time, 'Nhập thời gian dự kiến');
             return false;
         }else {
             setSuccessFor(time);
-        }
-        //time update
-        if(timeUp.value.trim() == ""){
-            setErrorFor(timeUp, 'Nhập thời gian dự kiến');
-            return false;
-        }else {
-            setSuccessFor(timeUp);
         }
     }
     function  setErrorFor(input, message){
@@ -422,30 +414,30 @@
                                                 <input type="text" class="form-control" readonly="readonly" value="${l.endPoint.address}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="price" class="col-form-label">Giá vé</label>
+                                                <label for="priceUpdate" class="col-form-label">Giá vé</label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="updatePrice" name="price" value="${l.price}">
+                                                <input type="number" class="form-control" id="priceUpdate" name="price" value="${l.price}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="distance" class="col-form-label">Quảng đường </label>
+                                                <label for="distanceUpdate" class="col-form-label">Quảng đường </label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="updateDistance" name="distance" value="${l.kilometer}">
+                                                <input type="number" class="form-control" id="distanceUpdate" name="distance" value="${l.kilometer}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="time" class="col-form-label">Thời gian dự kiến</label>
+                                                <label for="timeUpdate" class="col-form-label">Thời gian dự kiến</label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="updateTime" name="time" value="${l.time}">
+                                                <input type="number" class="form-control" id="timeUpdate" name="time" value="${l.time}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                            <input onclick="return checkInput()" type="submit" class="btn btn-primary" value="Cập nhật tuyến">
+                                            <input onclick="" type="submit" class="btn btn-primary" value="Cập nhật tuyến">
                                         </div>
                                     </form>
                                 </div>
@@ -471,7 +463,6 @@
                                             <a href="<c:url value="/line/${l.id}/delete"/>">
                                                 <button type="button" class="btn btn-primary">Xác nhận</button>
                                             </a>
-
                                         </div>
                                     </div>
                                 </div>
