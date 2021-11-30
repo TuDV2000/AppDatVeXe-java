@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 
 <c:url var="create" value="/add-line" />
+<c:url var="update" value="/line-update" />
 <script>
     $(document).ready(function () {
 
@@ -14,6 +15,97 @@
         });
 
     });
+    function test(){
+        checkInput();
+        console.log(checkInput());
+    }
+    function checkInput(){
+        //Create Line
+        const lineName = document.getElementById('name');
+        const startPlace = document.getElementById('startPlace');
+        const endPlace = document.getElementById('endPlace');
+        const price = document.getElementById('price');
+        const distance = document.getElementById('distance');
+        const time = document.getElementById('time');
+        //Update Line
+        const priceUp = document.getElementById('updatePrice');
+        const distanceUp = document.getElementById('updateDistance');
+        const timeUp = document.getElementById('updateTime');
+        //line name
+        if(lineName.value.trim() == ""){
+            setErrorFor(lineName, 'Không được để trống tên tuyến');
+            return false;
+        }else {
+            setSuccessFor(lineName);
+        }
+        //start Place
+        if(startPlace.value.trim() == "Chọn điểm"){
+            setErrorFor(startPlace, 'Yêu cầu chọn điểm bắt đầu');
+            return false;
+        }else {
+            setSuccessFor(startPlace);
+        }
+        //end Place
+        if(endPlace.value.trim() == "Chọn điểm"){
+            setErrorFor(endPlace, 'Yêu cầu chọn điểm kết thúc');
+            return false;
+        }else {
+            setSuccessFor(endPlace);
+        }
+        //price
+        if(price.value.trim() == ""){
+            setErrorFor(price, 'Nhập giá vé');
+            return false;
+        }else {
+            setSuccessFor(price);
+        }
+        //price update
+        if(priceUp.value.trim() == ""){
+            setErrorFor(priceUp, 'Nhập giá vé');
+            return false;
+        }else {
+            setSuccessFor(priceUp);
+        }
+        //distance
+        if(distance.value.trim() == ""){
+            setErrorFor(distance, 'Nhập quãng đường');
+            return false;
+        }else {
+            setSuccessFor(distance);
+        }
+        //distance update
+        if(distanceUp.value.trim() == ""){
+            setErrorFor(distanceUp, 'Nhập quãng đường');
+            return false;
+        }else {
+            setSuccessFor(distanceUp);
+        }
+        //time
+        if(time.value.trim() == ""){
+            setErrorFor(time, 'Nhập thời gian dự kiến');
+            return false;
+        }else {
+            setSuccessFor(time);
+        }
+        //time update
+        if(timeUp.value.trim() == ""){
+            setErrorFor(timeUp, 'Nhập thời gian dự kiến');
+            return false;
+        }else {
+            setSuccessFor(timeUp);
+        }
+    }
+    function  setErrorFor(input, message){
+        const formOutline = input.parentElement;
+        const small = formOutline.querySelector('small');
+
+        small.innerText = message;
+        formOutline.className = "form-group mb-4 error";
+    }
+    function setSuccessFor(input){
+        const formOutline = input.parentElement;
+        formOutline.className = "form-group mb-4 success";
+    }
 </script>
 <c:choose>
     <c:when test="${result == 'sus'}">
@@ -188,7 +280,7 @@
                         <span class="navbar-brand"> Tuyến xe </span>
                         <a class="header-nav-button-signup">
                             <button type="button" class="btn btn-outline-light admin"
-                                    data-toggle="modal" data-target="#exampleModal">Thêm tuyến</button>
+                                    data-toggle="modal" data-target="#createLineModal">Thêm tuyến</button>
                         </a>
                     </div>
                     <h3>
@@ -210,8 +302,8 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
                             <c:forEach var="l" items="${lines}">
+                            <tbody>
                             <tr>
                                 <td>${l.id}</td>
                                 <td>${l.name}</td>
@@ -221,14 +313,14 @@
                                 <td>${l.kilometer}km</td>
                                 <td>${l.time}h</td>
                                 <td>${l.trips.size()}</td>
-                                <td><a href="#">Sửa</a></td>
-                                <td><a href="#">Xóa</a></td>
+                                <td><a href="#" data-toggle="modal" data-target="#updateLineModal${l.id}">Sửa</a></td>
+                                <td><a href="#" data-toggle="modal" data-target="#deleteLineModal${l.id}">Xóa</a></td>
                             </tr>
-                            </c:forEach>
                             </tbody>
+                            </c:forEach>
                         </table>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- Modal Create -->
+                        <div class="modal fade" id="createLineModal" tabindex="-1" aria-labelledby="createLineModal" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -237,7 +329,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form id="form" method="post" action="${create}" accept-charset="utf-8">
+                                    <form id="createLineForm" method="post" action="${create}" accept-charset="utf-8">
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="name" class="col-form-label">Tên tuyến </label>
@@ -273,33 +365,118 @@
                                             <div class="form-group">
                                                 <label for="price" class="col-form-label">Giá vé</label>
                                                 <small>Erro message</small>
-                                                <input type="text" class="form-control" id="price" name="price">
+                                                <input type="number" class="form-control" id="price" name="price">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
                                                 <label for="distance" class="col-form-label">Quảng đường </label>
                                                 <small>Erro message</small>
-                                                <input type="text" class="form-control" id="distance" name="distance">
+                                                <input type="number" class="form-control" id="distance" name="distance">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="time" class="col-form-label">Thời gian</label>
+                                                <label for="time" class="col-form-label">Thời gian dự kiến</label>
                                                 <small>Erro message</small>
-                                                <input type="text" class="form-control" id="time" name="time">
+                                                <input type="number" class="form-control" id="time" name="time">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                            <input onclick="" type="submit" class="btn btn-primary" value="Lưu tuyến">
+                                            <input onclick="return checkInput()" type="submit" class="btn btn-primary" value="Lưu tuyến">
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal Update -->
+                        <c:forEach var="l" items="${lines}">
+                        <div class="modal fade" id="updateLineModal${l.id}" tabindex="-1" aria-labelledby="updateLineModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Chỉnh sửa tuyến xe</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="updateLineForm" method="post" action="${update}" accept-charset="utf-8">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="idline" class="col-form-label">id </label>
+                                                <input type="text" class="form-control" name="idline" id="idline" readonly="readonly" value="${l.id}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Tên tuyến </label>
+                                                <input type="text" class="form-control" readonly="readonly" value="${l.name}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Điểm bắt đầu </label>
+                                                <input type="text" class="form-control" readonly="readonly" value="${l.startPoint.address}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Điểm bắt đầu </label>
+                                                <input type="text" class="form-control" readonly="readonly" value="${l.endPoint.address}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="price" class="col-form-label">Giá vé</label>
+                                                <small>Erro message</small>
+                                                <input type="number" class="form-control" id="updatePrice" name="price" value="${l.price}">
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="distance" class="col-form-label">Quảng đường </label>
+                                                <small>Erro message</small>
+                                                <input type="number" class="form-control" id="updateDistance" name="distance" value="${l.kilometer}">
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="time" class="col-form-label">Thời gian dự kiến</label>
+                                                <small>Erro message</small>
+                                                <input type="number" class="form-control" id="updateTime" name="time" value="${l.time}">
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <input onclick="return checkInput()" type="submit" class="btn btn-primary" value="Cập nhật tuyến">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </c:forEach>
+                        <!-- Modal Delete -->
+                        <c:forEach var="l" items="${lines}">
+                            <div class="modal fade" id="deleteLineModal${l.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa ${l.name}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Xác nhận xóa tuyến ${l.startPoint.address} => ${l.endPoint.address}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <a href="<c:url value="/line/${l.id}/delete"/>">
+                                                <button type="button" class="btn btn-primary">Xác nhận</button>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

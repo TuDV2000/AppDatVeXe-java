@@ -11,6 +11,7 @@ public interface ILineService extends IGenericsServevice<Line>{
     public List<Line> getLinesBySPoint(int idSPoint);
     public Line getLine(int sPointId, int ePointId);
     public List<Line> getPopularLine();
-    public List<Line> getOnlyLines();
     public void createLine(Line line);
+    public void deleteLine(Line line);
+    public Line getLineById(int lineId);
 }

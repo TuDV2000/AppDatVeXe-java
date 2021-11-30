@@ -38,8 +38,11 @@ public class LineService extends GenericsService<Line> implements ILineService {
     }
 
     @Override
-    public List<Line> getOnlyLines(){return  lineRepository.getAll();};
+    public void createLine(Line line){lineRepository.save(line);};
 
     @Override
-    public void createLine(Line line){lineRepository.save(line);};
+    public void deleteLine(Line line){lineRepository.delete(line);}
+
+    @Override
+    public Line getLineById(int lineId){return lineRepository.getLineById(lineId);}
 }

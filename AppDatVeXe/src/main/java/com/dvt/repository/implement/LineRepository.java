@@ -26,7 +26,7 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
         Map<Point, List<Line>> allLines = new HashMap<>();
         List<Point> lPoints = pointRepository.getAll();
 
-        for (Point p: lPoints) {
+        for (Point p : lPoints) {
             List<Line> lLines = getLinesBySPoint(p.getId());
             if (lLines.size() > 0) {
                 allLines.put(p, lLines);
@@ -66,32 +66,47 @@ public class LineRepository extends GenericsRepository<Line> implements ILineRep
 
         return null;
     }
+
     @Override
-    public List<Line> getPopularLine(){
+    public List<Line> getPopularLine() {
         List<Line> poLines = new ArrayList<>();
 
         List<Point> lPoints = pointRepository.getAll();
-        for (Point p: lPoints) {
+        for (Point p : lPoints) {
             List<Line> lLines = getLinesBySPoint(p.getId());
-            for (Line l: lLines){
-                if(l.getPopular_line() == 1){
+            for (Line l : lLines) {
+                if (l.getPopular_line() == 1) {
                     poLines.add(l);
                 }
             }
         }
         return poLines;
     }
+
     @Override
-    public boolean createLine(Line line){
+    public boolean createLine(Line line) {
         List<Line> lines = getAll();
-        for (Line l: lines)
-        {
-            if(line.getStartPoint().getId() == l.getStartPoint().getId()
-                    && line.getEndPoint().getId() == l.getEndPoint().getId()){
+        for (Line l : lines) {
+            if (line.getStartPoint().getId() == l.getStartPoint().getId()
+                    && line.getEndPoint().getId() == l.getEndPoint().getId()) {
                 return false;
             }
         }
         save(line);
         return true;
+    }
+
+    @Override
+    public Line getLineById(int lineId) {
+        Line l = null;
+        try {
+            String hql1 = "from Line where id =:id";
+            l = (Line) getCurrentSession().createQuery(hql1)
+                    .setParameter("id", lineId)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+        return l;
     }
 }

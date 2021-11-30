@@ -12,4 +12,5 @@ public interface ILineRepository extends IGenericsRepository<Line> {
     public Line getLine(int sPointId, int ePointId);
     public List<Line> getPopularLine();
     public boolean createLine(Line line);
+    public Line getLineById(int lineId);
 }
