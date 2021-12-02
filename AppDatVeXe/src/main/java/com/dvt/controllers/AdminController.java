@@ -2,6 +2,8 @@ package com.dvt.controllers;
 
 import com.dvt.pojos.Line;
 import com.dvt.pojos.Point;
+import com.dvt.pojos.Trip;
+import com.dvt.pojos.User;
 import com.dvt.service.ILineService;
 import com.dvt.service.IPointService;
 import com.dvt.service.ITripService;
@@ -12,6 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,8 +43,10 @@ public class AdminController {
         model.addAttribute("points", pointService.getAll());
         model.addAttribute("customers", userService.getAllCustomer());
         model.addAttribute("employees", userService.getAllDriverAndEmployee());
+        model.addAttribute("drivers", userService.getAllDriver());
         return "admin";
     }
+//    ==================================================== Line Controller=======================
     @PostMapping("/add-line")
     public String createLine(Model model
             , @RequestParam(value = "lineName") String lineName
@@ -47,12 +56,6 @@ public class AdminController {
             , @RequestParam(value = "distance") int distance
             , @RequestParam(value = "time") int time) {
         String mgs = "";
-//        System.out.println("# line name =" + lineName );
-//        System.out.println("# startPlace =" + startPlace );
-//        System.out.println("# endPlace =" + endPlace );
-//        System.out.println("# price =" + price );
-//        System.out.println("# distance =" + distance );
-//        System.out.println("# time =" + time );
 
         List<Line> lines = lineService.getAll();
         for(Line l :lines){
@@ -70,8 +73,7 @@ public class AdminController {
             if(p.getAddress().equals(endPlace))
                 endPoint = p;
         }
-//        System.out.println("Start-Point " + startPoint.getAddress());
-//        System.out.println("Start-Point " + endPoint.getAddress());
+
         lineService.createLine(new Line(lineName,startPoint,endPoint,price,distance,time));
         mgs ="sus";
         System.out.println("%%% === MGS =  " + mgs);
@@ -81,11 +83,7 @@ public class AdminController {
     @RequestMapping("/line/{lineId}/delete")
     public String deleteLine(@PathVariable(value = "lineId") Integer lineId){
         Line line = lineService.getLineById(lineId);
-//        List<Line> ls = lineService.getAll();
-//        for(Line l: ls){
-//            if(l.getId() == lineId)
-//                line = l;
-//        }
+
         lineService.deleteLine(line);
         return "redirect:/admin";
     }
@@ -102,6 +100,37 @@ public class AdminController {
         l.setKilometer(distance);
         l.setTime(time);
         lineService.update(l);
+        return "redirect:/admin";
+    }
+    //    ==================================================== Trip Controller=======================
+    @PostMapping("/add-trip")
+    public String createTrip(Model model
+            , @RequestParam(value = "tripName") String tripName
+            , @RequestParam(value = "tripLine") int tripLine
+            , @RequestParam(value = "startTrip") String startTrip
+            , @RequestParam(value = "endTrip") String endTrip
+            , @RequestParam(value = "blackSeat") int blackSeat
+            , @RequestParam(value = "tripDriver") int tripDriver
+            , @RequestParam(value = "extraChanges") BigDecimal extraChanges) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String formatSTrip = startTrip.replace("T", " ");
+        String formatETrip = endTrip.replace("T", " ");
+        try {
+            Date sTrip = formatter.parse(formatETrip);
+            Date eTrip = formatter.parse(formatSTrip);
+            Line line = lineService.getLineById(tripLine);
+            User driver = userService.getUserById(tripDriver);
+            if (extraChanges == null){
+                extraChanges = BigDecimal.valueOf(0);
+                System.out.println("jqwygiqwuhixiqwdjojqiwd]]]]]ư" + extraChanges);
+            }
+
+            tripService.save(new Trip(tripName, sTrip, eTrip,blackSeat,extraChanges,driver,line));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return "redirect:/admin";
     }
 }

@@ -30,6 +30,17 @@ public class Trip implements Serializable {
     @JoinColumn(name = "line_id")
     private Line line;
 
+    public Trip(){}
+    public Trip(String tripName, Date startTime, Date endTime, int blankSeat, BigDecimal extra_changes, User driver, Line line){
+        this.name = tripName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.blankSeat = blankSeat;
+        this.extra_changes = extra_changes;
+        this.driver = driver;
+        this.line = line;
+    }
+
     @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
 

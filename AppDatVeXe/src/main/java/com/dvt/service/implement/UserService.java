@@ -78,4 +78,8 @@ public class UserService extends GenericsService<User> implements IUserService {
 
     @Override
     public List<User> getAllDriverAndEmployee(){return userRepository.getAllDriverAndEmployee();}
+    @Override
+    public List<User> getAllDriver(){return userRepository.getAllDriver();}
+    @Override
+    public User getUserById(int id){return userRepository.getUserById(id);}
 }

@@ -123,4 +123,24 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         }
         return lCus;
     }
+    @Override
+    public List<User> getAllDriver(){
+        List<User> lUser = getAll();
+        List<User> lDri = new ArrayList<>();
+        for (User u: lUser){
+            if(u.getPermission().getName().equals("driver"))
+                lDri.add(u);
+        }
+        return lDri;
+    }
+    @Override
+    public User getUserById(int id){
+        try {
+            return (User) getCurrentSession().createQuery("from User where id = :id")
+                    .setParameter("id", id).getSingleResult();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

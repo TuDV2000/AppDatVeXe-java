@@ -16,4 +16,6 @@ public interface IUserRepository extends IGenericsRepository<User> {
     public void updateAvatar(String username, String avatar);
     public List<User> getAllCustomer();
     public List<User> getAllDriverAndEmployee();
+    public List<User> getAllDriver();
+    public User getUserById(int Id);
 }

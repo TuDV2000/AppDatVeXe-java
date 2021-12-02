@@ -106,6 +106,16 @@ a[data-toggle="collapse"] {
     top: 20px;
     position: absolute;
 }
+.top-table{
+    background: linear-gradient(
+            90deg, rgb(119, 199, 253) 0%, rgb(26, 23, 23) 100%);
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: relative;
+}
 /* ========================= form group ======================*/
 .form-group{
     position: relative;
@@ -132,6 +142,12 @@ a[data-toggle="collapse"] {
     color: #e74c3c;
     display: block;
     padding-bottom: 5px;
+}
+.form-group.error input{
+    border-color: #e74c3c;
+}
+.form-group.success input{
+    border-color: #2ecc71;
 }
 @media (max-width: 768px) {
     #sidebar {
