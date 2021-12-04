@@ -137,6 +137,9 @@ a[data-toggle="collapse"] {
     visibility: visible;
     color: #e74c3c;
 }
+.form-group.error.noicon i.fa-exclamation-circle{
+    visibility: hidden;
+}
 .form-group.error small{
     visibility: visible;
     color: #e74c3c;

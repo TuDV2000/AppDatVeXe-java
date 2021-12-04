@@ -478,7 +478,7 @@
                                             <div class="form-group">
                                                 <label for="blankSeat" class="col-form-label">Số lượng ghế trống </label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="blankSeat" name="blackSeat">
+                                                <input type="number" class="form-control" id="blankSeat" name="blankSeat">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
@@ -486,7 +486,7 @@
                                                 <label for="tripDriver" class="col-form-label">Tài xế</label>
                                                 <small>Erro message</small>
                                                 <select class="form-control" id="tripDriver" name="tripDriver">
-                                                    <option>Chọn tài xế</option>
+                                                    <option value="0">Chọn tài xế</option>
                                                     <c:forEach var="d" items="${drivers}">
                                                         <option value="${d.id}">${d.firstName} ${d.lastName}</option>
                                                     </c:forEach>

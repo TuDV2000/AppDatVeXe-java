@@ -54,7 +54,7 @@ function checkTripInput(){
     const tripLine = document.getElementById('tripLine');
     var startTrip = document.getElementById('startTrip');
     var endTrip = document.getElementById('endTrip');
-    const blackSeat = document.getElementById('blackSeat');
+    const blankSeat = document.getElementById('blankSeat');
     const tripDriver = document.getElementById('tripDriver');
     const extraChanges = document.getElementById('extraChanges');
     
@@ -63,7 +63,7 @@ function checkTripInput(){
     // console.log("startTrip =" + startTrip.value );
     // console.log("endTrip =" + endTrip.value );
     // console.log("blackSeat =" + blackSeat.value );
-    // console.log("tripDriver =" + tripDriver.value );
+    console.log("tripDriver =" + tripDriver.value );
     // console.log("extraChanges =" + extraChanges.value );
     // console.log(compareDate(startTrip.value, endTrip.value));
 
@@ -78,25 +78,25 @@ function checkTripInput(){
         }else {
             setSuccessFor(tripLine);
             if(startTrip.value.trim() == ""){
-                setErrorFor(startTrip, 'Chọn thời gian khởi hành');
+                setErrorForWithoutIcon(startTrip, 'Chọn thời gian khởi hành');
                 return false;
             }else {
                 setSuccessFor(startTrip);
                 if(endTrip.value.trim() == ""){
-                    setErrorFor(endTrip, 'Chọn thời gian kết thúc');
+                    setErrorForWithoutIcon(endTrip, 'Chọn thời gian kết thúc');
                     return false;
                 }else if(compareDate(startTrip.value, endTrip.value) == false) {
-                    setErrorFor(endTrip, 'Thời gian kết thúc phải sau thời gian khởi hành');
+                    setErrorForWithoutIcon(endTrip, 'Thời gian kết thúc phải sau thời gian khởi hành');
                     return false;
                 }else {
                     setSuccessFor(endTrip);
-                    if(blackSeat.value.trim() == ""){
-                        setErrorFor(blackSeat, 'Nhập số lượng ghế trống');
+                    if(blankSeat.value.trim() == ""){
+                        setErrorFor(blankSeat, 'Nhập số lượng ghế trống');
                         return false;
                     }else
                     {
-                        setSuccessFor(blackSeat)
-                        if(tripDriver.value.trim() == "Chọn tài xế"){
+                        setSuccessFor(blankSeat)
+                        if(tripDriver.value.trim() == 0){
                             setErrorFor(tripDriver, 'Chọn tài xế');
                             return false;
                         }else
@@ -122,6 +122,13 @@ function  setErrorFor(input, message){
 
     small.innerText = message;
     formOutline.className = "form-group mb-4 error";
+}
+function  setErrorForWithoutIcon(input, message){
+    const formOutline = input.parentElement;
+    const small = formOutline.querySelector('small');
+
+    small.innerText = message;
+    formOutline.className = "form-group mb-4 error noicon";
 }
 function setSuccessFor(input){
     const formOutline = input.parentElement;
