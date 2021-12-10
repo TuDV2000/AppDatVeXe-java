@@ -19,4 +19,6 @@ public class PermissionService extends GenericsService<Permission> implements IP
     public Permission getPerByName(String perName) {
         return permissionRepository.getPerByName(perName);
     }
+    @Override
+    public Permission getPerById(int perId){return  permissionRepository.getPerById(perId);}
 }

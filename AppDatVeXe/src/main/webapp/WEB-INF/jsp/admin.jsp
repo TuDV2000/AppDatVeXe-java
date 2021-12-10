@@ -11,6 +11,8 @@
 <c:url var="updateT" value="/trip-update"/>
 <c:url var="createP" value="/add-place"/>
 <c:url var="updateP" value="place-update" />
+<c:url var="createU" value="/create-user"/>
+<c:url var="updateU" value="/update-user"/>
 
 <script src="<c:url value="/js/admin.js" />"></script>
 <c:if test="${result == 'sus'}">
@@ -40,6 +42,8 @@
             <a class="nav-link admin" id="v-pills-line-tab" data-toggle="pill" href="#v-pills-line" role="tab" aria-controls="v-pills-line" aria-selected="false">Tuyến xe</a>
             <a class="nav-link admin" id="v-pills-trip-tab" data-toggle="pill" href="#v-pills-trip" role="tab" aria-controls="v-pills-trip" aria-selected="false">Chuyến xe</a>
             <a class="nav-link admin" id="v-pills-place-tab" data-toggle="pill" href="#v-pills-place" role="tab" aria-controls="v-pills-place" aria-selected="false">Địa điểm</a>
+            <a class="nav-link admin" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab" aria-controls="v-pills-place" aria-selected="false">Người dùng</a>
+
         </div>
     </nav>
     <div id="content">
@@ -186,6 +190,8 @@
                     <div class="top-table">
                         <span class="navbar-brand"> Tuyến xe </span>
                         <a class="header-nav-button-signup">
+<%--                            <button type="button" class="btn btn-outline-light admin plus"--%>
+<%--                                    data-toggle="modal" data-target="#createLineModal">Tuyến phổ biến</button>--%>
                             <button type="button" class="btn btn-outline-light admin"
                                     data-toggle="modal" data-target="#createLineModal">Thêm tuyến</button>
                         </a>
@@ -732,6 +738,221 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                                             <a href="<c:url value="/place/${p.id}/delete"/>">
+                                                <button type="button" class="btn btn-primary">Xác nhận</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+    <!-- =================================================Người dùng=================================================== -->
+            <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                <div class="col-sm-11 info-content">
+                    <div class="top-table">
+                        <span class="navbar-brand"> Người dùng </span>
+                        <a class="header-nav-button-signup">
+                            <button type="button" class="btn btn-outline-light admin"
+                                    data-toggle="modal" data-target="#createUserModal">Thêm người dùng</button>
+                        </a>
+                    </div>
+                    <h3>
+                        Số lượng : ${users.size()}
+                    </h3>
+                    <div class="schedule-scroll">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>username</th>
+                                <th>Họ và tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Loại người dùng</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <c:forEach var="u" items="${users}">
+                                <tbody>
+                                <tr>
+                                    <td>${u.id}</td>
+                                    <td>${u.username}</td>
+                                    <td>${u.firstName} ${u.lastName}</td>
+                                    <td>${u.address}</td>
+                                    <td>${u.numberPhone}</td>
+                                    <td>${u.permission.name}</td>
+                                    <td><a href="#" data-toggle="modal" data-target="#updateUserModal${u.id}">Sửa</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#deleteUserModal${u.id}">Xóa</a></td>
+                                </tr>
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                        <!-- Modal Create -->
+                        <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Thêm người dùng</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="createUserForm" method="post" action="${createU}" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Họ & Tên đệm</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="lastname" name="lastName" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Tên </label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="firstname" name="firstName" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Username</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="username" name="username"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Số điện thoại</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Mật khẩu</label>
+                                                <small>Erro message</small>
+                                                <input type="password" id="password" name="password"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Xác thực mật khẩu</label>
+                                                <small>Erro message</small>
+                                                <input type="password" id="password2" name="password2"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tripLine" class="col-form-label">Loại người dùng</label>
+                                                <small>Erro message</small>
+                                                <select class="form-control" id="permission" name="permission">
+                                                    <option></option>
+                                                    <c:forEach var="pe" items="${permission}">
+                                                        <option value="${pe.id}">${pe.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <input type="submit" onclick="return checkUserInput()" class="btn btn-primary" value="Lưu người dùng">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Update -->
+                        <c:forEach var="u" items="${users}">
+                            <div class="modal fade" id="updateUserModal${u.id}" tabindex="-1" aria-labelledby="updateUserModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Chỉnh sửa người dùng</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="updateUserForm" method="post" action="${updateU}" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >id</label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" name="id" class="form-control" value="${u.id}" readonly="readonly"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Họ & Tên đệm</label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="lastnameUpdate${u.id}" name="lastName" class="form-control" value="${u.lastName}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Tên </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="firstnameUpdate${u.id}" name="firstName" class="form-control" value="${u.firstName}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Địa chỉ </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="addressUpdate${u.id}" name="address" class="form-control" value="${u.address}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Số điện thoại </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="phoneNumberUpdate${u.id}" name="phoneNumber" class="form-control" value="${u.numberPhone}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripLine" class="col-form-label">Loại người dùng</label>
+                                                    <small>Erro message</small>
+                                                    <select class="form-control" id="permissionUpdate" name="permission">
+                                                        <option value="${u.permission.id}">${u.permission.name}</option>
+                                                        <c:forEach var="pe" items="${permission}">
+                                                            <option value="${pe.id}">${pe.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <input type="submit" onclick="return checkUserUpdate(${u.id})" class="btn btn-primary" value="Lưu người dùng">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <!-- Modal Delete -->
+                        <c:forEach var="u" items="${users}">
+                            <div class="modal fade" id="deleteUserModal${u.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa ${u.username}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="place-img-admin" src="${u.avatar}" alt="Ảnh"/>
+                                            ${u.firstName} ${u.lastName}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <a href="<c:url value="/user/${u.id}/delete"/>">
                                                 <button type="button" class="btn btn-primary">Xác nhận</button>
                                             </a>
                                         </div>

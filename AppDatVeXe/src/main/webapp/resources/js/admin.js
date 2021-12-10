@@ -1,3 +1,10 @@
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
 function checkInput(){
     //Create Line
     const lineName = document.getElementById('name');
@@ -187,6 +194,113 @@ function checkPlaceUpdate(id){
         setSuccessFor(placePicture);
     }
 }
+function checkUserInput(){
+    const firstname = document.getElementById("firstname");
+    const lastname = document.getElementById("lastname");
+    const username = document.getElementById('username');
+    const phone = document.getElementById('phoneNumber');
+    const password = document.getElementById('password');
+    const password2 = document.getElementById('password2');
+    const permission = document.getElementById('permission');
+
+    //last name
+    if(lastname.value.trim() == ""){
+        setErrorFor(lastname, 'Không được để trống họ của bạn');
+        return false;
+    }else {
+        setSuccessFor(lastname);
+    }
+    //first name
+    if(firstname.value.trim() == ""){
+        setErrorFor(firstname, 'Không được để trống tên của bạn');
+        return false;
+    }else {
+        setSuccessFor(firstname);
+    }
+    //user name
+    if(username.value.trim() == ""){
+        setErrorFor(username, 'Không được để trống tên đăng nhập');
+        return false;
+    }else {
+        setSuccessFor(username);
+    }
+    //phone
+    if(phone.value.trim() == ""){
+        setErrorFor(phone,'Không được để trống số điện thoại');
+        return false;
+    }else if(!isPhone(phone.value.trim())){
+        setErrorFor(phone, 'Số điện thoại không hợp lệ');
+        return false;
+    }else {
+        setSuccessFor(phone);
+    }
+    //password
+    if(password.value.trim() == ""){
+        setErrorFor(password, 'Không được để trống mật khẩu');
+        return false;
+    }else if (password.value.trim().length <= 6){
+        setErrorFor(password,'Mật khẩu phải dài hơn 6 ký tự')
+        return false;
+    }else {
+        setSuccessFor(password);
+    }
+    //password check
+    if(password2.value.trim() == ""){
+        setErrorFor(password2,'Không được để trống xác thực mật khẩu');
+        return false;
+    }else if(password.value.trim() != password2.value.trim()){
+        setErrorFor(password2, 'Mật khẩu xác thực không đúng');
+        return false;
+    }else {
+        setSuccessFor(password2);
+    }
+    // permission
+    if(permission.value.trim() == ""){
+        setErrorFor(permission,'Chọn loại người dùng');
+        return false;
+    }else {
+        setSuccessFor(permission);
+    }
+    return true;
+}
+function checkUserUpdate(id){
+    const firstname = document.getElementById("firstnameUpdate"+id);
+    const lastname = document.getElementById("lastnameUpdate" + id);
+    const phone = document.getElementById('phoneNumberUpdate'+ id);
+    const address = document.getElementById('addressUpdate'+ id);
+    //last name
+    if(lastname.value.trim() == ""){
+        setErrorFor(lastname, 'Nhập họ của bạn');
+        return false;
+    }else {
+        setSuccessFor(lastname);
+    }
+    //first name
+    if(firstname.value.trim() == ""){
+        setErrorFor(firstname, 'Nhập tên của bạn');
+        return false;
+    }else {
+        setSuccessFor(firstname);
+    }
+    //address
+    if(address.value.trim() == ""){
+        setErrorFor(address, 'Nhập địa chỉ');
+        return false;
+    }else {
+        setSuccessFor(address);
+    }
+    return true;
+    //phone
+    if(phone.value.trim() == ""){
+        setErrorFor(phone,'Nhập số điện thoại');
+        return false;
+    }else if(!isPhone(phone.value.trim())){
+        setErrorFor(phone, 'Số điện thoại không hợp lệ');
+        return false;
+    }else {
+        setSuccessFor(phone);
+    }
+}
 function  setErrorFor(input, message){
     const formOutline = input.parentElement;
     const small = formOutline.querySelector('small');
@@ -246,4 +360,7 @@ function compareDate(sdate, edate){
     }
     else
         return true;
+}
+function isPhone(phone) {
+    return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phone);
 }
