@@ -66,6 +66,7 @@ body{
 }
 .form-outline.success input{
     border-color: #2ecc71;
+
 }
 .form-outline.error i.fa-exclamation-circle{
     visibility: visible;

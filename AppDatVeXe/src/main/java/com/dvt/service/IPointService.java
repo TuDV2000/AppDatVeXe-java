@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IPointService extends IGenericsServevice<Point>{
     public List<Point> getAllPoint();
+    public Point getPointById(int id);
 }

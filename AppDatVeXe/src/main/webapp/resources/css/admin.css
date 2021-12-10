@@ -152,6 +152,14 @@ a[data-toggle="collapse"] {
 .form-group.success input{
     border-color: #2ecc71;
 }
+.place-img-admin{
+    height: 100px;
+    border-radius: 5px;
+}
+.file.btn{
+    width: 100%;
+    font-size: 1rem;
+}
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

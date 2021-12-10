@@ -49,6 +49,32 @@ function checkInput(){
         setSuccessFor(time);
     }
 }
+function checkLineUpdateInput(id){
+    const price = document.getElementById('priceUpdate-' + id);
+    const distance = document.getElementById('distanceUpdate-'+ id);
+    const time = document.getElementById('timeUpdate-'+ id);
+    //price
+    if(price.value.trim() == ""){
+        setErrorFor(price, 'Nhập giá vé');
+        return false;
+    }else {
+        setSuccessFor(price);
+    }
+    //distance
+    if(distance.value.trim() == ""){
+        setErrorFor(distance, 'Nhập quảng đường');
+        return false;
+    }else {
+        setSuccessFor(distance);
+    }
+    //time
+    if(time.value.trim() == ""){
+        setErrorFor(time, 'Nhập thời gian dự kiến');
+        return false;
+    }else {
+        setSuccessFor(time);
+    }
+}
 function checkTripInput(){
     const tripName = document.getElementById('tripName');
     const tripLine = document.getElementById('tripLine');
@@ -57,15 +83,6 @@ function checkTripInput(){
     const blankSeat = document.getElementById('blankSeat');
     const tripDriver = document.getElementById('tripDriver');
     const extraChanges = document.getElementById('extraChanges');
-    
-    // console.log("tripName =" + tripName.value );
-    // console.log("tripLine =" + tripLine.value );
-    // console.log("startTrip =" + startTrip.value );
-    // console.log("endTrip =" + endTrip.value );
-    // console.log("blackSeat =" + blackSeat.value );
-    console.log("tripDriver =" + tripDriver.value );
-    // console.log("extraChanges =" + extraChanges.value );
-    // console.log(compareDate(startTrip.value, endTrip.value));
 
     if(tripName.value.trim() == ""){
         setErrorFor(tripName, 'Không được để trống tên chuyến');
@@ -115,6 +132,60 @@ function checkTripInput(){
         }
     }
     
+}
+function checkTripUpdate(id){
+    const blankSeat = document.getElementById('blankSeatUpdate-'+id);
+    const tripDriver = document.getElementById('driverUpdate-'+id);
+    const extraChanges = document.getElementById('extraChangesUpdate-'+id);
+
+    //blankSeat
+    if(blankSeat.value.trim() == ""){
+        setErrorFor(blankSeat, 'Nhập số ghế trống');
+        return false;
+    }else {
+        setSuccessFor(blankSeat);
+    }
+    //driver
+    if(tripDriver.value.trim() != ""){
+        setSuccessFor(tripDriver);
+    }
+    //extraChange
+    if(extraChanges.value.trim() == ""){
+        setErrorFor(extraChanges, 'Nhập phụ thu');
+        return false;
+    }else {
+        setSuccessFor(extraChanges);
+    }
+}
+function checkPlaceInput(){
+    const placeName = document.getElementById('placeName');
+    const placePicture = document.getElementById('placePicture');
+
+    //placeName
+    if(placeName.value.trim() == ""){
+        setErrorFor(placeName, 'Nhập tên địa điểm');
+        return false;
+    }else {
+        setSuccessFor(placeName);
+    }
+    //placePicture
+    if(placePicture.value.trim() == ""){
+        setErrorForWithoutIcon(placePicture, 'Chọn ảnh minh họa');
+        return false;
+    }else {
+        setSuccessFor(placePicture);
+    }
+}
+function checkPlaceUpdate(id){
+    const placePicture = document.getElementById('placePictureUpdate'+id);
+
+    //placePicture
+    if(placePicture.value.trim() == ""){
+        setErrorForWithoutIcon(placePicture, 'Chọn ảnh minh họa');
+        return false;
+    }else {
+        setSuccessFor(placePicture);
+    }
 }
 function  setErrorFor(input, message){
     const formOutline = input.parentElement;
