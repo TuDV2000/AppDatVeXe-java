@@ -1,6 +1,7 @@
 package com.dvt.service.implement;
 
 import com.dvt.pojos.Ticket;
+import com.dvt.pojos.TicketDetail;
 import com.dvt.repository.ITicketRepository;
 import com.dvt.service.ITicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,7 @@ public class TicketService extends GenericsService<Ticket> implements ITicketSer
     public List<Ticket> getTicketsByTrip(int tripId) {
         return ticketRepository.getTicketsByTrip(tripId);
     }
+
+    @Override
+    public TicketDetail getTicketsDeTailByTicktetId(int ticketId){return ticketRepository.getTicketsDeTailByTicktetId(ticketId);}
 }

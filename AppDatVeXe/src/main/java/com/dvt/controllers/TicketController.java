@@ -1,6 +1,7 @@
 package com.dvt.controllers;
 
 import com.dvt.pojos.Ticket;
+import com.dvt.pojos.TicketDetail;
 import com.dvt.pojos.Trip;
 import com.dvt.pojos.User;
 import com.dvt.service.ITicketService;
@@ -64,5 +65,14 @@ public class TicketController {
         Trip trip = tripService.getTripById(tripId);
 
         return "";
+    }
+
+    @GetMapping("/ticketdetail/{ticketId}")
+    public String showDetailTicket(Model model
+            , @PathVariable(value = "ticketId") int ticketId){
+
+        TicketDetail ticketDetail = ticketService.getTicketsDeTailByTicktetId(ticketId);
+        model.addAttribute("ticketDetail", ticketDetail);
+        return "ticketdetail";
     }
 }

@@ -153,4 +153,6 @@ public class UserController {
         model.addAttribute("ticket", userService.getTicketByUsername(principal.getName()));
         return "profile";
     }
+
+
 }
