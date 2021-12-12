@@ -8,25 +8,29 @@
 <c:url var="create" value="/add-line" />
 <c:url var="update" value="/line-update" />
 <c:url var="createT" value="/add-trip" />
+<c:url var="updateT" value="/trip-update"/>
+<c:url var="createP" value="/add-place"/>
+<c:url var="updateP" value="place-update" />
+<c:url var="createU" value="/create-user"/>
+<c:url var="updateU" value="/update-user"/>
+
 <script src="<c:url value="/js/admin.js" />"></script>
-<c:choose>
-    <c:when test="${result == 'sus'}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Cập nhật thành công!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-    <c:when test="${result == 'err'}">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Cập nhật không thành công, thử lại sau!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-</c:choose>
+<c:if test="${result == 'sus'}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p>${mgs}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
+<c:if test="${result == 'err'}">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        ${mgs}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
 <div class="wrapper">
     <!-- =================================================Sidebar=================================================== -->
     <nav id="sidebar">
@@ -37,6 +41,9 @@
             <a class="nav-link admin active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Tổng quan</a>
             <a class="nav-link admin" id="v-pills-line-tab" data-toggle="pill" href="#v-pills-line" role="tab" aria-controls="v-pills-line" aria-selected="false">Tuyến xe</a>
             <a class="nav-link admin" id="v-pills-trip-tab" data-toggle="pill" href="#v-pills-trip" role="tab" aria-controls="v-pills-trip" aria-selected="false">Chuyến xe</a>
+            <a class="nav-link admin" id="v-pills-place-tab" data-toggle="pill" href="#v-pills-place" role="tab" aria-controls="v-pills-place" aria-selected="false">Địa điểm</a>
+            <a class="nav-link admin" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab" aria-controls="v-pills-place" aria-selected="false">Người dùng</a>
+
         </div>
     </nav>
     <div id="content">
@@ -183,6 +190,8 @@
                     <div class="top-table">
                         <span class="navbar-brand"> Tuyến xe </span>
                         <a class="header-nav-button-signup">
+<%--                            <button type="button" class="btn btn-outline-light admin plus"--%>
+<%--                                    data-toggle="modal" data-target="#createLineModal">Tuyến phổ biến</button>--%>
                             <button type="button" class="btn btn-outline-light admin"
                                     data-toggle="modal" data-target="#createLineModal">Thêm tuyến</button>
                         </a>
@@ -326,30 +335,30 @@
                                                 <input type="text" class="form-control" readonly="readonly" value="${l.endPoint.address}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="priceUpdate" class="col-form-label">Giá vé</label>
+                                                <label for="priceUpdate-${l.id}" class="col-form-label">Giá vé</label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="priceUpdate" name="price" value="${l.price}">
+                                                <input type="number" class="form-control" id="priceUpdate-${l.id}" name="price" value="${l.price}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="distanceUpdate" class="col-form-label">Quảng đường </label>
+                                                <label for="distanceUpdate-${l.id}" class="col-form-label">Quảng đường </label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="distanceUpdate" name="distance" value="${l.kilometer}">
+                                                <input type="number" class="form-control" id="distanceUpdate-${l.id}" name="distance" value="${l.kilometer}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="timeUpdate" class="col-form-label">Thời gian dự kiến</label>
+                                                <label for="timeUpdate-${l.id}" class="col-form-label">Thời gian dự kiến</label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="timeUpdate" name="time" value="${l.time}">
+                                                <input type="number" class="form-control" id="timeUpdate-${l.id}" name="time" value="${l.time}">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                            <input onclick="" type="submit" class="btn btn-primary" value="Cập nhật tuyến">
+                                            <input onclick="return checkLineUpdateInput(${l.id})" type="submit" class="btn btn-primary" value="Cập nhật tuyến">
                                         </div>
                                     </form>
                                 </div>
@@ -423,8 +432,8 @@
                                     <td>${t.blankSeat}</td>
                                     <td>${t.driver.firstName } ${t.driver.lastName }</td>
                                     <td>${t.extra_changes}</td>
-                                    <td><a href="#" data-toggle="modal" data-target="#updateLineModal${t.id}">Sửa</a></td>
-                                    <td><a href="#" data-toggle="modal" data-target="#deleteLineModal${t.id}">Xóa</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#updateTripModal${t.id}">Sửa</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#deleteTripModal${t.id}">Xóa</a></td>
                                 </tr>
                                 </tbody>
                             </c:forEach>
@@ -475,9 +484,9 @@
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
                                             <div class="form-group">
-                                                <label for="blackSeat" class="col-form-label">Số lượng ghế trống </label>
+                                                <label for="blankSeat" class="col-form-label">Số lượng ghế trống </label>
                                                 <small>Erro message</small>
-                                                <input type="number" class="form-control" id="blackSeat" name="blackSeat">
+                                                <input type="number" class="form-control" id="blankSeat" name="blankSeat">
                                                 <i class="fas fa-check-circle"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                             </div>
@@ -485,7 +494,7 @@
                                                 <label for="tripDriver" class="col-form-label">Tài xế</label>
                                                 <small>Erro message</small>
                                                 <select class="form-control" id="tripDriver" name="tripDriver">
-                                                    <option>Chọn tài xế</option>
+                                                    <option value="0">Chọn tài xế</option>
                                                     <c:forEach var="d" items="${drivers}">
                                                         <option value="${d.id}">${d.firstName} ${d.lastName}</option>
                                                     </c:forEach>
@@ -510,90 +519,447 @@
                             </div>
                         </div>
                         <!-- Modal Update -->
-                        <%--                        <c:forEach var="l" items="${lines}">--%>
-                        <%--                            <div class="modal fade" id="updateLineModal${l.id}" tabindex="-1" aria-labelledby="updateLineModal" aria-hidden="true">--%>
-                        <%--                                <div class="modal-dialog">--%>
-                        <%--                                    <div class="modal-content">--%>
-                        <%--                                        <div class="modal-header">--%>
-                        <%--                                            <h5 class="modal-title">Chỉnh sửa tuyến xe</h5>--%>
-                        <%--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                        <%--                                                <span aria-hidden="true">&times;</span>--%>
-                        <%--                                            </button>--%>
-                        <%--                                        </div>--%>
-                        <%--                                        <form id="updateTripForm" method="post" action="${update}" accept-charset="utf-8">--%>
-                        <%--                                            <div class="modal-body">--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label for="idline" class="col-form-label">id </label>--%>
-                        <%--                                                    <input type="text" class="form-control" name="idline" id="idline" readonly="readonly" value="${l.id}">--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Tên tuyến </label>--%>
-                        <%--                                                    <input type="text" class="form-control" readonly="readonly" value="${l.name}">--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Điểm bắt đầu </label>--%>
-                        <%--                                                    <input type="text" class="form-control" readonly="readonly" value="${l.startPoint.address}">--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Điểm bắt đầu </label>--%>
-                        <%--                                                    <input type="text" class="form-control" readonly="readonly" value="${l.endPoint.address}">--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Giá vé</label>--%>
-                        <%--                                                    <small>Erro message</small>--%>
-                        <%--                                                    <input type="number" class="form-control" name="price" value="${l.price}">--%>
-                        <%--                                                    <i class="fas fa-check-circle"></i>--%>
-                        <%--                                                    <i class="fas fa-exclamation-circle"></i>--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Quảng đường </label>--%>
-                        <%--                                                    <small>Erro message</small>--%>
-                        <%--                                                    <input type="number" class="form-control" name="distance" value="${l.kilometer}">--%>
-                        <%--                                                    <i class="fas fa-check-circle"></i>--%>
-                        <%--                                                    <i class="fas fa-exclamation-circle"></i>--%>
-                        <%--                                                </div>--%>
-                        <%--                                                <div class="form-group">--%>
-                        <%--                                                    <label class="col-form-label">Thời gian dự kiến</label>--%>
-                        <%--                                                    <small>Erro message</small>--%>
-                        <%--                                                    <input type="number" class="form-control" name="time" value="${l.time}">--%>
-                        <%--                                                    <i class="fas fa-check-circle"></i>--%>
-                        <%--                                                    <i class="fas fa-exclamation-circle"></i>--%>
-                        <%--                                                </div>--%>
-                        <%--                                            </div>--%>
-                        <%--                                            <div class="modal-footer">--%>
-                        <%--                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>--%>
-                        <%--                                                <button type="button" onclick="checkUpdateInput()">Tui không hỉu</button>--%>
-                        <%--                                                <input onclick="" type="submit" class="btn btn-primary" value="Cập nhật tuyến">--%>
-                        <%--                                            </div>--%>
-                        <%--                                        </form>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </c:forEach>--%>
-                        <%--                        <!-- Modal Delete -->--%>
-                        <%--                        <c:forEach var="l" items="${lines}">--%>
-                        <%--                            <div class="modal fade" id="deleteLineModal${l.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-                        <%--                                <div class="modal-dialog">--%>
-                        <%--                                    <div class="modal-content">--%>
-                        <%--                                        <div class="modal-header">--%>
-                        <%--                                            <h5 class="modal-title">Xóa ${l.name}</h5>--%>
-                        <%--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                        <%--                                                <span aria-hidden="true">&times;</span>--%>
-                        <%--                                            </button>--%>
-                        <%--                                        </div>--%>
-                        <%--                                        <div class="modal-body">--%>
-                        <%--                                            Xác nhận xóa tuyến ${l.startPoint.address} => ${l.endPoint.address}--%>
-                        <%--                                        </div>--%>
-                        <%--                                        <div class="modal-footer">--%>
-                        <%--                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>--%>
-                        <%--                                            <a href="<c:url value="/line/${l.id}/delete"/>">--%>
-                        <%--                                                <button type="button" class="btn btn-primary">Xác nhận</button>--%>
-                        <%--                                            </a>--%>
-                        <%--                                        </div>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </c:forEach>--%>
+                            <c:forEach var="t" items="${trips}">
+                            <div class="modal fade" id="updateTripModal${t.id}" tabindex="-1" aria-labelledby="updateLineModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Chỉnh sửa chuyến xe</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="updateTripForm" method="post" action="${updateT}" accept-charset="utf-8">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control"  name="tripId" readonly="readonly" value="${t.id}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripName" class="col-form-label">Tên chuyến </label>
+                                                    <input type="text" class="form-control" readonly="readonly" value="${t.name}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripLine" class="col-form-label">Tuyến</label>
+                                                    <input type="text" class="form-control" readonly="readonly" value="${t.line.startPoint.address}=>${t.line.endPoint.address}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="blankSeat" class="col-form-label">Số lượng ghế trống </label>
+                                                    <small>Erro message</small>
+                                                    <input type="number" class="form-control" id="blankSeatUpdate-${t.id}"  name="blankSeat" value="${t.blankSeat}">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripDriver" class="col-form-label">Tài xế</label>
+                                                    <small>Erro message</small>
+                                                    <select class="form-control" id="driverUpdate-${t.id}" name="tripDriver">
+                                                        <option value="${t.driver.id}" >${t.driver.firstName} ${t.driver.lastName}</option>
+                                                        <c:forEach var="d" items="${drivers}">
+                                                            <option value="${d.id}">${d.firstName} ${d.lastName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="extraChanges" class="col-form-label">Phụ thu </label>
+                                                    <small>Erro message</small>
+                                                    <input type="number" class="form-control" id="extraChangesUpdate-${t.id}" name="extraChanges" value="${t.extra_changes}">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <input onclick="return checkTripUpdate(${t.id})" type="submit" class="btn btn-primary" value="Lưu chuyến">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </c:forEach>
+                            <!-- Modal Delete -->
+                            <c:forEach var="t" items="${trips}">
+                            <div class="modal fade" id="deleteTripModal${t.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa ${t.name}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Xác nhận xóa chuyến ${t.name} từ ${t.line.startPoint.address} => ${t.line.endPoint.address}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <a href="<c:url value="/trip/${t.id}/delete"/>">
+                                                <button type="button" class="btn btn-primary">Xác nhận</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </c:forEach>
+                    </div>
+                </div>
+            </div>
+    <!-- =================================================Địa điểm=================================================== -->
+            <div class="tab-pane fade" id="v-pills-place" role="tabpanel" aria-labelledby="v-pills-trip-tab">
+                <div class="col-sm-11 info-content">
+                    <div class="top-table">
+                        <span class="navbar-brand"> Địa điểm </span>
+                        <a class="header-nav-button-signup">
+                            <button type="button" class="btn btn-outline-light admin"
+                                    data-toggle="modal" data-target="#createPlaceModal">Thêm Điểm</button>
+                        </a>
+                    </div>
+                    <h3>
+                        Số lượng : ${points.size()}
+                    </h3>
+                    <div class="schedule-scroll">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Địa điểm</th>
+                                <th>Ảnh</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <c:forEach var="p" items="${points}">
+                                <tbody>
+                                <tr>
+                                    <td>${p.id}</td>
+                                    <td>${p.address}</td>
+                                    <td>
+                                        <c:if test="${p.picture == null}">
+                                            <img class="place-img-admin" src="https://res.cloudinary.com/docswnn1e/image/upload/v1638958966/place_tibfrs.png" alt="Ảnh"/>
+                                        </c:if>
+                                        <c:if test="${p.picture != null}">
+                                        <img class="place-img-admin" src="${p.picture}" alt="Ảnh"/>
+                                        </c:if>
+                                    </td>
+
+                                    <td><a href="#" data-toggle="modal" data-target="#updatePlaceModal${p.id}">Sửa</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#deletePlaceModal${p.id}">Xóa</a></td>
+                                </tr>
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                        <!-- Modal Create -->
+                        <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createLineModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Thêm địa điểm</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="createPlaceForm" method="post" action="${createP}" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="tripName" class="col-form-label">Tên địa điểm </label>
+                                                <small>Erro message</small>
+                                                <input type="text" class="form-control" id="placeName" name="placeName">
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tripLine" class="col-form-label">Ảnh</label>
+                                                <small>Erro message</small>
+                                                <input class="file btn btn-lg btn-primary" id="placePicture" name="placePicture" type="file" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <input type="submit" onclick="return checkPlaceInput()" class="btn btn-primary" value="Lưu địa điểm">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Update -->
+                        <c:forEach var="p" items="${points}">
+                            <div class="modal fade" id="updatePlaceModal${p.id}" tabindex="-1" aria-labelledby="updatePlaceModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Chỉnh sửa chuyến xe</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="updatePlaceForm" method="post" action="${updateP}" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div>
+                                                    <img class="place-img-admin" src="${p.picture}" alt="Ảnh"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Id </label>
+                                                    <input type="text" name="placeId" class="form-control" readonly="readonly" value="${p.id}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Tên địa điểm </label>
+                                                    <input type="text" class="form-control" readonly="readonly" value="${p.address}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripLine" class="col-form-label">Ảnh</label>
+                                                    <small>Erro message</small>
+                                                    <input class="file btn btn-lg btn-primary" id="placePictureUpdate${p.id}" name="placePictureUpdate" type="file" />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <input onclick="return checkPlaceUpdate(${p.id})" type="submit" class="btn btn-primary" value="Lưu điểm">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <!-- Modal Delete -->
+                        <c:forEach var="p" items="${points}">
+                            <div class="modal fade" id="deletePlaceModal${p.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa ${p.address}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="place-img-admin" src="${p.picture}" alt="Ảnh"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <a href="<c:url value="/place/${p.id}/delete"/>">
+                                                <button type="button" class="btn btn-primary">Xác nhận</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+    <!-- =================================================Người dùng=================================================== -->
+            <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                <div class="col-sm-11 info-content">
+                    <div class="top-table">
+                        <span class="navbar-brand"> Người dùng </span>
+                        <a class="header-nav-button-signup">
+                            <button type="button" class="btn btn-outline-light admin"
+                                    data-toggle="modal" data-target="#createUserModal">Thêm người dùng</button>
+                        </a>
+                    </div>
+                    <h3>
+                        Số lượng : ${users.size()}
+                    </h3>
+                    <div class="schedule-scroll">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>username</th>
+                                <th>Họ và tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Loại người dùng</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <c:forEach var="u" items="${users}">
+                                <tbody>
+                                <tr>
+                                    <td>${u.id}</td>
+                                    <td>${u.username}</td>
+                                    <td>${u.firstName} ${u.lastName}</td>
+                                    <td>${u.address}</td>
+                                    <td>${u.numberPhone}</td>
+                                    <td>${u.permission.name}</td>
+                                    <td><a href="#" data-toggle="modal" data-target="#updateUserModal${u.id}">Sửa</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#deleteUserModal${u.id}">Xóa</a></td>
+                                </tr>
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                        <!-- Modal Create -->
+                        <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Thêm người dùng</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form id="createUserForm" method="post" action="${createU}" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Họ & Tên đệm</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="lastname" name="lastName" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Tên </label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="firstname" name="firstName" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Username</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="username" name="username"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Số điện thoại</label>
+                                                <small>Erro message</small>
+                                                <input type="text" id="phoneNumber" name="phone" pattern="[0-9]+" class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Mật khẩu</label>
+                                                <small>Erro message</small>
+                                                <input type="password" id="password" name="password"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label" >Xác thực mật khẩu</label>
+                                                <small>Erro message</small>
+                                                <input type="password" id="password2" name="password2"  class="form-control" />
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tripLine" class="col-form-label">Loại người dùng</label>
+                                                <small>Erro message</small>
+                                                <select class="form-control" id="permission" name="permission">
+                                                    <option></option>
+                                                    <c:forEach var="pe" items="${permission}">
+                                                        <option value="${pe.id}">${pe.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <i class="fas fa-check-circle"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <input type="submit" onclick="return checkUserInput()" class="btn btn-primary" value="Lưu người dùng">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Update -->
+                        <c:forEach var="u" items="${users}">
+                            <div class="modal fade" id="updateUserModal${u.id}" tabindex="-1" aria-labelledby="updateUserModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Chỉnh sửa người dùng</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="updateUserForm" method="post" action="${updateU}" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >id</label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" name="id" class="form-control" value="${u.id}" readonly="readonly"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Họ & Tên đệm</label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="lastnameUpdate${u.id}" name="lastName" class="form-control" value="${u.lastName}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Tên </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="firstnameUpdate${u.id}" name="firstName" class="form-control" value="${u.firstName}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Địa chỉ </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="addressUpdate${u.id}" name="address" class="form-control" value="${u.address}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" >Số điện thoại </label>
+                                                    <small>Erro message</small>
+                                                    <input type="text" id="phoneNumberUpdate${u.id}" name="phoneNumber" class="form-control" value="${u.numberPhone}"/>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tripLine" class="col-form-label">Loại người dùng</label>
+                                                    <small>Erro message</small>
+                                                    <select class="form-control" id="permissionUpdate" name="permission">
+                                                        <option value="${u.permission.id}">${u.permission.name}</option>
+                                                        <c:forEach var="pe" items="${permission}">
+                                                            <option value="${pe.id}">${pe.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <input type="submit" onclick="return checkUserUpdate(${u.id})" class="btn btn-primary" value="Lưu người dùng">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <!-- Modal Delete -->
+                        <c:forEach var="u" items="${users}">
+                            <div class="modal fade" id="deleteUserModal${u.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa ${u.username}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="place-img-admin" src="${u.avatar}" alt="Ảnh"/>
+                                            ${u.firstName} ${u.lastName}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                            <a href="<c:url value="/user/${u.id}/delete"/>">
+                                                <button type="button" class="btn btn-primary">Xác nhận</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

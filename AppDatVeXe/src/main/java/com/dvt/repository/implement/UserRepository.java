@@ -33,10 +33,7 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
     public boolean createUser(User user) {
         try {
             if (user != null) {
-                if (getUserByUsername(user.getUsername()) != null)
-                    return false;
-
-                user.setPermission(permissionRepository.getPerByName("Customer"));
+//                user.setPermission(permissionRepository.getPerByName("Customer"));
                 getCurrentSession().save(user);
                 return true;
             }
@@ -142,5 +139,15 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
             ex.printStackTrace();
         }
         return null;
+    }
+    @Override
+    public List<User> getAllUser(){
+        List<User> lUser = getAll();
+        List<User> lDri = new ArrayList<>();
+        for (User u: lUser){
+            if(u.isActive() == true)
+                lDri.add(u);
+        }
+        return lDri;
     }
 }

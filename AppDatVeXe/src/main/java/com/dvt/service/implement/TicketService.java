@@ -2,6 +2,7 @@ package com.dvt.service.implement;
 
 import com.dvt.pojos.Booking;
 import com.dvt.pojos.Ticket;
+import com.dvt.pojos.TicketDetail;
 import com.dvt.repository.ITicketRepository;
 import com.dvt.service.ITicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,7 @@ public class TicketService extends GenericsService<Ticket> implements ITicketSer
     public boolean addTicket(HttpSession session, String transId, String orderId) {
          return ticketRepository.addTicket(session, transId , orderId);
     }
+
+    @Override
+    public TicketDetail getTicketsDeTailByTicktetId(int ticketId){return ticketRepository.getTicketsDeTailByTicktetId(ticketId);}
 }

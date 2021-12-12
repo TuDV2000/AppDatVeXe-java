@@ -19,4 +19,5 @@ public interface IUserService extends IGenericsServevice<User>, UserDetailsServi
     public List<User> getAllDriverAndEmployee();
     public List<User> getAllDriver();
     public User getUserById(int id);
+    public List<User> getAllUser();
 }

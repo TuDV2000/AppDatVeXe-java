@@ -18,4 +18,7 @@ public class PointService extends GenericsService<Point> implements IPointServic
 
     @Override
     public List<Point> getAllPoint(){return pointRepository.getAll();}
+
+    @Override
+    public Point getPointById(int id){return pointRepository.getPointById(id);}
 }

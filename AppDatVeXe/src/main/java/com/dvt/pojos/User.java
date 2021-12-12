@@ -54,6 +54,7 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.numberPhone = numberPhone;
+        this.isActive = true;
         this.permission = permission;
     }
 

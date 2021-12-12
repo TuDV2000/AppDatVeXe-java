@@ -18,4 +18,5 @@ public interface IUserRepository extends IGenericsRepository<User> {
     public List<User> getAllDriverAndEmployee();
     public List<User> getAllDriver();
     public User getUserById(int Id);
+    public List<User> getAllUser();
 }

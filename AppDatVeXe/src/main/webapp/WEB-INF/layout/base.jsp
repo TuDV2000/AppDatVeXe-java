@@ -27,6 +27,7 @@
         <link href="<c:url value="/css/payment.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/admin.css" />" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/css/profile.css" />" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/css/ticketdetail.css" />" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>

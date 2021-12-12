@@ -27,4 +27,15 @@ public class PermissionRepository extends GenericsRepository<Permission> impleme
         }
         return permission;
     }
+    @Override
+    public Permission getPerById(int perId){
+        Permission permission = null;
+        try {
+            permission = (Permission) getCurrentSession().createQuery("from Permission where id = :id")
+                    .setParameter("id", perId).getSingleResult();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+        return permission;
+    }
 }

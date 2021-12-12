@@ -16,6 +16,13 @@ public class Point implements Serializable {
     @OneToMany(mappedBy = "startPoint", fetch = FetchType.LAZY)
     private List<Line> lines;
 
+    public Point(){}
+
+    public Point(String address, String picture){
+        this.address = address;
+        this.picture = picture;
+    }
+
     public List<Line> getLines() {
         return lines;
     }
