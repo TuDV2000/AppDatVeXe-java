@@ -15,6 +15,7 @@ public class TicketDetail implements Serializable {
     private String note;
     @Column(name = "current_price")
     private BigDecimal currentPrice;
+    private String transId;
 
     @ManyToOne
     @JoinColumn(name = "ticket_id")
@@ -23,6 +24,19 @@ public class TicketDetail implements Serializable {
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
+
+    public TicketDetail() {
+    }
+
+    public TicketDetail(int seatPosition, String note, BigDecimal currentPrice
+            , String transId, Ticket ticket, Vehicle vehicle) {
+        this.seatPosition = seatPosition;
+        this.note = note;
+        this.currentPrice = currentPrice;
+        this.transId = transId;
+        this.ticket = ticket;
+        this.vehicle = vehicle;
+    }
 
     public Ticket getTicket() {
         return ticket;

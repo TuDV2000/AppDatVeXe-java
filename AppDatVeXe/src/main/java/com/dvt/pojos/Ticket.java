@@ -29,6 +29,15 @@ public class Ticket implements Serializable {
     @OneToMany(mappedBy = "ticket")
     private List<TicketDetail> ticketDetails;
 
+    public Ticket() {
+    }
+
+    public Ticket(Date createdDate, User customer, Trip trip) {
+        this.createdDate = createdDate;
+        this.customer = customer;
+        this.trip = trip;
+    }
+
     public User getCustomer() {
         return customer;
     }

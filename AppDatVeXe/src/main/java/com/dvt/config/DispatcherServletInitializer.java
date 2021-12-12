@@ -20,7 +20,8 @@ public class DispatcherServletInitializer
         return new Class[] {
                 HibernateConfig.class,
                 TilesConfig.class,
-                SpringSecurityConfig.class
+                SpringSecurityConfig.class,
+                MoMoConfig.class
         };
     }
 

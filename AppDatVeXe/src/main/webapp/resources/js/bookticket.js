@@ -3,10 +3,13 @@
 //     $("#booking").css("display", "block")
 // }
 function seatSelected(id) {
-    let seatPos = document.getElementById("seatPosition");
+    let seatPos1 = document.getElementById("seatPositionHidden");
+    let seatPos2 = document.getElementById("seatPositionView");
     let bookingBlock = document.getElementById("booking");
 
-    seatPos.value = id;
+    if (seatPos1) {
+        seatPos1.value = seatPos2.value = id;
+    }
     bookingBlock.style.display = "block";
     bookingBlock.scrollIntoView();
 }
