@@ -9,6 +9,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:if test="${mgs == 'Success'}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Thanh toán thành công !!!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
 
 <!DOCTYPE html>
 <div class="schedule-container">

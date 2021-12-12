@@ -30,4 +30,9 @@ public class TicketService extends GenericsService<Ticket> implements ITicketSer
 
     @Override
     public TicketDetail getTicketsDeTailByTicktetId(int ticketId){return ticketRepository.getTicketsDeTailByTicktetId(ticketId);}
+
+    @Override
+    public int getTicketIdbyTranId(String transId) {
+        return ticketRepository.getTicketIdbyTranId(transId);
+    }
 }

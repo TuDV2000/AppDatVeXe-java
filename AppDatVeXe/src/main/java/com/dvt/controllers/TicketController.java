@@ -67,11 +67,12 @@ public class TicketController {
         return "";
     }
 
-    @GetMapping("/{ticketId}/ticketdetail")
+    @GetMapping(value = {"/{ticketId}/ticketdetail", "/{ticketId}/ticketdetail/{result}"})
     public String showDetailTicket(Model model
-            , @PathVariable(value = "ticketId") int ticketId){
-
+            , @PathVariable(value = "ticketId") int ticketId
+            , @PathVariable(value = "result", required = false) String result){
         TicketDetail ticketDetail = ticketService.getTicketsDeTailByTicktetId(ticketId);
+        model.addAttribute("mgs", result);
         model.addAttribute("ticketDetail", ticketDetail);
         return "ticketdetail";
     }

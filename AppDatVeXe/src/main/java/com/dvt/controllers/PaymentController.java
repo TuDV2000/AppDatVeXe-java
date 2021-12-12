@@ -35,6 +35,7 @@ public class PaymentController {
             , @RequestParam(value = "seatPosition") int seatPosition
             , @RequestParam(value = "userId") int userId
             , HttpServletRequest request) {
+
         String requestId = request.getSession().getId();
         Booking b = new Booking(UUID.randomUUID().toString(), tripId, price, seatPosition, userId);
         System.out.println("Booking b: " + b);
@@ -64,18 +65,16 @@ public class PaymentController {
     }
 
     @RequestMapping("/momo/result")
-    public String checkPayMent(@RequestParam("accessKey") String accessKey
+    public String checkPayMent(Model model
+            ,@RequestParam("accessKey") String accessKey
             ,@RequestParam("partnerCode") String partnerCode
             ,@RequestParam("requestId") String requestId
             ,@RequestParam("orderId") String orderId
             ,@RequestParam("transId") String transId
+            ,@RequestParam("message") String message
             ,@RequestParam("localMessage") String localMessage
             ,@RequestParam(value = "errorCode",required = false) String errorCode
             , HttpServletRequest request){
-        //Todo: return về page ticketdetail
-        if (ticketService.addTicket(request.getSession(), transId, orderId)) {
-            //redirect den page ticket detail
-        }
         System.err.println("=====Thông tin thanh toán trả về==");
         System.err.println(accessKey);
         System.err.println(partnerCode);
@@ -84,7 +83,10 @@ public class PaymentController {
         System.err.println(transId);
         System.err.println(localMessage);
         System.err.println(errorCode);
-
+        if (ticketService.addTicket(request.getSession(), transId, orderId)) {
+            int ticketId = ticketService.getTicketIdbyTranId(transId);
+            return "redirect:/" + ticketId + "/ticketdetail/" + message;
+        }
         return "redirect:/book-ticket";
     }
 }

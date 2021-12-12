@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: bookticketsdb_java
+-- Host: localhost    Database: bookticketsdb_java
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -75,7 +75,7 @@ CREATE TABLE `line` (
 
 LOCK TABLES `line` WRITE;
 /*!40000 ALTER TABLE `line` DISABLE KEYS */;
-INSERT INTO `line` VALUES (4,'tuyến 1',6,7,100000,1,132,2),(5,'tuyến 2',6,8,90000,0,0,1),(6,'tuyến 3',9,6,120000,1,308,6),(7,'tuyến 4',11,6,120000,1,180,4),(8,'tuyến 5',12,6,500000,1,434,8),(9,'tuyến 6',13,15,1500000,1,838,18);
+INSERT INTO `line` VALUES (4,'tuyến 1',6,7,100000,1,132,2),(5,'tuyến 2',6,8,9000,0,0,1),(6,'tuyến 3',9,6,120000,1,308,6),(7,'tuyến 4',11,6,120000,1,180,4),(8,'tuyến 5',12,6,500000,1,434,8),(9,'tuyến 6',13,15,1500000,1,838,18);
 /*!40000 ALTER TABLE `line` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `point`;
 CREATE TABLE `point` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `picture` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `picture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -148,7 +148,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `app_ticket_customer_id_9f11fd4b_fk_app_user_id` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`),
   CONSTRAINT `app_ticket_employee_id_bb25f7f5_fk_app_user_id` FOREIGN KEY (`employee_id`) REFERENCES `user` (`id`),
   CONSTRAINT `app_ticket_trip_id_e58b726b_fk_app_trip_id` FOREIGN KEY (`trip_id`) REFERENCES `trip` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (21,23,25,11,'2021-10-31 01:01:01.000000'),(22,30,25,11,'2021-10-31 01:01:01.000000'),(23,30,25,10,'2021-10-31 01:01:01.000000'),(24,30,25,12,'2021-10-31 01:01:01.000000');
+INSERT INTO `ticket` VALUES (25,26,NULL,11,'2021-12-11 19:22:18.712000'),(26,26,NULL,11,'2021-12-11 19:24:49.439000'),(27,26,NULL,11,'2021-12-12 13:22:35.533000'),(28,26,NULL,11,'2021-12-12 13:36:30.356000'),(29,26,NULL,11,'2021-12-12 13:58:57.009000'),(30,26,NULL,11,'2021-12-12 14:06:21.979000'),(31,26,NULL,11,'2021-12-12 14:10:41.536000'),(32,26,NULL,11,'2021-12-12 14:20:42.685000'),(33,26,NULL,11,'2021-12-12 14:26:52.717000'),(34,26,NULL,11,'2021-12-12 14:33:15.483000'),(35,26,NULL,11,'2021-12-12 14:43:17.713000');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,12 +175,13 @@ CREATE TABLE `ticketdetail` (
   `ticket_id` bigint NOT NULL,
   `vehicle_id` bigint NOT NULL,
   `current_price` int NOT NULL,
+  `transId` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `app_ticketdetail_vehicle_id_dd2f3eaf_fk_app_vehicle_id` (`vehicle_id`),
   KEY `app_ticketdetail_ticket_id_86f379dc_fk_app_ticket_id` (`ticket_id`),
   CONSTRAINT `app_ticketdetail_ticket_id_86f379dc_fk_app_ticket_id` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`),
   CONSTRAINT `app_ticketdetail_vehicle_id_dd2f3eaf_fk_app_vehicle_id` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +190,7 @@ CREATE TABLE `ticketdetail` (
 
 LOCK TABLES `ticketdetail` WRITE;
 /*!40000 ALTER TABLE `ticketdetail` DISABLE KEYS */;
-INSERT INTO `ticketdetail` VALUES (17,2,'Đi sớm trước 15p',21,5,200000),(18,1,'èd',22,5,200000),(19,5,'213123',23,5,200000),(20,2,'qưeeqwe',24,5,200000);
+INSERT INTO `ticketdetail` VALUES (21,2,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',25,5,9000,'2621926404'),(22,3,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',26,5,9000,'2621926406'),(23,10,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',27,5,9000,'2621929063'),(24,7,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',28,5,9000,'2621929088'),(25,17,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',29,5,9000,'2621929161'),(26,15,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',30,5,9000,'2621929170'),(27,21,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',31,5,9000,'2621929196'),(28,5,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',32,5,9000,'2621929212'),(29,16,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',33,5,9000,'2621929229'),(30,4,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',34,5,9000,'2621929265'),(31,1,'Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15\'',35,5,9000,'2621929297');
 /*!40000 ALTER TABLE `ticketdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +263,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (23,'1234567','gianghuynh','giang','huynh','huyniuahsiduh@gmail.com',1,'2000-07-09 00:00:00.000000','male','477',NULL,NULL,NULL,77),(24,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giang1','huynh','giang','dsfdasd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,79),(25,'1234567','giang2','ghhhg','áddss','dsfdawsd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,78),(26,'$2a$10$LfTTVXeNFNSDqt10tn5AzOHR66V2c9YcM171oNbZOU59gJ2UExs/2','tduong','tu','duong van',NULL,1,NULL,NULL,NULL,NULL,'0713124131',NULL,77),(27,'$2a$10$dSpvkxwIW9t5k43sBeNsMejQLDjUIlTcqmWf.gF3QrNRGLUvNrCw2','giangne','giang','giang',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77),(28,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giangne1','Guang','Gianggg','juygugyu@gmail.com',1,NULL,NULL,'447 Nguyen Van Cong p 33',NULL,'0913260623','https://res.cloudinary.com/docswnn1e/image/upload/v1637835323/ddudt4jtcuohylcqrgle.jpg',77),(29,'$2a$10$yToqZMneFgB.DrOocwaY5uqbcu4noi2Z3MUqr/SHVoJ1Pt4pI8p1e','tendangnhap','Hương','Đàm',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(30,'$2a$10$HxZLrYJDUPef48jMcTGRM.23mpM9W2ea6SvU0cYGlSF68LGIYPP0S','giangtest','test','Test','test@gmail.com',1,NULL,NULL,'ÃÂ¡ddq212312312',NULL,'0913260666',NULL,77),(34,'$2a$10$XKjQus/AN84mlde0An/30OughYhQWElT1TKPxLoT6BEjHmfek5H2y','zxc','TÆ°','TÆ°',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(35,'$2a$10$lbHoaxSYhhKtb4Y1CMy3hejbS9XkS3ioEZHPLn4F.vP.DaEvKHjGi','tyu','NÃ³','Máº¹',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77);
+INSERT INTO `user` VALUES (23,'1234567','gianghuynh','giang','huynh','huyniuahsiduh@gmail.com',1,'2000-07-09 00:00:00.000000','male','477',NULL,NULL,NULL,77),(24,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giang1','huynh','giang','dsfdasd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,79),(25,'1234567','giang2','ghhhg','áddss','dsfdawsd@gmail.com',1,'2000-07-09 00:00:00.000000',NULL,NULL,NULL,NULL,NULL,78),(26,'$2a$10$LfTTVXeNFNSDqt10tn5AzOHR66V2c9YcM171oNbZOU59gJ2UExs/2','tduong','tu','duong van','vantu@gmail.com',1,NULL,NULL,'thành phố',NULL,'0713124131','https://res.cloudinary.com/docswnn1e/image/upload/v1639291206/eiwa04offchxrmnorwhg.png',77),(27,'$2a$10$dSpvkxwIW9t5k43sBeNsMejQLDjUIlTcqmWf.gF3QrNRGLUvNrCw2','giangne','giang','giang',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77),(28,'$2a$10$C1S72YhZlrTQJWatqwbrF.gBBj0fNtrIw2uTuEkFq6bVwMVvg92Iq','giangne1','Guang','Gianggg','juygugyu@gmail.com',1,NULL,NULL,'447 Nguyen Van Cong p 33',NULL,'0913260623','https://res.cloudinary.com/docswnn1e/image/upload/v1637835323/ddudt4jtcuohylcqrgle.jpg',77),(29,'$2a$10$yToqZMneFgB.DrOocwaY5uqbcu4noi2Z3MUqr/SHVoJ1Pt4pI8p1e','tendangnhap','Hương','Đàm',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(30,'$2a$10$HxZLrYJDUPef48jMcTGRM.23mpM9W2ea6SvU0cYGlSF68LGIYPP0S','giangtest','test','Test','test@gmail.com',1,NULL,NULL,'ÃÂ¡ddq212312312',NULL,'0913260666',NULL,77),(34,'$2a$10$XKjQus/AN84mlde0An/30OughYhQWElT1TKPxLoT6BEjHmfek5H2y','zxc','TÆ°','TÆ°',NULL,1,NULL,NULL,NULL,NULL,'0913260666',NULL,77),(35,'$2a$10$lbHoaxSYhhKtb4Y1CMy3hejbS9XkS3ioEZHPLn4F.vP.DaEvKHjGi','tyu','NÃ³','Máº¹',NULL,1,NULL,NULL,NULL,NULL,'0913260623',NULL,77);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +324,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (5,'aaa',30,4,0,24);
+INSERT INTO `vehicle` VALUES (5,'59A1-123456',30,4,0,24);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-25 21:37:21
+-- Dump completed on 2021-12-12 15:31:11

@@ -11,7 +11,14 @@
 
 <c:url var="payment" value="/pay/momo"/>
 <c:url var="signin" value="/signin"/>
-
+<c:if test="${mgs != ''}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        ${mgs}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
 <!DOCTYPE html>
 <c:if test="${trip == null}"><h1 class="text-danger" style="text-align: center">Không có chuyến</h1></c:if>
 <c:if test="${trip != null}">

@@ -80,7 +80,7 @@
 <c:choose>
     <c:when test="${result == 'sus'}">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Cập nhật thành công!
+            ${result} Cập nhật thành công!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

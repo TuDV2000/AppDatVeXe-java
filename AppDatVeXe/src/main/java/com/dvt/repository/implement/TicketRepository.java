@@ -1,8 +1,6 @@
 package com.dvt.repository.implement;
 
-import com.dvt.pojos.Ticket;
-import com.dvt.pojos.TicketDetail;
-import com.dvt.pojos.Trip;
+import com.dvt.pojos.*;
 import com.dvt.repository.ITicketRepository;
 import com.dvt.repository.ITripRepository;
 import com.dvt.repository.IUserRepository;
@@ -51,6 +49,14 @@ public class TicketRepository extends GenericsRepository<Ticket> implements ITic
     }
 
     @Override
+    public int getTicketIdbyTranId(String transId) {
+        TicketDetail td = (TicketDetail) getCurrentSession()
+                .createQuery("from TicketDetail where transId = :id")
+                .setParameter("id", transId).getSingleResult();
+        return td.getTicket().getId();
+    }
+
+    @Override
     public boolean addTicket(HttpSession session, String transId, String orderId) {
         List<Booking> bookingList = (List<Booking>) session.getAttribute("bookingList");
 
@@ -72,4 +78,6 @@ public class TicketRepository extends GenericsRepository<Ticket> implements ITic
 
         return true;
     }
+
+
 }
