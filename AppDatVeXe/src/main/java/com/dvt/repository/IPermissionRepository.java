@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IPermissionRepository extends IGenericsRepository<Permission>{
     public Permission getPerByName(String perName);
-    public Permission getPerById(int perId);
+    public Permission getPerById(String perId);
 }

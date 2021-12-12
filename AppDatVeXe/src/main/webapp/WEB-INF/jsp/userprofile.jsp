@@ -129,17 +129,8 @@
         </div>
         <div class="col-md-6">
             <div class="profile-head">
-                <h5>
-                    ${pageContext.request.userPrincipal.name}
-                </h5>
-                <c:if test="${user.permission.id != 77}">
-                    <h6>
-                            ${user.permission.name}
-                    </h6>
-                </c:if>
-                <c:if test="${user.permission.id == 77}">
-                    <h6> Khách hàng  </h6>
-                </c:if>
+                <h5>${pageContext.request.userPrincipal.name}</h5>
+                <h6>${user.permission.name}</h6>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item user-profile" role="presentation">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Thông tin</a>
@@ -151,6 +142,9 @@
             </div>
         </div>
         <div class="col-md-2">
+            <c:if test="${user.getPermission().getId() == 'ROLE_ADMIN'}">
+            <a type="button" class="profile-edit-btn" href="<c:url value="/admin" />">Trang quản lý</a>
+            </c:if>
             <button type="button" class="profile-edit-btn" data-toggle="modal" data-target="#exampleModal">
                 Chỉnh sửa
             </button>

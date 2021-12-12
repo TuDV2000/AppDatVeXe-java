@@ -48,7 +48,7 @@ public class UserController {
         System.out.println("fistName ===============" + firstName);
 
         if (password.equals(password2)) {
-            Permission permission = permissionService.getPerById(77);
+            Permission permission = permissionService.getPerById("ROLE_CUSTOMER");
             if (userDetailsService.createUser(new User(username, password, firstName
                     , lastName, phone, permission))) {
                     return "redirect:/signin";

@@ -285,7 +285,7 @@ public class AdminController {
             , @RequestParam(value = "phone") String phone
             , @RequestParam(value = "password") String password
             , @RequestParam(value = "password2") String password2
-            , @RequestParam(value = "permission") int permission) {
+            , @RequestParam(value = "permission") String permission) {
         String mgs = "";
         List<User> ls = userService.getAllUser();
         for(User u : ls){
@@ -317,7 +317,7 @@ public class AdminController {
             @RequestParam(value = "id") int id
             , @RequestParam(value = "lastName") String lastName
             , @RequestParam(value = "firstName") String firstName
-            , @RequestParam(value = "permission") int permission
+            , @RequestParam(value = "permission") String permission
             , @RequestParam(value = "address", required = false) String address
             , @RequestParam(value = "phoneNumber") String phoneNumber) {
         System.out.println(lastName);

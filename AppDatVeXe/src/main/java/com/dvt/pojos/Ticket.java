@@ -19,10 +19,6 @@ public class Ticket implements Serializable {
     private User customer;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private User employee;
-
-    @ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
@@ -44,14 +40,6 @@ public class Ticket implements Serializable {
 
     public void setCustomer(User customer) {
         this.customer = customer;
-    }
-
-    public User getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(User employee) {
-        this.employee = employee;
     }
 
     public Trip getTrip() {

@@ -53,8 +53,7 @@ public class UserService extends GenericsService<User> implements IUserService {
         if (user == null)
             throw new UsernameNotFoundException("Không tồn tại");
         Set<GrantedAuthority> authoritySet = new HashSet<>();
-        authoritySet.add(new SimpleGrantedAuthority(user.getPermission().getName()));
-
+        authoritySet.add(new SimpleGrantedAuthority(user.getPermission().getId()));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authoritySet);
     }

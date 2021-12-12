@@ -82,6 +82,9 @@
                     </a>
                     <div class="card-body p-5">
                         <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
+                        <c:if test="${param.accessDenied != null}">
+                            <label class="text-danger">*Bạn không có quyền</label>
+                        </c:if>
                         <c:if test="${param.error != null}">
                             <label class="text-danger">*Đăng nhập không thành công</label>
                         </c:if>
