@@ -226,7 +226,7 @@
                                     <th scope="row"></th>
                                     <td>${t.id}</td>
                                     <td>${t.trip.line.startPoint.address} - ${t.trip.line.endPoint.address}</td>
-                                    <td><a href="#">Chi tiết</a></td>
+                                    <td><a href="<c:url value="/${t.getId()}/ticketdetail" />">Chi tiết</a></td>
                                 </tr>
                             </c:forEach>
                             </tbody>

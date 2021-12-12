@@ -67,7 +67,7 @@ public class TicketController {
         return "";
     }
 
-    @GetMapping("/ticketdetail/{ticketId}")
+    @GetMapping("/{ticketId}/ticketdetail")
     public String showDetailTicket(Model model
             , @PathVariable(value = "ticketId") int ticketId){
 
