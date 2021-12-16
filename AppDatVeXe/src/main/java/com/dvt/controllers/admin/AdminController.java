@@ -1,4 +1,4 @@
-package com.dvt.controllers;
+package com.dvt.controllers.admin;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -22,43 +23,37 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
-
     @Autowired
     IUserService userDetailsService;
-
     @Autowired
     ILineService lineService;
-
     @Autowired
     ITripService tripService;
-
     @Autowired
     IUserService userService;
-
     @Autowired
     IPointService pointService;
-
     @Autowired
     Cloudinary cloudinary;
-
     @Autowired
     IPermissionService permissionService;
 
+    @ModelAttribute
+    public void commonAttrs(Model model, HttpSession session) {
+    }
 
-    @RequestMapping(value = {"/admin", "/admin/{result}/{mgs}"})
+    @RequestMapping("/{result}/{mgs}")
     public String admin(Model model
             , @PathVariable(value = "result", required = false) String result
             , @PathVariable(value = "mgs", required = false) String mgs) {
-        model.addAttribute("lines", lineService.getAll());
-        model.addAttribute("trips", tripService.getAllTripp());
-        model.addAttribute("points", pointService.getAll());
-        model.addAttribute("customers", userService.getAllCustomer());
-        model.addAttribute("employees", userService.getAllDriverAndEmployee());
-        model.addAttribute("drivers", userService.getAllDriver());
-        model.addAttribute("users", userService.getAllUser());
-        model.addAttribute("permission", permissionService.getAll());
-        return "admin";
+        return "baseAdminLayout";
+    }
+
+    @GetMapping("")
+    public String showAdmin() {
+        return "baseAdminLayout";
     }
 
     //    ==================================================== Line Controller=======================
@@ -209,6 +204,10 @@ public class AdminController {
     }
 
     // =================================================== Point Controller =====================================
+    /*@GetMapping("/points")
+    public String showPoint() {
+        return "pointsAdmin";
+    }
     @PostMapping("/add-place")
     public String createPlace(Model model
             , @RequestParam(value = "placeName") String placeName
@@ -274,7 +273,7 @@ public class AdminController {
         }
 
         return "redirect:/admin/sus/" + mgs;
-    }
+    }*/
 
     // =========================================================== User Controller ============================================
     @PostMapping("/create-user")
@@ -358,5 +357,7 @@ public class AdminController {
 
         return "redirect:/admin/sus/" + mgs;
     }
+
+
 }
 

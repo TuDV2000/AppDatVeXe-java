@@ -125,7 +125,7 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         List<User> lUser = getAll();
         List<User> lDri = new ArrayList<>();
         for (User u: lUser){
-            if(u.getPermission().getName().equals("driver"))
+            if(u.getPermission().getId().equals("ROLE_DRIVER"))
                 lDri.add(u);
         }
         return lDri;

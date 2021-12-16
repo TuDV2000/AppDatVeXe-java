@@ -53,5 +53,23 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Chi tiết vé"/>
         <put-attribute name="content" value="/WEB-INF/jsp/ticketdetail.jsp" />
     </definition>
-
+    <!-- ADMIN PAGE DEFINITION -->
+    <definition name="baseAdminLayout" template="/WEB-INF/layout/base-admin.jsp">
+        <put-attribute name="title"  value="Trang quản lý" />
+        <put-attribute name="header"  value="/WEB-INF/layout/header-admin.jsp" />
+        <put-attribute name="footer"  value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="content"  value="/WEB-INF/jsp/admin/index-admin.jsp" />
+    </definition>
+    <definition name="pointsAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý địa điểm"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/points-admin.jsp" />
+    </definition>
+    <definition name="linesAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý tuyến xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/lines-admin.jsp" />
+    </definition>
+    <definition name="tripsAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý chuyến xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/trips-admin.jsp" />
+    </definition>
 </tiles-definitions>
