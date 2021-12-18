@@ -11,7 +11,7 @@
 
 <c:url var="payment" value="/pay/momo"/>
 <c:url var="signin" value="/signin"/>
-<c:if test="${mgs != ''}">
+<c:if test="${mgs != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         ${mgs}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -56,7 +56,7 @@
                         </c:choose>
                     </c:forEach>
                 </div>
-                        <%--  Hình minh họa          --%>
+                        <%--  Hình minh họa  --%>
                 <div class="seat-statuses">
                     <div class="status-item">
                         <div class="empty-seat-icon-small-background">
@@ -85,40 +85,37 @@
             <a href="${signin}" class="btn btn-primary">Đi đến đăng nhập</a>
         </c:when>
         <c:when test="${user != null}">
-            <h1 class="text-container">Thông tin vé</h1>
-            <form class="form" action="${payment}" method="get">
-                <label for="trip">Chuyến</label>
-                <input class="form-control" type="hidden" name="trip" value="${trip.getId()}">
-                <input class="form-control" disabled
-                       value="${trip.line.startPoint.address}-${trip.line.endPoint.address}">
+            <div class="book-ticket-container seat-payment">
+                <h1 class="text-container ticket">Thông tin vé</h1>
+                <form class="form-book-ticket-seat" action="${payment}" method="get">
+                    <label for="trip">Chuyến</label>
+                    <input class="form-control" type="hidden" name="trip" value="${trip.getId()}">
+                    <input class="form-control" disabled
+                           value="${trip.line.startPoint.address}-${trip.line.endPoint.address}">
 
-                <label for="price">Tiền vé</label>
-                <input class="form-control" type="hidden" name="price"
-                        value="${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}">
-                <input class="form-control"  disabled
-                       value="${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}">
+                    <label for="price">Tiền vé</label>
+                    <input class="form-control" type="hidden" name="price"
+                           value="${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}">
+                    <input class="form-control"  disabled
+                           value="${trip.line.price + trip.extra_changes + trip.driver.vehicles[0].extraChanges}">
 
-                <label for="seatPosition">Vị trí ghế</label>
-                <input class="form-control " type="hidden" name="seatPosition" id="seatPositionHidden">
-                <input class="form-control " id="seatPositionView" disabled>
+                    <label for="seatPosition">Vị trí ghế</label>
+                    <input class="form-control " type="hidden" name="seatPosition" id="seatPositionHidden">
+                    <input class="form-control " id="seatPositionView" disabled>
 
-                <input type="hidden" name="userId" id="userId" value="${user.getId()}">
-                <label for="fullName">Họ và tên</label>
-                <input class="form-control" type="text" name="fullName" id="fullName" disabled
-                       value="${user.getFirstName()} ${user.getLastName()}" >
-                <label for="phone">Số điện thoại</label>
-                <input class="form-control" type="text" pattern="^[0-9\-\+]{10,11}$" name="phone" id="phone"
-                       value="${user.getNumberPhone()}" disabled>
-                <p class="text-danger">Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15'</p>
-                <button type="submit" class="btn btn-primary btn-lg ticket">Đặt vé</button>
-            </form>
+                    <input type="hidden" name="userId" id="userId" value="${user.getId()}">
+                    <label for="fullName">Họ và tên</label>
+                    <input class="form-control" type="text" name="fullName" id="fullName" disabled
+                           value="${user.getFirstName()} ${user.getLastName()}" >
+                    <label for="phone">Số điện thoại</label>
+                    <input class="form-control" type="text" pattern="^[0-9\-\+]{10,11}$" name="phone" id="phone"
+                           value="${user.getNumberPhone()}" disabled>
+                    <p class="text-danger">Lưu ý: Vui lòng đến có mặt trước giờ khỏi hành 15'</p>
+                    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Đặt vé</button>
+                </form>
+            </div>
         </c:when>
         </c:choose>
-    </div>
-    <div class="ticket-btn-container">
-        <div class="ticket-btn-return">
-            <button type="button" class="btn btn-primary btn-lg ticket">Quay Lại</button>
-        </div>
     </div>
 </div>
 </c:if>

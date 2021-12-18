@@ -41,16 +41,26 @@ public class UserController {
             , @RequestParam(value = "username") String username
             , @RequestParam(value = "phone") String phone
             , @RequestParam(value = "password") String password
-            , @RequestParam(value = "password2") String password2) {
+            , @RequestParam(value = "password2") String password2
+            , @RequestParam(value = "avatar") MultipartFile avatar) {
         String mgs = "";
 
-        System.out.println("lastName ===============" + lastName);
-        System.out.println("fistName ===============" + firstName);
-
+        String uAvatar = "";
+        try {
+            Map imgCloud = this.cloudinary.uploader()
+                    .upload(avatar.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            uAvatar = (String) imgCloud.get("secure_url");
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("Chọn ảnh đại diện thất bại", mgs);
+            return "signup";
+        }
+        System.out.println(uAvatar);
         if (password.equals(password2)) {
-            Permission permission = permissionService.getPerById("ROLE_CUSTOMER");
+            Permission permission = permissionService.getPerById("77");
             if (userDetailsService.createUser(new User(username, password, firstName
                     , lastName, phone, permission))) {
+                    userService.updateAvatar(username, uAvatar);
                     return "redirect:/signin";
                 } else {
                 mgs = "Username đã tồn tại!!";

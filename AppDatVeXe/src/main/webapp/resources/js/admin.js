@@ -331,7 +331,6 @@ function compareDate(sdate, edate){
     const sMi= sdate.substring(14);
     const eMi= edate.substring(14);
 
-
     if(eY < sY)
     {
         console.log(sY);
@@ -348,18 +347,19 @@ function compareDate(sdate, edate){
         console.log(eD);
         return false;
     }
-    else if(eH < sH){
-        console.log(sH);
-        console.log(eH);
-        return false;
+    if(sY==eY && sM==eM && eD==sD){
+        if(eH < sH){
+            console.log(sH);
+            console.log(eH);
+            return false;
+        }
+        else if(eMi < sMi){
+            console.log(sMi);
+            console.log(eMi);
+            return false;
+        }
     }
-    else if(eMi < sMi){
-        console.log(sMi);
-        console.log(eMi);
-        return false;
-    }
-    else
-        return true;
+    return true;
 }
 function isPhone(phone) {
     return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phone);

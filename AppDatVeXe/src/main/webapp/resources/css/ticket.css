@@ -149,6 +149,23 @@ h3 {
     background-color: rgb(36, 100, 143);
     transition: all 0.3s ease-out;
 }
+.book-ticket-container.seat-payment{
+    margin-top: 4rem;
+}
+.text-container.ticket{
+    text-align: center;
+}
+.gradient-custom-4{
+    background: linear-gradient(to right, rgba(119, 199, 253, 1), rgba(26, 23, 23, 1));
+}
+.form-book-ticket-seat input{
+    margin-bottom: 20px;
+}
+.form-book-ticket-seat p{
+    margin-bottom: 20px;
+}
+.form-book-ticket-seat label{
+}
 
 @media screen and (max-width: 960px){
     .empty-seat{
