@@ -13,6 +13,7 @@ public interface IUserService extends IGenericsServevice<User>, UserDetailsServi
     boolean updateUser(User user);
     public String enCode(String s);
     public User getUserByUsername(String username);
+    public List<User> getUsersByRole(String roleId);
     public List<Ticket> getTicketByUsername (String username);
     public void updateAvatar(String username, String avatar);
     public List<User> getAllCustomer();
@@ -20,4 +21,5 @@ public interface IUserService extends IGenericsServevice<User>, UserDetailsServi
     public List<User> getAllDriver();
     public User getUserById(int id);
     public List<User> getAllUser();
+    public List<User> getDrivers();
 }

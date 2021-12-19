@@ -16,7 +16,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>
-<%--    <script src="<c:url value="/js/admin.js" />"></script>--%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<c:url value="/js/admin.js" />"></script>
+    <script src="<c:url value="/js/stats.js" />"></script>
 
     <link href="<c:url value="/css/base.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/css/header.css"/>" rel="stylesheet" type="text/css"/>

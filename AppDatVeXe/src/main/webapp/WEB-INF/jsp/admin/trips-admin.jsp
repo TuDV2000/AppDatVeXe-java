@@ -2,6 +2,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:url var="createT" value="/admin/trips/add-trip"/>
+<c:url var="updateT" value="/admin/trips/update-trip"/>
+
+<c:if test="${mgs != null}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ${mgs}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
 <div class="col-sm-11 info-content">
     <div class="top-table">
         <span class="navbar-brand"> Chuyến xe </span>
@@ -10,7 +21,7 @@
                     data-toggle="modal" data-target="#createTripModal">Thêm chuyến</button>
         </a>
     </div>
-    <h3>
+    <h3 class="text-center">
         Số lượng : ${trips.size()}
     </h3>
     <div class="schedule-scroll">
@@ -47,7 +58,7 @@
             </c:forEach>
         </table>
         <!-- Modal Create -->
-        <div class="modal fade" id="createTripModal" tabindex="-1" aria-labelledby="createLineModal" aria-hidden="true">
+        <div class="modal fade" id="createTripModal" tabindex="-1" aria-labelledby="createTripModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -88,13 +99,6 @@
                                 <label for="endTrip" class="col-form-label">Kết thúc(dự kiến) </label>
                                 <small>Erro message</small>
                                 <input class="form-control" type="datetime-local" id="endTrip" name="endTrip">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i>
-                            </div>
-                            <div class="form-group">
-                                <label for="blankSeat" class="col-form-label">Số lượng ghế trống </label>
-                                <small>Erro message</small>
-                                <input type="number" class="form-control" id="blankSeat" name="blankSeat">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i>
                             </div>
@@ -148,12 +152,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tripLine" class="col-form-label">Tuyến</label>
-                                    <input type="text" class="form-control" readonly="readonly" value="${t.line.startPoint.address}=>${t.line.endPoint.address}">
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           value="${t.line.startPoint.address}=>${t.line.endPoint.address}">
                                 </div>
                                 <div class="form-group">
                                     <label for="blankSeat" class="col-form-label">Số lượng ghế trống </label>
                                     <small>Erro message</small>
-                                    <input type="number" class="form-control" id="blankSeatUpdate-${t.id}"  name="blankSeat" value="${t.blankSeat}">
+                                    <input type="number" class="form-control" readonly="readonly"
+                                           id="blankSeatUpdate-${t.id}"  name="blankSeat" value="${t.blankSeat}">
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                 </div>
@@ -161,9 +167,15 @@
                                     <label for="tripDriver" class="col-form-label">Tài xế</label>
                                     <small>Erro message</small>
                                     <select class="form-control" id="driverUpdate-${t.id}" name="tripDriver">
-                                        <option value="${t.driver.id}" >${t.driver.firstName} ${t.driver.lastName}</option>
                                         <c:forEach var="d" items="${drivers}">
-                                            <option value="${d.id}">${d.firstName} ${d.lastName}</option>
+                                            <c:choose>
+                                                <c:when test="${t.driver.id == d.id}">
+                                                <option value="${d.id}" selected>${d.firstName} ${d.lastName}</option>
+                                                </c:when>
+                                                <c:when test="${t.driver.id != d.id}">
+                                                <option value="${d.id}">${d.firstName} ${d.lastName}</option>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </select>
                                     <i class="fas fa-check-circle"></i>
@@ -202,9 +214,16 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <a href="<c:url value="/trip/${t.id}/delete"/>">
-                                <button type="button" class="btn btn-primary">Xác nhận</button>
-                            </a>
+                            <c:if test="${mgs == null}">
+                                <a href="<c:url value="trips/${t.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
+                            <c:if test="${mgs != null}">
+                                <a href="<c:url value="${t.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

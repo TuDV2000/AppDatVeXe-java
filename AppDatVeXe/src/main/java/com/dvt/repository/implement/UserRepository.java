@@ -130,6 +130,19 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         }
         return lDri;
     }
+
+    @Override
+    public List<User> getUsersByRole(String roleId){
+        try {
+            return (List<User>) getCurrentSession().createQuery("from User where permission.id = :roleId")
+                    .setParameter("roleId", roleId).getResultList();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
     @Override
     public User getUserById(int id){
         try {
@@ -149,5 +162,22 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
                 lDri.add(u);
         }
         return lDri;
+    }
+
+    @Override
+    public List<User> getDrivers() {
+        // Lấy driver chưa có xe
+        String hql = "from User where permission.id = 'ROLE_DRIVER' and id not in "
+                + "(select u.id from User as u join Vehicle as v on u.id = v.driver.id)";
+        // Lấy driver có xe nhưng
+
+        List<User> drivers = null;
+        try {
+            drivers = (List<User>) getCurrentSession().createQuery(hql).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return drivers;
     }
 }

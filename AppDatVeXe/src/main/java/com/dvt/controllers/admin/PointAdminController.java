@@ -29,11 +29,12 @@ public class PointAdminController {
     @GetMapping(value = {"", "/{result}"})
     public String showPoint(Model model
             , @PathVariable(value = "result", required = false) String result) {
-        model.addAttribute("points", pointService.getAll());
-        System.out.println("result: " + result);
-        if(result != null)
-            model.addAttribute("result", result);
 
+        if (result != null) {
+            model.addAttribute("mgs", MgsUtil.mgsShow("địa điểm",result));
+        }
+
+        model.addAttribute("points", pointService.getAll());
         return "pointsAdmin";
     }
 
@@ -41,61 +42,66 @@ public class PointAdminController {
     public String createPlace(Model model
             , @RequestParam(value = "placeName") String placeName
             , @RequestParam(value = "placePicture") MultipartFile placePicture) {
-
+        String status = "addSus";
         String placeImage = "";
+
         try {
             Map imgCloud = this.cloudinary.uploader()
                     .upload(placePicture.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
             placeImage = (String) imgCloud.get("secure_url");
         } catch (IOException e) {
-            return "redirect:/admin/points/err";
+            status = "err";
+            e.printStackTrace();
         }
-        pointService.save(new Point(placeName, placeImage));
 
-        return "redirect:/admin/points/createSus";
+        pointService.save(new Point(placeName, placeImage));
+        return "redirect:/admin/points/" + status;
     }
 
     @PostMapping("/point-update")
-    public String updatePlace(@RequestParam(value = "placePictureUpdate") MultipartFile placePicture
+    public String updatePlace(Model model
+            ,@RequestParam(value = "placePictureUpdate") MultipartFile placePicture
             , @RequestParam(value = "placeId") int placeId) {
-
+        String status = "updateSus";
         String placeImage = "";
-        if (placePicture == null) {
-            return "redirect:/admin/points/err";
+
+        if (placePicture.getSize() <= 0) {
+            status = "err";
         } else {
             try {
                 Map imgCloud = this.cloudinary.uploader()
                         .upload(placePicture.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 placeImage = (String) imgCloud.get("secure_url");
             } catch (IOException e) {
+                status = "err";
                 e.printStackTrace();
-                return "redirect:/admin/points/err";
             }
         }
         Point p = pointService.getPointById(placeId);
         p.setPicture(placeImage);
         pointService.update(p);
-        return "redirect:/admin/points/updateSus";
+
+        return "redirect:/admin/points/" + status;
     }
 
     @RequestMapping("/{placeId}/delete")
-    public String deletePlace(@PathVariable(value = "placeId") Integer placeId) {
-        String mgs = "";
+    public String deletePlace(Model model
+            , @PathVariable(value = "placeId") Integer placeId) {
+        String status = "deleteSus";
+
         try {
             List<Line> ls = lineService.getLinesBySPoint(placeId);
-            System.out.println(ls.size());
+
             if (ls.size() > 0) {
-                mgs = "Xoa diem khong thanh cong! Yeu cau xoa cac tuyen su dung dia diem truoc. ";
-                return "redirect:/admin/err/" + mgs;
+                status = "err";
+            } else {
+                Point p = pointService.getPointById(placeId);
+                pointService.delete(p);
             }
-            Point p = pointService.getPointById(placeId);
-            pointService.delete(p);
-            mgs = "Xoa diem thanh cong!";
         } catch (Exception e) {
-            mgs = "Xoa diem that bai!" + e;
-            return "redirect:/admin/err/" + mgs;
+            status = "err";
         }
 
-        return "redirect:/admin/sus/" + mgs;
+        return "redirect:/admin/points/" + status;
     }
 }

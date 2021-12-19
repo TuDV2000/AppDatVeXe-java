@@ -1,5 +1,6 @@
 package com.dvt.repository.implement;
 
+import com.dvt.pojos.Trip;
 import com.dvt.repository.IGenericsRepository;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class GenericsRepository<T> implements IGenericsRepository<T> {
     @Override
     public List<T> getAll() {
         return getCurrentSession().createQuery("from " + getClassType().getSimpleName()).getResultList();
+    }
+
+    @Override
+    public T getById(int id) {
+        return (T) getCurrentSession().get(getClassType(), id);
     }
 
     @Override

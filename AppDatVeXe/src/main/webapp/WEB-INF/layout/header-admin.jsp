@@ -3,7 +3,12 @@
 <!DOCTYPE html>
 
 <c:url var="home" value="/" />
+<c:url var="adminIndex" value="/admin" />
 <c:url var="point" value="/admin/points" />
+<c:url var="line" value="/admin/lines" />
+<c:url var="trip" value="/admin/trips" />
+<c:url var="vehicle" value="/admin/vehicles" />
+<c:url var="user" value="/admin/users" />
 
 <script src="<c:url value="/js/header.js" />"></script>
 <div class="container-fluid">
@@ -17,19 +22,22 @@
         </div>
         <ul class="navbar-nav">
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href=${home}>TRANG CHỦ</a>
+                <a class="nav-link" href="${adminIndex}">Thống kê</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="${point}">ĐỊA ĐIỂM</a>
+                <a class="nav-link" href="${point}">Địa điểm</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="">TUYẾN XE</a>
+                <a class="nav-link" href="${line}">Tuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="">CHUYẾN XE</a>
+                <a class="nav-link" href="${trip}">Chuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="">NGƯỜI DÙNG</a>
+                <a class="nav-link" href="${vehicle}">xe</a>
+            </li>
+            <li class="nav-item active" onclick="closeNav()">
+                <a class="nav-link" href="${user}">Người dùng</a>
             </li>
         </ul>
     </nav>

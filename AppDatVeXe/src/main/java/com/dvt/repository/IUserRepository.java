@@ -11,7 +11,7 @@ public interface IUserRepository extends IGenericsRepository<User> {
     boolean createUser(User user);
     boolean updateUser(User user);
     public User getUserByUsername(String username);
-    // Viết nhầm chỗ :(
+    public List<User> getUsersByRole(String roleId);
     public List<Ticket> getTicketByUsername (String username);
     public void updateAvatar(String username, String avatar);
     public List<User> getAllCustomer();
@@ -19,4 +19,5 @@ public interface IUserRepository extends IGenericsRepository<User> {
     public List<User> getAllDriver();
     public User getUserById(int Id);
     public List<User> getAllUser();
+    public List<User> getDrivers();
 }

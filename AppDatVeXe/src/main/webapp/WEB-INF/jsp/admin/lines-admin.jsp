@@ -2,6 +2,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:url var="createL" value="/admin/lines/add-line" />
+<c:url var="updateL" value="/admin/lines/update-line" />
+
+<c:if test="${mgs != null}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ${mgs}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</c:if>
 <div class="col-sm-11 info-content">
     <div class="top-table">
         <span class="navbar-brand"> Tuyến xe </span>
@@ -10,7 +21,7 @@
                     data-toggle="modal" data-target="#createLineModal">Thêm tuyến</button>
         </a>
     </div>
-    <h3>
+    <h3 class="text-center">
         Số lượng : ${lines.size()}
     </h3>
     <div class="schedule-scroll">
@@ -56,10 +67,10 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="createLineForm" method="post" action="${create}" accept-charset="utf-8">
+                    <form id="createLineForm" method="post" action="${createL}" accept-charset="utf-8">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name" class="col-form-label">Tên tuyến </label>
+                                <label for="name" class="col-form-label">Tên tuyến</label>
                                 <small>Erro message</small>
                                 <input type="text" class="form-control" id="name" name="lineName">
                                 <i class="fas fa-check-circle"></i>
@@ -69,9 +80,9 @@
                                 <label for="startPlace" class="col-form-label">Điểm khởi hành</label>
                                 <small>Erro message</small>
                                 <select class="form-control" id="startPlace" name="startPlace">
-                                    <option>Chọn điểm</option>
+                                    <option value="0">Chọn điểm</option>
                                     <c:forEach var="p" items="${points}">
-                                        <option>${p.address}</option>
+                                        <option value="${p.id}">${p.address}</option>
                                     </c:forEach>
                                 </select>
                                 <i class="fas fa-check-circle"></i>
@@ -83,7 +94,7 @@
                                 <select class="form-control" id="endPlace" name="endPlace">
                                     <option>Chọn điểm</option>
                                     <c:forEach var="p" items="${points}">
-                                        <option>${p.address}</option>
+                                        <option value="${p.id}">${p.address}</option>
                                     </c:forEach>
                                 </select>
                                 <i class="fas fa-check-circle"></i>
@@ -97,7 +108,7 @@
                                 <i class="fas fa-exclamation-circle"></i>
                             </div>
                             <div class="form-group">
-                                <label for="distance" class="col-form-label">Quảng đường </label>
+                                <label for="distance" class="col-form-label">Quảng đường</label>
                                 <small>Erro message</small>
                                 <input type="number" class="form-control" id="distance" name="distance">
                                 <i class="fas fa-check-circle"></i>
@@ -130,10 +141,10 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="updateLineForm" method="post" action="${update}" accept-charset="utf-8">
+                        <form id="updateLineForm" method="post" action="${updateL}" accept-charset="utf-8">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="idline" class="col-form-label">id </label>
+                                    <label for="idline" class="col-form-label">id</label>
                                     <input type="text" class="form-control" name="idline" id="idline" readonly="readonly" value="${l.id}">
                                 </div>
                                 <div class="form-group">
@@ -195,9 +206,16 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <a href="<c:url value="/line/${l.id}/delete"/>">
-                                <button type="button" class="btn btn-primary">Xác nhận</button>
-                            </a>
+                            <c:if test="${mgs == null}">
+                                <a href="<c:url value="lines/${l.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
+                            <c:if test="${mgs != null}">
+                                <a href="<c:url value="${l.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

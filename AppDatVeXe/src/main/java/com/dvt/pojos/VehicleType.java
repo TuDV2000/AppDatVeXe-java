@@ -12,6 +12,7 @@ public class VehicleType implements Serializable {
     private int id;
     @Column(name = "name_type")
     private String nameType;
+    private int seat;
 
     @OneToMany(mappedBy = "vehicleType", fetch = FetchType.LAZY)
     private Set<Vehicle> vehicles;
@@ -38,5 +39,13 @@ public class VehicleType implements Serializable {
 
     public void setNameType(String nameType) {
         this.nameType = nameType;
+    }
+
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
     }
 }

@@ -5,24 +5,15 @@
 <c:url var="createP" value="/admin/points/add-point" />
 <c:url var="updateP" value="/admin/points/point-update" />
 
-<c:choose>
-    <c:when test="${result == 'createSus'}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Thêm thành công thành công!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-    <c:when test="${result == 'updateSus'}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Cập nhật thành công!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-</c:choose>
+<c:if test="${mgs != null}">
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+        ${mgs}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+</c:if>
+
 <div class="col-sm-11 info-content">
     <div class="top-table">
         <span class="navbar-brand"> Địa điểm </span>
@@ -66,7 +57,7 @@
             </c:forEach>
         </table>
         <!-- Modal Create -->
-        <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createLineModal" aria-hidden="true">
+        <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -78,14 +69,14 @@
                     <form id="createPlaceForm" method="post" action="${createP}" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="tripName" class="col-form-label">Tên địa điểm </label>
+                                <label for="placeName" class="col-form-label">Tên địa điểm </label>
                                 <small>Erro message</small>
                                 <input type="text" class="form-control" id="placeName" name="placeName">
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i>
                             </div>
                             <div class="form-group">
-                                <label for="tripLine" class="col-form-label">Ảnh</label>
+                                <label for="placePicture" class="col-form-label">Ảnh</label>
                                 <small>Erro message</small>
                                 <input class="file btn btn-lg btn-primary" id="placePicture" name="placePicture" type="file" />
                             </div>
@@ -123,7 +114,7 @@
                                     <input type="text" class="form-control" readonly="readonly" value="${p.address}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tripLine" class="col-form-label">Ảnh</label>
+                                    <label for="placePictureUpdate" class="col-form-label">Ảnh</label>
                                     <small>Erro message</small>
                                     <input class="file btn btn-lg btn-primary" id="placePictureUpdate${p.id}" name="placePictureUpdate" type="file" />
                                 </div>
@@ -153,9 +144,16 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <a href="<c:url value="admin/points/${p.id}/delete"/>">
-                                <button type="button" class="btn btn-primary">Xác nhận</button>
-                            </a>
+                            <c:if test="${mgs == null}">
+                                <a href="<c:url value="points/${p.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
+                            <c:if test="${mgs != null}">
+                                <a href="<c:url value="${p.id}/delete"/>">
+                                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                                </a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
