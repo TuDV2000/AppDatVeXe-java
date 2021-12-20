@@ -5,23 +5,29 @@
 <!DOCTYPE html>
 
 <div id="content">
-    <h1 class="text-center text-danger">THỐNG KÊ VÉ THEO TUYẾN XE</h1>
-    <table class="table">
-        <tr>
-            <th>Mã tuyến xe</th>
-            <th>Tên tuyến</th>
-            <th>Số lượng vé đã bán được</th>
-        </tr>
-        <c:forEach items="${lineStats}" var="l">
-            <tr>
-                <td>${l[0]}</td>
-                <td>${l[1]}</td>
-                <td>${l[2]}</td>
-            </tr>
-        </c:forEach>
-    </table>
-    <div>
-        <canvas id="myLineStatsChart"></canvas>
+    <h1 class="title-page">THỐNG KÊ VÉ THEO TUYẾN XE</h1>
+    <div class="admin-line row">
+        <div class="col-md-4">
+            <div class="admin-stats">
+                <canvas id="myLineStatsChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <tr>
+                    <th>Mã tuyến xe</th>
+                    <th>Tên tuyến</th>
+                    <th>Số lượng vé đã bán được</th>
+                </tr>
+                <c:forEach items="${lineStats}" var="l">
+                    <tr>
+                        <td>${l[0]}</td>
+                        <td>${l[1]}</td>
+                        <td>${l[2]}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </div>
 </div>
 

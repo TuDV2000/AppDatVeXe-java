@@ -11,7 +11,7 @@
 
 <c:url var="payment" value="/pay/momo"/>
 <c:url var="signin" value="/signin"/>
-<c:if test="${mgs != ''}">
+<c:if test="${mgs != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         ${mgs}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

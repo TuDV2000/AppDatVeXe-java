@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 
 <div id="content">
-    <h1 class="text-center text-danger">THỐNG KÊ VÉ THEO THÁNG</h1>
+    <h1 class="title-page">THỐNG KÊ VÉ THEO THÁNG</h1>
     <div class="text-center">
         <button type="button" class="btn">
            <a href="${stats}<c:out value="${currentYear - 1}" />"><c:out value="${currentYear - 1}" /></a>
@@ -24,21 +24,28 @@
     </div>
 
     <c:if test="${monthStats != null}">
-    <table class="table">
-        <tr>
-            <th>Tháng-năm</th>
-            <th>Số lượng vé đã bán được</th>
-        </tr>
-        <c:forEach items="${monthStats}" var="m">
-            <tr>
-                <td>${m[0]}-${m[1]}</td>
-                <td>${m[2]}</td>
-            </tr>
-        </c:forEach>
-    </table>
-    <div>
-        <canvas id="myMonthStatsChart"></canvas>
+    <div class="admin-line row">
+        <div class="col-md-4">
+            <div class="admin-stats">
+                <canvas id="myMonthStatsChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <tr>
+                    <th>Tháng-năm</th>
+                    <th>Số lượng vé đã bán được</th>
+                </tr>
+                <c:forEach items="${monthStats}" var="m">
+                    <tr>
+                        <td>${m[0]}-${m[1]}</td>
+                        <td>${m[2]}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </div>
+
     <script>
         let monthLabels=[], monthInfo=[];
         <c:forEach items="${monthStats}" var="m">

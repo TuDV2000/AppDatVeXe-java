@@ -38,6 +38,9 @@
     justify-content: end;
     margin-right: 2rem;
 }
+.navbar-nav.admin{
+    grid-template-columns: repeat(7, auto);
+}
 .nav-item{
     height: 80px;
 }
@@ -86,6 +89,10 @@
         transition: all 0.5s ease;
         margin-right: 0%;
         display: none;
+    }
+    .navbar-nav.admin{
+        height: 70vh;
+
     }
     .navbar-nav.show {
         background: #242222;

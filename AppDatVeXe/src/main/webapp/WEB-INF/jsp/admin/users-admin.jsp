@@ -16,9 +16,9 @@
     <div class="top-table">
         <span class="navbar-brand"> Người dùng </span>
     </div>
-    <h3>
+    <p class="admin-amount-text">
         Số lượng : ${users.size()}
-    </h3>
+    </p>
     <div class="schedule-scroll">
         <table class="table table-hover">
             <thead>

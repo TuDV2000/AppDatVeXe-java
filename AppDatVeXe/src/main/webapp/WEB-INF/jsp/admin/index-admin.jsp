@@ -8,14 +8,26 @@
 
 <!DOCTYPE html>
 
-<div id="content">
-    <button type="button" class="btn">
-        <a href="${lineStats}">Thống kê vé theo tuyến xe</a>
-    </button>
-    <button type="button" class="btn">
-        <a href="${tripStats}">Thống kê vé theo chuyến xe</a>
-    </button>
-    <button type="button" class="btn">
-        <a href="${monthstats}">Thống kê vé theo tháng</a>
-    </button>
+<div class="admin-statistic container">
+    <div class="admin-buttons">
+        <a href="${lineStats}">
+            <button type="button" class="btn btn-outline-info">
+                Thống kê vé theo tuyến xe
+            </button>
+        </a>
+
+        <a href="${tripStats}">
+            <button type="button" class="btn btn-outline-info">
+                Thống kê vé theo chuyến xe
+            </button>
+        </a>
+
+        <a href="${monthstats}">
+            <button type="button" class="btn btn-outline-info">
+                Thống kê vé theo tháng
+            </button>
+        </a>
+
+    </div>
+
 </div>

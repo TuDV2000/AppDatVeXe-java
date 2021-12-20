@@ -20,7 +20,7 @@
         <div class='menu-icon' onclick="handleClick()">
             <i class='fas fa-bars'></i>
         </div>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav admin">
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="${adminIndex}">Thống kê</a>
             </li>
@@ -34,7 +34,7 @@
                 <a class="nav-link" href="${trip}">Chuyến xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
-                <a class="nav-link" href="${vehicle}">xe</a>
+                <a class="nav-link" href="${vehicle}">Xe</a>
             </li>
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="${user}">Người dùng</a>

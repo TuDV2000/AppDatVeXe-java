@@ -23,7 +23,9 @@
     <link href="<c:url value="/css/base.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/css/header.css"/>" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/css/footer.css" />" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/css/admin.css" />" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="/css/admin/admin.css" />" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="/css/admin/line-stats.css" />" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
     <tiles:insertAttribute name="header" />

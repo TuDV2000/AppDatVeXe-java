@@ -121,6 +121,21 @@ a[data-toggle="collapse"] {
     font-size: 1.2rem;
     position: relative;
 }
+.admin-statistic{
+    margin-top: 30px;
+    position: relative;
+    min-height: 100vh;
+}
+.admin-buttons{
+    position: absolute;
+    left: 22%;
+}
+.admin-amount-text{
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px;
+    color: #f02727;
+}
 /* ========================= form group ======================*/
 .form-group{
     position: relative;

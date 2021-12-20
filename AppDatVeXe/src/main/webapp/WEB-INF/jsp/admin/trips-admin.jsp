@@ -21,9 +21,9 @@
                     data-toggle="modal" data-target="#createTripModal">Thêm chuyến</button>
         </a>
     </div>
-    <h3 class="text-center">
+    <p class="admin-amount-text">
         Số lượng : ${trips.size()}
-    </h3>
+    </p>
     <div class="schedule-scroll">
         <table class="table table-hover">
             <thead>

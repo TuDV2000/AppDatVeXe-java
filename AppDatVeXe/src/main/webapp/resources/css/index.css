@@ -47,7 +47,7 @@
     border-radius: 10px;
     box-shadow: 4px 4px 20px 1px hsl(0 ,0% ,75%);
     border: none;
-    background-color: rgb(68, 180, 255);
+    background-color: rgb(78 122 153);
 }
 .btn.btn-primary:hover{
     background-color: rgb(36, 100, 143);
