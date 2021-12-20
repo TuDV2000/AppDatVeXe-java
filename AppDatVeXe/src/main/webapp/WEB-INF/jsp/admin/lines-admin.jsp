@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="createL" value="/admin/lines/add-line" />
-<c:url var="updateL" value="/admin/lines/update-line" />
+<c:url var="createL" value="/admin/lines/add" />
+<c:url var="updateL" value="/admin/lines/update" />
 
 <c:if test="${mgs != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,9 +29,7 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Tên tuyến</th>
-                <th>Điểm bắt đầu</th>
-                <th>Điểm kết thúc</th>
+                <th>Tuyến</th>
                 <th>Giá </th>
                 <th>Quảng đường</th>
                 <th>Thời gian</th>
@@ -45,8 +43,6 @@
                 <tr>
                     <td>${l.id}</td>
                     <td>${l.name}</td>
-                    <td>${l.startPoint.address}</td>
-                    <td>${l.endPoint.address}</td>
                     <td>${l.price}</td>
                     <td>${l.kilometer}km</td>
                     <td>${l.time}h</td>
@@ -69,13 +65,6 @@
                     </div>
                     <form id="createLineForm" method="post" action="${createL}" accept-charset="utf-8">
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="name" class="col-form-label">Tên tuyến</label>
-                                <small>Erro message</small>
-                                <input type="text" class="form-control" id="name" name="lineName">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i>
-                            </div>
                             <div class="form-group">
                                 <label for="startPlace" class="col-form-label">Điểm khởi hành</label>
                                 <small>Erro message</small>
@@ -150,14 +139,6 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Tên tuyến </label>
                                     <input type="text" class="form-control" readonly="readonly" value="${l.name}">
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-form-label">Điểm bắt đầu </label>
-                                    <input type="text" class="form-control" readonly="readonly" value="${l.startPoint.address}">
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-form-label">Điểm bắt đầu </label>
-                                    <input type="text" class="form-control" readonly="readonly" value="${l.endPoint.address}">
                                 </div>
                                 <div class="form-group">
                                     <label for="priceUpdate-${l.id}" class="col-form-label">Giá vé</label>

@@ -45,9 +45,8 @@ public class TripAdminController {
         return "tripsAdmin";
     }
 
-    @PostMapping("/add-trip")
-    public String createTrip(@RequestParam(value = "tripName") String tripName
-            , @RequestParam(value = "tripLine") int tripLine
+    @PostMapping("/add")
+    public String createTrip(@RequestParam(value = "tripLine") int tripLine
             , @RequestParam(value = "startTrip") String startTrip
             , @RequestParam(value = "endTrip") String endTrip
             , @RequestParam(value = "tripDriver") int tripDriver
@@ -62,7 +61,7 @@ public class TripAdminController {
             Date eTrip = formatter.parse(formatSTrip);
             Line line = lineService.getLineById(tripLine);
             User driver = userService.getUserById(tripDriver);
-            tripService.save(new Trip(tripName, sTrip, eTrip, driver.getVehicles().get(0).getSeat()
+            tripService.save(new Trip(sTrip, eTrip, driver.getVehicles().get(0).getSeat()
                     , extraChanges, driver, line));
         } catch (ParseException e) {
             status = "err";
@@ -73,7 +72,7 @@ public class TripAdminController {
         return "redirect:/admin/trips/" + status;
     }
 
-    @PostMapping("/update-trip")
+    @PostMapping("/update")
     public String updateTrip(Model model
             , @RequestParam(value = "tripId") int tripId
             , @RequestParam(value = "tripDriver") int tripDriver

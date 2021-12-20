@@ -39,7 +39,7 @@ public class VehicleAdminController {
         return "vehiclesAdmin";
     }
 
-    @PostMapping("/add-vehicle")
+    @PostMapping("/add")
     public String createTrip(@RequestParam(value = "licensePlate") String licensePlate
             , @RequestParam(value = "vehicleType") int vehicleTypeId
             , @RequestParam(value = "extraChanges") BigDecimal extraChanges
@@ -60,7 +60,7 @@ public class VehicleAdminController {
         return "redirect:/admin/vehicles/" + status;
     }
 
-    @PostMapping("/update-vehicle")
+    @PostMapping("/update")
     public String updatePlace(@RequestParam(value = "vehicleId") int vehicleId
             ,@RequestParam(value = "extraChangesUp") BigDecimal extraChanges
             ,@RequestParam(value = "driverUp") int driverId) {

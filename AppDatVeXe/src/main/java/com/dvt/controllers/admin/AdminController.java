@@ -38,14 +38,11 @@ public class AdminController {
     }
 
     @GetMapping("/month-stats")
-    public String statsForMonth() {
-        return "monthStats";
-    }
+    public String statsForMonth(Model model
+            , @RequestParam(value = "year", required = false) Integer year) {
+        if (year != null)
+            model.addAttribute("monthStats", statsService.monthStats(year.intValue()));
 
-    @GetMapping("/month-stats/{year}")
-    public String statsForMonth(Model model, @PathVariable(value = "year") int year) {
-
-        model.addAttribute("monthStats", statsService.monthStats(year));
         return "monthStats";
     }
 }

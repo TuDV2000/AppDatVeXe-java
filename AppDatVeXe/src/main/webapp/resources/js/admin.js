@@ -151,18 +151,10 @@ function checkTripInput(){
     
 }
 function checkTripUpdate(id){
-    const blankSeat = document.getElementById('blankSeatUpdate-'+id);
     const tripDriver = document.getElementById('driverUpdate-'+id);
     const extraChanges = document.getElementById('extraChangesUpdate-'+id);
     var status = true;
 
-    //blankSeat
-    if(blankSeat.value.trim() == ""){
-        setErrorFor(blankSeat, 'Nhập số ghế trống');
-        status = false;
-    }else {
-        setSuccessFor(blankSeat);
-    }
     //driver
     if(tripDriver.value.trim() == ""){
         setErrorFor(tripDriver, 'Chọn tài xế');

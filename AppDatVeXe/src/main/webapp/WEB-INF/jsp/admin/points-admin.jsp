@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="createP" value="/admin/points/add-point" />
-<c:url var="updateP" value="/admin/points/point-update" />
+<c:url var="createP" value="/admin/points/add" />
+<c:url var="updateP" value="/admin/points/update" />
 
 <c:if test="${mgs != null}">
 <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
 
 @Controller
 @RequestMapping("/admin/users")
@@ -18,18 +21,18 @@ public class UserAdminController {
     IPermissionService permissionService;
 
     @GetMapping(value = {"", "/{result}"})
-    public String showTrip(Model model
+    public String showTrip(Model model, Principal principal
             , @PathVariable(value = "result", required = false) String result) {
         if(result != null)
             model.addAttribute("mgs", MgsUtil.mgsShow("người dùng", result));
 
-        model.addAttribute("users", userService.getAll());
+        model.addAttribute("users", userService.getAnotherUsers(principal.getName()));
         model.addAttribute("permissions", permissionService.getAll());
 
         return "usersAdmin";
     }
 
-    @PostMapping("/update-user")
+    @PostMapping("/update")
     public String updatePlace(@RequestParam(value = "userId") int userId
             ,@RequestParam(value = "addressUp") String address
             ,@RequestParam(value = "phoneNumberUp") String phoneNumberUp

@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="createV" value="/admin/vehicles/add-vehicle"/>
-<c:url var="updateV" value="/admin/vehicles/update-vehicle"/>
+<c:url var="createV" value="/admin/vehicles/add"/>
+<c:url var="updateV" value="/admin/vehicles/update"/>
 
 <c:if test="${mgs != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -132,10 +132,6 @@
                                     <input type="text" class="form-control" readonly="readonly" value="${v.licensePlate}">
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-form-label">Số ghế </label>
-                                    <input type="text" class="form-control" readonly="readonly" value="${v.seat}">
-                                </div>
-                                <div class="form-group">
                                     <label class="col-form-label">Loại xe </label>
                                     <input type="text" class="form-control" readonly="readonly" value="${v.vehicleType.nameType}">
                                 </div>
@@ -170,7 +166,7 @@
             </div>
         </c:forEach>
         <!-- Modal Delete -->
-        <<c:forEach var="v" items="${vehicles}">
+        <c:forEach var="v" items="${vehicles}">
             <div class="modal fade" id="deleteVehicleModal${v.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

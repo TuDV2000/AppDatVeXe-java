@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="createT" value="/admin/trips/add-trip"/>
-<c:url var="updateT" value="/admin/trips/update-trip"/>
+<c:url var="createT" value="/admin/trips/add"/>
+<c:url var="updateT" value="/admin/trips/update"/>
 
 <c:if test="${mgs != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -69,13 +69,6 @@
                     </div>
                     <form id="createTripForm" method="post" action="${createT}" accept-charset="utf-8">
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="tripName" class="col-form-label">Tên chuyến </label>
-                                <small>Erro message</small>
-                                <input type="text" class="form-control" id="tripName" name="tripName">
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i>
-                            </div>
                             <div class="form-group">
                                 <label for="tripLine" class="col-form-label">Tuyến</label>
                                 <small>Erro message</small>

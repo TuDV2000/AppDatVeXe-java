@@ -32,9 +32,8 @@ public class LineAdminController {
         return "linesAdmin";
     }
 
-    @PostMapping("/add-line")
-    public String createLine(@RequestParam(value = "lineName") String lineName
-            , @RequestParam(value = "startPlace") int startPlaceId
+    @PostMapping("/add")
+    public String createLine(@RequestParam(value = "startPlace") int startPlaceId
             , @RequestParam(value = "endPlace") int endPlaceId
             , @RequestParam(value = "price") BigDecimal price
             , @RequestParam(value = "distance") int distance
@@ -56,7 +55,7 @@ public class LineAdminController {
                     return "redirect:/admin/lines/" + status;
                 }
             }
-            lineService.createLine(new Line(lineName, pointService.getPointById(startPlaceId)
+            lineService.createLine(new Line(pointService.getPointById(startPlaceId)
                     , pointService.getPointById(endPlaceId), price, distance, time));
         } catch (Exception e) {
             status = "err";
@@ -66,7 +65,7 @@ public class LineAdminController {
         return "redirect:/admin/lines/" + status;
     }
 
-    @PostMapping("/update-line")
+    @PostMapping("/update")
     public String updateLine(@RequestParam(value = "idline") int lineId
             , @RequestParam(value = "price") BigDecimal price
             , @RequestParam(value = "distance") int distance

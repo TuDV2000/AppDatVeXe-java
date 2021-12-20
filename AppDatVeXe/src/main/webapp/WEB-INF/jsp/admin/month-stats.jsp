@@ -5,22 +5,31 @@
 <jsp:useBean id="date" class="java.util.Date" />
 
 <fmt:formatDate value="${date}" pattern="yyyy" var="currentYear" />
-<c:url var="stats" value="/admin/month-stats/" />
+<c:url var="stats" value="/admin/month-stats" />
 
 <!DOCTYPE html>
 
 <div id="content">
-    <h1 class="title-page">THỐNG KÊ VÉ THEO THÁNG</h1>
+    <h1 class="title-page">THỐNG KÊ VÉ THEO THÁNG / NĂM</h1>
+
     <div class="text-center">
-        <button type="button" class="btn">
-           <a href="${stats}<c:out value="${currentYear - 1}" />"><c:out value="${currentYear - 1}" /></a>
-        </button>
-        <button type="button" class="btn">
-            <a href="${stats}<c:out value="${currentYear}" />"><c:out value="${currentYear}" /></a>
-        </button>
-        <button type="button" class="btn">
-            <a href="${stats}<c:out value="${currentYear + 1}" />"><c:out value="${currentYear + 1}" /></a>
-        </button>
+        <form method="get" action="${stats}">
+            <div class="form-group">
+                <label for="year" class="col-form-label">Nhập năm: </label>
+                <small>Erro message</small>
+                <input type="text" class="form-control" id="year" name="year">
+                <button type="submit" class="btn btn-secondary">Thống kê</button>
+            </div>
+        </form>
+<%--        <button type="button" class="btn">--%>
+<%--           <a href="${stats}<c:out value="${currentYear - 1}" />"><c:out value="${currentYear - 1}" /></a>--%>
+<%--        </button>--%>
+<%--        <button type="button" class="btn">--%>
+<%--            <a href="${stats}<c:out value="${currentYear}" />"><c:out value="${currentYear}" /></a>--%>
+<%--        </button>--%>
+<%--        <button type="button" class="btn">--%>
+<%--            <a href="${stats}<c:out value="${currentYear + 1}" />"><c:out value="${currentYear + 1}" /></a>--%>
+<%--        </button>--%>
     </div>
 
     <c:if test="${monthStats != null}">

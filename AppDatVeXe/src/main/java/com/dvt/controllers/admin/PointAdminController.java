@@ -38,7 +38,7 @@ public class PointAdminController {
         return "pointsAdmin";
     }
 
-    @PostMapping("/add-point")
+    @PostMapping("/add")
     public String createPlace(Model model
             , @RequestParam(value = "placeName") String placeName
             , @RequestParam(value = "placePicture") MultipartFile placePicture) {
@@ -58,7 +58,7 @@ public class PointAdminController {
         return "redirect:/admin/points/" + status;
     }
 
-    @PostMapping("/point-update")
+    @PostMapping("/update")
     public String updatePlace(Model model
             ,@RequestParam(value = "placePictureUpdate") MultipartFile placePicture
             , @RequestParam(value = "placeId") int placeId) {
