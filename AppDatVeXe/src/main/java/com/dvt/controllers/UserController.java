@@ -57,7 +57,7 @@ public class UserController {
         }
         System.out.println(uAvatar);
         if (password.equals(password2)) {
-            Permission permission = permissionService.getPerById("77");
+            Permission permission = permissionService.getPerById("ROLE_CUSTOMER");
             if (userDetailsService.createUser(new User(username, password, firstName
                     , lastName, phone, permission))) {
                     userService.updateAvatar(username, uAvatar);

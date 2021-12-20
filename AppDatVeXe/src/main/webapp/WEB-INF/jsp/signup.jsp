@@ -213,7 +213,6 @@
                             </div>
 
                             <div class="d-flex justify-content-center">
-                                <button type="button" onclick="checkInput()" >Check</button>
                                 <input onclick="return checkInput()" type="submit" value="Đăng ký"
                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-white" />
                             </div>
