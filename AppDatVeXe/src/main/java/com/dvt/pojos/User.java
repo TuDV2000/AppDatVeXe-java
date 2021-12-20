@@ -1,7 +1,5 @@
 package com.dvt.pojos;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -32,7 +30,7 @@ public class User implements Serializable {
     @Column(name = "is_active")
     private boolean isActive;
     @Transient
-    private MultipartFile img;
+    private String img;
 
     @ManyToOne
     @JoinColumn(name = "user_permission")
@@ -47,6 +45,17 @@ public class User implements Serializable {
 
     public User() {}
 
+    public User(String username, String password, String firstName, String lastName
+            , String numberPhone, Permission permission, String img) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.numberPhone = numberPhone;
+        this.isActive = true;
+        this.permission = permission;
+        this.setImg(img);
+    }
     public User(String username, String password, String firstName, String lastName
             , String numberPhone, Permission permission) {
         this.username = username;
@@ -187,11 +196,11 @@ public class User implements Serializable {
         isActive = active;
     }
 
-    public MultipartFile getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(MultipartFile img) {
+    public void setImg(String img) {
         this.img = img;
     }
 }

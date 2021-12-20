@@ -45,7 +45,7 @@
         const password = document.getElementById('password');
         const password2 = document.getElementById('password2');
         const checker = document.getElementById('checker');
-
+        const avatar = document.getElementById('avatar');
 
         //last name
         if(lastname.value.trim() == ""){
@@ -98,6 +98,14 @@
         }else {
             setSuccessFor(password2);
         }
+        //avatar
+        if(avatar.value.trim() == ""){
+            setErrorFor(avatar, 'Chọn ảnh đại diện');
+            return false;
+        }else {
+            setSuccessFor(avatar);
+        }
+
         // checker
         if (checker.checked){
             checker.parentElement.style.color = 'black';
@@ -135,7 +143,7 @@
                         <c:if test="${mgs != ''}">
                             <h3 class="text-danger">${mgs}</h3>
                         </c:if>
-                        <form class="form-signup" id="form" method="post" action="${signup}">
+                        <form class="form-signup" id="form" method="post" action="${signup}" enctype="multipart/form-data">
                             <div class="fullname-textbox-container">
                                 <div class="form-outline mb-4">
                                     <small>Erro message</small>
@@ -183,6 +191,13 @@
                                 <i class="fas fa-check-circle"></i>
                                 <i class="fas fa-exclamation-circle"></i>
                                 <label class="form-label" >Xác thực mật khẩu</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <small>Erro message</small>
+                                <input class="form-control form-control-lg avatar" id="avatar" name="avatar" type="file" />
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <label class="form-label" >Chọn ảnh đại diện</label>
                             </div>
 
                             <div class="form-check d-flex justify-content-center mb-5">

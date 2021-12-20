@@ -512,6 +512,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <button type="button" onclick="checkTripInput()">check</button>
                                             <input type="submit" onclick="return checkTripInput()" class="btn btn-primary" value="Lưu chuyến">
                                         </div>
                                     </form>

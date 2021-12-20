@@ -143,7 +143,12 @@
         </div>
         <div class="col-md-2">
             <c:if test="${user.getPermission().getId() == 'ROLE_ADMIN'}">
-            <a type="button" class="profile-edit-btn" href="<c:url value="/admin" />">Trang quản lý</a>
+            <a href="<c:url value="/admin" />">
+                <button type="button" class="profile-edit-btn">
+                    Trang quản lý
+                </button>
+
+            </a>
             </c:if>
             <button type="button" class="profile-edit-btn" data-toggle="modal" data-target="#exampleModal">
                 Chỉnh sửa

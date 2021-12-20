@@ -82,3 +82,7 @@ body{
     visibility: visible;
     color: #e74c3c;
 }
+.form-control.form-control-lg.avatar{
+    font-size: 1rem;
+    height: 48px;
+}
