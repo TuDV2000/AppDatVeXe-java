@@ -136,6 +136,17 @@ a[data-toggle="collapse"] {
     margin: 10px;
     color: #f02727;
 }
+.month-stats-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-group.month-stats{
+    text-align: center;
+}
+.form-group.month-stats button{
+    margin-top: 10px;
+}
 /* ========================= form group ======================*/
 .form-group{
     position: relative;

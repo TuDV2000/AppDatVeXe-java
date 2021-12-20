@@ -28,12 +28,6 @@
             </button>
         </a>
 
-        <a href="">
-            <button type="button" class="btn btn-outline-info">
-                Thống kê vé theo năm
-            </button>
-        </a>
-
     </div>
 
 </div>

@@ -12,13 +12,12 @@
 <div id="content">
     <h1 class="title-page">THỐNG KÊ VÉ THEO THÁNG / NĂM</h1>
 
-    <div class="text-center">
+    <div class="month-stats-container">
         <form method="get" action="${stats}">
-            <div class="form-group">
+            <div class="form-group month-stats">
                 <label for="year" class="col-form-label">Nhập năm: </label>
-                <small>Erro message</small>
-                <input type="text" class="form-control" id="year" name="year">
-                <button type="submit" class="btn btn-secondary">Thống kê</button>
+                <input type="text" class="form-control month-stats" id="year" name="year">
+                <button type="submit" class="btn btn-outline-info">Thống kê</button>
             </div>
         </form>
 <%--        <button type="button" class="btn">--%>
