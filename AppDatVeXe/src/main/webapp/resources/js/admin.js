@@ -5,83 +5,93 @@ $(document).ready(function () {
     });
 
 });
+
+//-----------check for line-------------
 function checkInput(){
-    //Create Line
     const lineName = document.getElementById('name');
     const startPlace = document.getElementById('startPlace');
     const endPlace = document.getElementById('endPlace');
     const price = document.getElementById('price');
     const distance = document.getElementById('distance');
     const time = document.getElementById('time');
-    //line name
+    var status = true;
+
     if(lineName.value.trim() == ""){
         setErrorFor(lineName, 'Không được để trống tên tuyến');
-        return false;
+        status = false;
     }else {
         setSuccessFor(lineName);
     }
     //start Place
     if(startPlace.value.trim() == "Chọn điểm"){
         setErrorFor(startPlace, 'Yêu cầu chọn điểm bắt đầu');
-        return false;
+        status = false;
     }else {
         setSuccessFor(startPlace);
     }
     //end Place
     if(endPlace.value.trim() == "Chọn điểm"){
         setErrorFor(endPlace, 'Yêu cầu chọn điểm kết thúc');
-        return false;
+        status = false;
     }else {
         setSuccessFor(endPlace);
     }
     //price
     if(price.value.trim() == ""){
         setErrorFor(price, 'Nhập giá vé');
-        return false;
+        status = false;
     }else {
         setSuccessFor(price);
     }
     //distance
     if(distance.value.trim() == ""){
         setErrorFor(distance, 'Nhập quãng đường');
-        return false;
+        status = false;
     }else {
         setSuccessFor(distance);
     }
     //time
     if(time.value.trim() == ""){
         setErrorFor(time, 'Nhập thời gian dự kiến');
-        return false;
+        status = false;
     }else {
         setSuccessFor(time);
     }
+
+    return status;
 }
 function checkLineUpdateInput(id){
     const price = document.getElementById('priceUpdate-' + id);
     const distance = document.getElementById('distanceUpdate-'+ id);
     const time = document.getElementById('timeUpdate-'+ id);
+    var status = true;
+
     //price
     if(price.value.trim() == ""){
         setErrorFor(price, 'Nhập giá vé');
-        return false;
+        status = false;
     }else {
         setSuccessFor(price);
     }
     //distance
     if(distance.value.trim() == ""){
         setErrorFor(distance, 'Nhập quảng đường');
-        return false;
+        status = false;
     }else {
         setSuccessFor(distance);
     }
     //time
     if(time.value.trim() == ""){
         setErrorFor(time, 'Nhập thời gian dự kiến');
-        return false;
+        status = false;
     }else {
         setSuccessFor(time);
     }
+
+    return status;
 }
+
+//-----------check for trip-------------
 function checkTripInput(){
     const tripName = document.getElementById('tripName');
     const tripLine = document.getElementById('tripLine');
@@ -141,59 +151,67 @@ function checkTripInput(){
     
 }
 function checkTripUpdate(id){
-    const blankSeat = document.getElementById('blankSeatUpdate-'+id);
     const tripDriver = document.getElementById('driverUpdate-'+id);
     const extraChanges = document.getElementById('extraChangesUpdate-'+id);
+    var status = true;
 
-    //blankSeat
-    if(blankSeat.value.trim() == ""){
-        setErrorFor(blankSeat, 'Nhập số ghế trống');
-        return false;
-    }else {
-        setSuccessFor(blankSeat);
-    }
     //driver
-    if(tripDriver.value.trim() != ""){
-        setSuccessFor(tripDriver);
+    if(tripDriver.value.trim() == ""){
+        setErrorFor(tripDriver, 'Chọn tài xế');
+        status = false;
+    } else {
+
     }
     //extraChange
     if(extraChanges.value.trim() == ""){
         setErrorFor(extraChanges, 'Nhập phụ thu');
-        return false;
+        status = false;
     }else {
         setSuccessFor(extraChanges);
     }
+
+    return status;
 }
+
+//-----------check for place-------------
 function checkPlaceInput(){
     const placeName = document.getElementById('placeName');
     const placePicture = document.getElementById('placePicture');
+    var status = true;
 
     //placeName
     if(placeName.value.trim() == ""){
         setErrorFor(placeName, 'Nhập tên địa điểm');
-        return false;
+        status = false;
     }else {
         setSuccessFor(placeName);
     }
     //placePicture
     if(placePicture.value.trim() == ""){
         setErrorForWithoutIcon(placePicture, 'Chọn ảnh minh họa');
-        return false;
+        status = false;
     }else {
         setSuccessFor(placePicture);
     }
+
+    return status;
 }
 function checkPlaceUpdate(id){
     const placePicture = document.getElementById('placePictureUpdate'+id);
+    var status = true;
 
     //placePicture
     if(placePicture.value.trim() == ""){
         setErrorForWithoutIcon(placePicture, 'Chọn ảnh minh họa');
-        return false;
+        status = false;
     }else {
         setSuccessFor(placePicture);
     }
+
+    return status;
 }
+
+//-----------check for user-------------
 function checkUserInput(){
     const firstname = document.getElementById("firstname");
     const lastname = document.getElementById("lastname");
@@ -290,7 +308,6 @@ function checkUserUpdate(id){
         setSuccessFor(address);
     }
     return true;
-    //phone
     if(phone.value.trim() == ""){
         setErrorFor(phone,'Nhập số điện thoại');
         return false;
@@ -301,6 +318,67 @@ function checkUserUpdate(id){
         setSuccessFor(phone);
     }
 }
+
+//-----------check for vehicle-------------
+function checkVehicleInput(){
+    const licensePlate = document.getElementById('licensePlate');
+    const vehicleType = document.getElementById('vehicleType');
+    const extraChanges = document.getElementById('extraChanges');
+    const driver = document.getElementById('driver');
+    var status = true;
+
+    if(licensePlate.value == ""){
+        setErrorFor(licensePlate, 'Không được để trống biển số');
+        status = false;
+    }else {
+        setSuccessFor(licensePlate);
+    }
+
+    if(vehicleType.value == "null"){
+        setErrorFor(vehicleType, 'Yêu cầu chọn loại xe');
+        status = false;
+    }else {
+        setSuccessFor(vehicleType);
+    }
+
+    if(extraChanges.value == ""){
+        setErrorFor(extraChanges, 'Nhập phụ thu');
+        status = false;
+    }else {
+        setSuccessFor(extraChanges);
+    }
+
+    if(driver.value == "null"){
+        setErrorFor(driver, 'Yêu cầu chọn tài xế');
+        status = false;
+    }else {
+        setSuccessFor(driver);
+    }
+
+    return status;
+}
+function checkVehicleUpdate(id){
+    const extraChanges = document.getElementById('extraChangesUpdate-' + id);
+    const driver = document.getElementById('driverUpdate-' + id);
+    var status = true;
+
+    if(extraChanges.value == ""){
+        setErrorFor(extraChanges, 'Nhập phụ thu');
+        status = false;
+    }else {
+        setSuccessFor(extraChanges);
+    }
+
+    if(driver.value == "null"){
+        setErrorFor(driver, 'Yêu cầu chọn tài xế');
+        status = false;
+    }else {
+        setSuccessFor(driver);
+    }
+
+    return status
+}
+
 function  setErrorFor(input, message){
     const formOutline = input.parentElement;
     const small = formOutline.querySelector('small');

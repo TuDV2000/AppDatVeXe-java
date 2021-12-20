@@ -31,8 +31,8 @@ public class Line implements Serializable {
 
     public Line(){}
 
-    public Line (String lineName, Point startPoint, Point endPoint, BigDecimal price, int distance, int time){
-        this.name = lineName;
+    public Line (Point startPoint, Point endPoint, BigDecimal price, int distance, int time){
+        this.name = startPoint.getAddress() + " -> " + endPoint.getAddress();
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.price = price;

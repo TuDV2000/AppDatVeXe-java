@@ -31,8 +31,9 @@ public class Trip implements Serializable {
     private Line line;
 
     public Trip(){}
-    public Trip(String tripName, Date startTime, Date endTime, int blankSeat, BigDecimal extra_changes, User driver, Line line){
-        this.name = tripName;
+
+    public Trip(Date startTime, Date endTime, int blankSeat, BigDecimal extra_changes, User driver, Line line){
+        this.name = "Chuyến " + (line.getTrips().size() + 1);
         this.startTime = startTime;
         this.endTime = endTime;
         this.blankSeat = blankSeat;

@@ -33,7 +33,6 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
     public boolean createUser(User user) {
         try {
             if (user != null) {
-//                user.setPermission(permissionRepository.getPerByName("Customer"));
                 getCurrentSession().save(user);
                 return true;
             }
@@ -54,7 +53,6 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
             e.printStackTrace();
         }
         return false;
-
     }
 
     @Override
@@ -73,16 +71,12 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         try{
             List<Ticket> result = new ArrayList<>();
             int id = getUserByUsername(username).getId();
-//            System.out.println("=============================userName " + username + "id" + id);
             List<Ticket> tickets = ticketRepository.getAll();
-//            System.out.println("=======================ListTickets" + tickets.size());
             for (Ticket t: tickets){
-//                System.out.println("===============Ticket=========" + t.getId());
                 if(t.getCustomer().getId() == id){
                     result.add(t);
                 }
             }
-//            System.out.println("=======================Results" + result.size());
             return result;
         }catch (HibernateError e){
             e.printStackTrace();
@@ -95,11 +89,7 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         user.setAvatar(avatar);
         getCurrentSession().update(user);
     }
-//    public List<User> getUsers(String username) {
-//        String hql = "from User where username = :un";
-//        List<User> users = getCurrentSession().createQuery(hql)
-//                .setParameter("un", username).getResultList();
-//    }
+
     @Override
     public List<User> getAllCustomer(){
         List<User> lUser = getAll();
@@ -125,11 +115,24 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         List<User> lUser = getAll();
         List<User> lDri = new ArrayList<>();
         for (User u: lUser){
-            if(u.getPermission().getName().equals("driver"))
+            if(u.getPermission().getId().equals("ROLE_DRIVER"))
                 lDri.add(u);
         }
         return lDri;
     }
+
+    @Override
+    public List<User> getUsersByRole(String roleId){
+        try {
+            return (List<User>) getCurrentSession().createQuery("from User where permission.id = :roleId")
+                    .setParameter("roleId", roleId).getResultList();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
     @Override
     public User getUserById(int id){
         try {
@@ -140,14 +143,29 @@ public class UserRepository extends GenericsRepository<User> implements IUserRep
         }
         return null;
     }
+
     @Override
-    public List<User> getAllUser(){
-        List<User> lUser = getAll();
-        List<User> lDri = new ArrayList<>();
-        for (User u: lUser){
-            if(u.isActive() == true)
-                lDri.add(u);
+    public List<User> getAnotherUsers(String username){
+        String hql = "from User where username <> :un";
+
+        return (List<User>) getCurrentSession().createQuery(hql)
+                .setParameter("un", username).getResultList();
+    }
+
+    @Override
+    public List<User> getDrivers() {
+        // Lấy driver chưa có xe
+        String hql = "from User where permission.id = 'ROLE_DRIVER' and id not in "
+                + "(select u.id from User as u join Vehicle as v on u.id = v.driver.id)";
+        // Lấy driver có xe nhưng
+
+        List<User> drivers = null;
+        try {
+            drivers = (List<User>) getCurrentSession().createQuery(hql).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lDri;
+
+        return drivers;
     }
 }

@@ -24,6 +24,16 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "vehicle_type_id")
     private VehicleType vehicleType;
 
+    public Vehicle() {}
+
+    public Vehicle(String licensePlate, int seat, BigDecimal extraChanges, User driver, VehicleType vehicleType) {
+        this.licensePlate = licensePlate;
+        this.seat = seat;
+        this.extraChanges = extraChanges;
+        this.driver = driver;
+        this.vehicleType = vehicleType;
+    }
+
     public VehicleType getVehicleType() {
         return vehicleType;
     }

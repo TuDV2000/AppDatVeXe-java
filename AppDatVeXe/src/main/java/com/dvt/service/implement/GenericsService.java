@@ -20,6 +20,11 @@ public class GenericsService<T> implements IGenericsServevice<T> {
     }
 
     @Override
+    public T getById(int id) {
+        return genericsRepository.getById(id);
+    }
+
+    @Override
     public void save(T obj) {
         genericsRepository.save(obj);
     }

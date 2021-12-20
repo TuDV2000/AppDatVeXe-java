@@ -53,5 +53,43 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Chi tiết vé"/>
         <put-attribute name="content" value="/WEB-INF/jsp/ticketdetail.jsp" />
     </definition>
-
+    <!-- ADMIN PAGE DEFINITION -->
+    <definition name="baseAdminLayout" template="/WEB-INF/layout/base-admin.jsp">
+        <put-attribute name="title"  value="Trang quản lý" />
+        <put-attribute name="header"  value="/WEB-INF/layout/header-admin.jsp" />
+        <put-attribute name="footer"  value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="content"  value="/WEB-INF/jsp/admin/index-admin.jsp" />
+    </definition>
+    <definition name="pointsAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý địa điểm"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/points-admin.jsp" />
+    </definition>
+    <definition name="linesAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý tuyến xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/lines-admin.jsp" />
+    </definition>
+    <definition name="tripsAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý chuyến xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/trips-admin.jsp" />
+    </definition>
+    <definition name="vehiclesAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý xe"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/vehicles-admin.jsp" />
+    </definition>
+    <definition name="usersAdmin" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/users-admin.jsp" />
+    </definition>
+    <definition name="lineStats" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê theo tuyến"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/line-stats.jsp" />
+    </definition>
+    <definition name="tripStats" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê theo chuyến"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/trip-stats.jsp" />
+    </definition>
+    <definition name="monthStats" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê theo tháng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/month-stats.jsp" />
+    </definition>
 </tiles-definitions>

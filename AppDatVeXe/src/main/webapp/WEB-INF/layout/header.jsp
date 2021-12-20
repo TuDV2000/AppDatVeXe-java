@@ -29,9 +29,6 @@
             <li class="nav-item active" onclick="closeNav()">
                 <a class="nav-link" href="${booking}">Đặt vé</a>
             </li>
-<%--            <li class="nav-item active" onclick="closeNav()">--%>
-<%--                <a class="nav-link" href="${tickets}">Hướng dẫn</a>--%>
-<%--            </li>--%>
             <c:if test="${pageContext.request.userPrincipal.name == null}">
             <li onclick="closeNav()" >
                 <a class="nav-link-signup" href=${signin}>ĐĂNG NHẬP</a>
