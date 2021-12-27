@@ -92,19 +92,19 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="createPlaceForm" method="post" action="" enctype="multipart/form-data">
+                        <form id="createPlaceForm" method="post" action="${feedBack}" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group" style="display: none">
                                     <label for="tripId" class="col-form-label">id</label>
-                                    <input type="text" class="form-control" id="tripId" name="tripId" value="${ticketDetail.ticket.trip.id}" readonly="readonly">
+                                    <input type="hidden" class="form-control" id="tripId" name="tripId" value="${ticketDetail.ticket.trip.id}" readonly="readonly">
+                                </div>
+                                <div class="form-group" style="display: none">
+                                    <label for="ticketId" class="col-form-label">id</label>
+                                    <input type="hidden" class="form-control" id="ticketId" name="ticketId" value="${ticketDetail.ticket.id}" readonly="readonly">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tripName" class="col-form-label">Tên chuyến</label>
-                                    <input type="text" class="form-control" id="tripName"value="${ticketDetail.ticket.trip.name}" readonly="readonly">
-                                </div>
-                                <div class="form-group">
-                                    <label for="Textarea">Example textarea</label>
-                                    <textarea class="form-control" id="Textarea" name="feedback" rows="3"></textarea>
+                                    <label for="content">Nội dung phản hồi</label>
+                                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
