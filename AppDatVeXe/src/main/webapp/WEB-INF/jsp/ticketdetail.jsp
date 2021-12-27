@@ -69,6 +69,46 @@
                         </p>
                     </section>
                 </article>
+                <!-- C:if -->
+                <div class="alert alert-info" style="margin-top: 1em " role="alert">
+                    Bạn đã đánh giá chuyến xe này!
+                </div>
+                <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-white" style="margin-top: 1em "
+                        data-toggle="modal" data-target="#feedbackModal"> Viết đánh giá </button>
+            </div>
+
+            <!-- Feedback Modal -->
+            <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Viết đánh giá</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="createPlaceForm" method="post" action="" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="form-group" style="display: none">
+                                    <label for="tripId" class="col-form-label">id</label>
+                                    <input type="text" class="form-control" id="tripId" name="tripId" value="${ticketDetail.ticket.trip.id}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tripName" class="col-form-label">Tên chuyến</label>
+                                    <input type="text" class="form-control" id="tripName"value="${ticketDetail.ticket.trip.name}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Textarea">Example textarea</label>
+                                    <textarea class="form-control" id="Textarea" name="feedback" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                <input type="submit" class="btn btn-primary" value="Gửi đánh giá">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
         </div>
