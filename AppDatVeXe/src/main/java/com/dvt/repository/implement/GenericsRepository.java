@@ -1,6 +1,5 @@
 package com.dvt.repository.implement;
 
-import com.dvt.pojos.Trip;
 import com.dvt.repository.IGenericsRepository;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;

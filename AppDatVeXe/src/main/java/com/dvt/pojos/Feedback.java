@@ -19,6 +19,15 @@ public class Feedback implements Serializable {
     @JoinColumn(name = "user_id")
     private User customer;
 
+    public Feedback() {
+    }
+
+    public Feedback(String content, Trip trip, User customer) {
+        this.content = content;
+        this.trip = trip;
+        this.customer = customer;
+    }
+
     public Trip getTrip() {
         return trip;
     }

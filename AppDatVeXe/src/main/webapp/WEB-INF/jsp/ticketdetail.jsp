@@ -9,6 +9,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:url var="feedBack" value="/trip/feed-back" />
+
 <c:if test="${mgs == 'Success'}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         Thanh toán thành công !!!
@@ -69,8 +71,21 @@
                         </p>
                     </section>
                 </article>
+                <div>
+                    <c:if test="${fbContent == ''}">
+                    <form action="${feedBack}" method="post">
+                        <input name="ticketId" type="hidden" value="${ticketDetail.ticket.id}">
+                        <input name="tripId" type="hidden" value="${ticketDetail.ticket.trip.id}">
+                        <label for="content">Nội dung phản hồi</label>
+                        <input id="content" name="content" type="text" class="form-group">
+                        <input class="form-group" type="submit" value="Gửi phản hồi">
+                    </form>
+                    </c:if>
+                    <c:if test="${fbContent != ''}">
+                    <h1>Bạn đã phản hồi chuyến xe này</h1>
+                    </c:if>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
