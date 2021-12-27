@@ -11,4 +11,5 @@ public interface ITripService extends IGenericsServevice<Trip>{
     public Trip getTrip(int sPointId, int ePointId, String sDate);
     public Map<Integer, Boolean> getSeatsByTrip(Trip trip);
     public List<Trip> getAllTripp();
+    public int getTripIdByTicket(int ticketId);
 }

@@ -88,4 +88,15 @@ public class TripRepository extends GenericsRepository<Trip> implements ITripRep
 
         return seats;
     }
+
+    @Override
+    public int getTripIdByTicket(int ticketId) {
+        String hql = "select t.id from Trip t join Ticket tk on t.id = tk.trip.id where tk.id = :ticketId";
+
+        int tripId = (int) getCurrentSession().createQuery(hql)
+                .setParameter("ticketId", ticketId)
+                .getSingleResult();
+
+        return tripId;
+    }
 }

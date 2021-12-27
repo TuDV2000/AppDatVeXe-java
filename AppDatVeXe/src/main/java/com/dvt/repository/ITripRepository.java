@@ -10,4 +10,5 @@ public interface ITripRepository extends IGenericsRepository<Trip>{
     public List<Trip> getTrips(int lineId);
     public Trip getTrip(int sPointId, int ePointId, String sDate);
     public Map<Integer, Boolean> getSeatsByTrip(Trip trip);
+    public int getTripIdByTicket(int ticketId);
 }

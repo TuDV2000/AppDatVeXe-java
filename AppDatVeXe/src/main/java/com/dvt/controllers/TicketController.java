@@ -1,9 +1,7 @@
 package com.dvt.controllers;
 
-import com.dvt.pojos.Ticket;
-import com.dvt.pojos.TicketDetail;
-import com.dvt.pojos.Trip;
-import com.dvt.pojos.User;
+import com.dvt.pojos.*;
+import com.dvt.service.IFeedbackService;
 import com.dvt.service.ITicketService;
 import com.dvt.service.ITripService;
 import com.dvt.service.IUserService;
@@ -29,6 +27,8 @@ public class TicketController {
     ITripService tripService;
     @Autowired
     ITicketService ticketService;
+    @Autowired
+    IFeedbackService feedbackService;
 
     @GetMapping("/book-ticket")
     public String showTicket(Model model, HttpSession session) {
@@ -68,12 +68,20 @@ public class TicketController {
     }
 
     @GetMapping(value = {"/{ticketId}/ticketdetail", "/{ticketId}/ticketdetail/{result}"})
-    public String showDetailTicket(Model model
+    public String showDetailTicket(Model model, Principal principal
             , @PathVariable(value = "ticketId") int ticketId
             , @PathVariable(value = "result", required = false) String result){
         TicketDetail ticketDetail = ticketService.getTicketsDeTailByTicktetId(ticketId);
+        int tripId = tripService.getTripIdByTicket(ticketId);
+        User user = userService.getUserByUsername(principal.getName());
+        String fbContent = feedbackService.getContentFBByTripAndUser(tripId, user.getId());
+
+        if (fbContent != null) {
+            model.addAttribute("fbContent", fbContent);
+        }
         model.addAttribute("mgs", result);
         model.addAttribute("ticketDetail", ticketDetail);
+
         return "ticketdetail";
     }
 }

@@ -39,4 +39,9 @@ public class TripService extends GenericsService<Trip> implements ITripService {
     public List<Trip> getAllTripp(){
         return tripRepository.getAll();
     }
+
+    @Override
+    public int getTripIdByTicket(int ticketId) {
+        return tripRepository.getTripIdByTicket(ticketId);
+    }
 }

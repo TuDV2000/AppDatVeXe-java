@@ -32,7 +32,7 @@
                     </div>
                     <section class="card-cont">
                         <h3> Biển số xe: ${ticketDetail.vehicle.licensePlate}</h3>
-                        <h3> Tài xế: ${ticketDetail.vehicle.driver.firstName} ${ticketDetail.vehicle.driver.firstName}</h3>
+                        <h3> Tài xế: ${ticketDetail.vehicle.driver.firstName} ${ticketDetail.vehicle.driver.lastName}</h3>
                         <h3> Khai thác tuyến: ${ticketDetail.ticket.trip.line.startPoint.address } => ${ticketDetail.ticket.trip.line.endPoint.address }</h3>
                     </section>
 
@@ -72,7 +72,7 @@
                     </section>
                 </article>
                 <div>
-                    <c:if test="${fbContent == ''}">
+                    <c:if test="${fbContent == null}">
                     <form action="${feedBack}" method="post">
                         <input name="ticketId" type="hidden" value="${ticketDetail.ticket.id}">
                         <input name="tripId" type="hidden" value="${ticketDetail.ticket.trip.id}">
@@ -81,7 +81,7 @@
                         <input class="form-group" type="submit" value="Gửi phản hồi">
                     </form>
                     </c:if>
-                    <c:if test="${fbContent != ''}">
+                    <c:if test="${fbContent != null}">
                     <h1>Bạn đã phản hồi chuyến xe này</h1>
                     </c:if>
                 </div>
